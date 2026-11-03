@@ -13,24 +13,31 @@ const STOPS = [
   [26, 56, 134],
   [37, 99, 235],
 ];
-function colorAt(t: number) {
-  const x = t * (STOPS.length - 1);
-  const k = Math.min(STOPS.length - 2, Math.floor(x));
+// the same gradient for the dark theme: white into light brand blue
+const LIGHT_STOPS = [
+  [255, 255, 255],
+  [190, 212, 255],
+  [110, 161, 255],
+];
+function colorAt(t: number, stops = STOPS) {
+  const x = t * (stops.length - 1);
+  const k = Math.min(stops.length - 2, Math.floor(x));
   const f = x - k;
-  const c = STOPS[k].map((v, j) => Math.round(v + (STOPS[k + 1][j] - v) * f));
+  const c = stops[k].map((v, j) => Math.round(v + (stops[k + 1][j] - v) * f));
   return `rgb(${c.join(',')})`;
 }
 
-function Word({ w, i, n, progress }: { w: string; i: number; n: number; progress: MotionValue<number> }) {
+function Word({ w, i, n, progress, dark, bg }: { w: string; i: number; n: number; progress: MotionValue<number>; dark: MotionValue<number>; bg: MotionValue<string> }) {
   const start = i / n;
-  // a white veil fades off each word (the text itself stays full-contrast for accessibility checks)
+  // a veil in the section's own background colour fades off each word (the text itself stays full-contrast for accessibility checks)
   const veil = useTransform(progress, [start, start + 1.5 / n], [0.86, 0]);
+  const color = useTransform(dark, [0, 1], [colorAt(i / (n - 1)), colorAt(i / (n - 1), LIGHT_STOPS)]);
   return (
-    <span className="relative inline-block" style={{ color: colorAt(i / (n - 1)) }}>
+    <motion.span className="relative inline-block" style={{ color }}>
       {w}
-      <motion.span aria-hidden="true" className="pointer-events-none absolute -inset-x-1 inset-y-0 bg-white" style={{ opacity: veil }} />
+      <motion.span aria-hidden="true" className="pointer-events-none absolute -inset-x-1 inset-y-0" style={{ opacity: veil, backgroundColor: bg }} />
       &nbsp;
-    </span>
+    </motion.span>
   );
 }
 
@@ -44,19 +51,25 @@ export function Statement() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   const progress = useTransform(scrollYProgress, [0.05, 0.85], [0, 1]);
 
+  // Theme change on scroll (Mercury, Canopy): the page goes from light to dark as this section arrives, and back as it leaves
+  const { scrollYProgress: enter } = useScroll({ target: ref, offset: ['start 85%', 'start 15%'] });
+  const { scrollYProgress: leave } = useScroll({ target: ref, offset: ['end 85%', 'end 15%'] });
+  const dark = useTransform([enter, leave], ([a, b]: number[]) => Math.max(0, Math.min(1, a)) - Math.max(0, Math.min(1, b)));
+  const bg = useTransform(dark, [0, 1], ['rgb(255,255,255)', 'rgb(12,22,56)']);
+
   return (
-    <section ref={ref} aria-label="What Topin does" className={`relative bg-white ${reduce ? '' : 'h-[220svh]'}`}>
+    <motion.section ref={ref} aria-label="What Topin does" className={`relative ${reduce ? 'bg-white' : 'h-[220svh]'}`} style={reduce ? undefined : { backgroundColor: bg }}>
       <div className={`${reduce ? 'py-[var(--section-y)]' : 'sticky top-0 h-svh'} flex items-center`}>
         <p className="sr-only">{LINES.join(' ')}</p>
         <p aria-hidden="true" className="wrap mx-auto max-w-[1100px] text-center font-display text-[40px] font-semibold leading-[46px] tracking-[-0.035em] md:text-[64px] md:leading-[70px] xl:text-[80px] xl:leading-[86px]">
           {WORDS.map(({ w, br }, i) => (
             <span key={i}>
-              {reduce ? <span style={{ color: colorAt(i / (WORDS.length - 1)) }}>{w} </span> : <Word w={w} i={i} n={WORDS.length} progress={progress} />}
+              {reduce ? <span style={{ color: colorAt(i / (WORDS.length - 1)) }}>{w} </span> : <Word w={w} i={i} n={WORDS.length} progress={progress} dark={dark} bg={bg} />}
               {br && <br className="hidden md:block" />}
             </span>
           ))}
         </p>
       </div>
-    </section>
+    </motion.section>
   );
 }
