@@ -3,6 +3,7 @@ import { HeroBest } from '@/components/best/HeroBest';
 import { HowStory } from '@/components/best/HowStory';
 import { Statement } from '@/components/best/Statement';
 import { HiringLine } from '@/components/iso/HiringLine';
+import { TrustBlock } from '@/components/best/TrustBlock';
 import { ProofResults } from '@/components/best/ProofResults';
 import { ClosingCTA } from '@/components/sections/ClosingCTA';
 import { Comparison } from '@/components/sections/Comparison';
@@ -29,6 +30,7 @@ export default function Home() {
         <Variant section="how" options={{ a: HowStory, b: HowItWorks }} />
         <Variant section="features" options={{ a: FeaturesTiles, b: FeaturesParallax }} />
         <Variant section="proof" options={{ a: ProofResults, b: Testimonials }} />
+        <TrustBlock />
         <Comparison />
         <ClosingCTA />
         <FAQ />
