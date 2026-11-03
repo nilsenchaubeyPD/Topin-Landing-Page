@@ -410,65 +410,58 @@ export function StepStage() {
   const s = steps[active];
 
   return (
-    <div className="flex flex-col gap-6 md:gap-8">
-      {/* tracker */}
-      <div role="tablist" aria-label="How it works steps" className="relative mx-auto grid w-full max-w-[720px] grid-cols-3">
-        <span aria-hidden="true" className="absolute left-[16.66%] right-[16.66%] top-5 h-[2px] rounded-pill bg-navy/10">
-          <motion.span className="block h-full rounded-pill bg-blue" animate={{ width: `${(active / 2) * 100}%` }} transition={{ duration: 0.45, ease }} />
-        </span>
+    <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] lg:gap-14">
+      {/* steps: pick one, the demo on the right follows */}
+      <div role="tablist" aria-label="How it works steps" aria-orientation="vertical" className="flex flex-col">
         {steps.map((st, i) => {
-          const done = i < active;
           const cur = i === active;
           return (
             <button
               key={st.name}
               type="button"
               role="tab"
+              id={`step-tab-${i}`}
               aria-selected={cur}
               aria-controls="step-panel"
               onClick={() => go(i)}
-              className="group relative flex flex-col items-center gap-3 text-center"
+              className="group relative border-t border-navy/[.1] py-5 text-left md:py-6"
             >
-              <span
-                className={`relative z-10 flex size-10 items-center justify-center rounded-full text-[15px] font-bold transition-[background-color,color,box-shadow,scale] duration-200 group-active:scale-[0.94] ${
-                  cur || done ? 'bg-blue text-white' : 'bg-white text-navy-2 shadow-[0_0_0_1px_rgba(12,22,56,.15)] group-hover:shadow-[0_0_0_1px_rgba(37,99,235,.5)]'
-                } ${cur ? 'shadow-[0_0_0_6px_rgba(37,99,235,.14)]' : ''}`}
-              >
-                {done ? '✓' : st.num}
+              <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[2px] bg-navy/[.08]">
+                {cur && <motion.span layoutId="step-line" className="block h-full bg-blue" transition={{ duration: 0.4, ease }} />}
               </span>
-              <span className={`text-[13px] font-semibold transition-colors duration-200 md:text-[15px] ${cur ? 'text-navy' : 'text-navy-2 group-hover:text-navy'}`}>{st.name}</span>
+              <span className={`block font-display text-[24px] font-medium leading-[30px] tracking-[-0.02em] transition-colors duration-200 md:text-[30px] md:leading-[36px] ${cur ? 'text-navy' : 'text-navy/35 group-hover:text-navy/60'}`}>
+                {st.name}
+              </span>
+              <AnimatePresence initial={false}>
+                {cur && (
+                  <motion.span
+                    key="d"
+                    className="block overflow-hidden"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease }}
+                  >
+                    <span className="mt-2 block max-w-[320px] text-[16px] leading-[25px] text-navy-2">{st.detail}</span>
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           );
         })}
       </div>
 
-      {/* title */}
-      <div className="relative mx-auto min-h-[96px] w-full max-w-[720px] text-center" aria-live="polite">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -10, filter: 'blur(4px)', transition: { duration: 0.15 } }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-          >
-            <h3 className="font-display text-[28px] font-medium leading-[34px] tracking-[-0.025em] text-navy md:text-[36px] md:leading-[42px]">{s.name}</h3>
-            <p className="mt-2 text-[16px] leading-[25px] text-navy-2 md:text-[17px] md:leading-[27px]">{s.detail}</p>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* app window */}
-      <div className="how-frame mx-auto w-full max-w-[1040px] rounded-[26px] p-2 md:rounded-[30px] md:p-3">
+      {/* interactive demo */}
+      <div className="how-frame w-full rounded-[26px] p-2 md:rounded-[30px] md:p-3">
         <div className="overflow-hidden rounded-[20px] bg-snow shadow-[0_30px_60px_-24px_rgba(12,22,56,.35)] md:rounded-[22px]">
           <div className="flex h-10 items-center gap-1.5 border-b border-navy/[.06] bg-white px-4">
             {[0, 1, 2].map((i) => (
               <span key={i} aria-hidden="true" className="size-2.5 rounded-full bg-sand" />
             ))}
             <span className="ml-3 truncate text-[12px] text-navy-2">app.topin.tech · {s.name}</span>
-            <span className="ml-auto hidden rounded-pill bg-yellow-soft px-2 py-0.5 text-[11px] font-semibold text-navy sm:inline">Interactive demo</span>
+            <span className="ml-auto hidden rounded-pill bg-yellow-soft px-2 py-0.5 text-[11px] font-semibold text-navy sm:inline">Try it</span>
           </div>
-          <div id="step-panel" role="tabpanel" className="relative min-h-[430px]">
+          <div id="step-panel" role="tabpanel" aria-labelledby={`step-tab-${active}`} className="relative min-h-[430px]">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={active}
@@ -485,28 +478,6 @@ export function StepStage() {
             </AnimatePresence>
           </div>
         </div>
-      </div>
-
-      {/* back / next */}
-      <div className="mx-auto flex w-full max-w-[1040px] items-center justify-between">
-        <button
-          type="button"
-          onClick={() => go(Math.max(0, active - 1))}
-          disabled={active === 0}
-          className="rounded-[10px] px-3 py-2 text-[14px] font-semibold text-navy-2 transition-colors hover:text-navy disabled:opacity-0"
-        >
-          ← Back
-        </button>
-        <span className="text-[13px] text-navy-2">
-          Step {active + 1} of {steps.length}
-        </span>
-        <button
-          type="button"
-          onClick={() => go(active === 2 ? 0 : active + 1)}
-          className="rounded-[10px] px-3 py-2 text-[14px] font-semibold text-blue transition-colors hover:text-blue-hover"
-        >
-          {active === 2 ? 'Start over ↺' : 'Next →'}
-        </button>
       </div>
     </div>
   );

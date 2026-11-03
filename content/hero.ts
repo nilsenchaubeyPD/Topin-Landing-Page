@@ -3,7 +3,7 @@ export const heroOptions = [
     id: 1,
     headline: ['Decide Faster.', 'Hire Better.'],
     description:
-      'Built on assessment integrity, so you can hire with confidence across every role, team, and hiring volume.',
+      'Assessments you can trust, and the right candidates ranked for you.',
     descriptionAlt:
       'Every assessment is backed by enterprise-grade integrity, helping you hire with confidence at any scale.',
   },

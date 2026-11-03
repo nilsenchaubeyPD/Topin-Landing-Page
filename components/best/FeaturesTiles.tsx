@@ -93,7 +93,7 @@ function VisRank() {
 }
 
 const TONE = ['bg-blue text-white', 'bg-cyan text-navy', 'bg-navy text-white', 'bg-sand text-navy'];
-function VisTeam() {
+export function VisTeam() {
   return (
     <div aria-hidden="true" className="flex justify-center -space-x-3">
       {access.roles.map((r, i) => (
@@ -112,7 +112,7 @@ function VisTeam() {
   );
 }
 
-function VisApi() {
+export function VisApi() {
   return (
     <div aria-hidden="true" className="mx-auto w-full max-w-[280px] rounded-[14px] bg-navy px-4 py-3.5 font-mono text-[12.5px] leading-[22px] text-cyan-soft">
       {api.code.map((l) => (
@@ -140,7 +140,7 @@ const DEVICE_ICONS: Record<string, ReactNode> = {
     </>
   ),
 };
-function VisDevices() {
+export function VisDevices() {
   return (
     <ul aria-hidden="true" className="flex justify-center gap-3">
       {devices.chips.map((c) => (
