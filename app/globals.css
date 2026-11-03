@@ -262,3 +262,9 @@ a {
   text-underline-position: from-font;
   text-decoration-thickness: from-font;
 }
+
+/* "Play video" badge: the ring of text turns slowly (still under reduced motion) */
+@keyframes video-ring-spin { to { transform: rotate(360deg); } }
+.video-ring { animation: video-ring-spin 16s linear infinite; transform-origin: 50% 50%; }
+.group:hover .video-ring { animation-duration: 6s; }
+@media (prefers-reduced-motion: reduce) { .video-ring { animation: none; } }

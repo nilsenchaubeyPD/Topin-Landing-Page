@@ -8,7 +8,7 @@ import { how } from '@/content/how';
 
 type BtnProps = { disabled?: boolean; onClick?: () => void; tone?: 'light' | 'dark'; size?: 'md' | 'lg' };
 
-const Btn = forwardRef<HTMLButtonElement, BtnProps>(function Btn({ disabled, onClick, tone = 'light', size = 'md', ...rest }, ref) {
+const Btn = forwardRef<HTMLButtonElement, BtnProps>(function Btn({ disabled, onClick, size = 'md', ...rest }, ref) {
   const big = size === 'lg';
   return (
     <button
@@ -18,16 +18,24 @@ const Btn = forwardRef<HTMLButtonElement, BtnProps>(function Btn({ disabled, onC
       aria-disabled={disabled || undefined}
       onClick={onClick}
       {...rest}
-      className={`group relative flex items-center gap-3 rounded-pill py-2 pl-2 pr-5 font-semibold shadow-float transition-transform duration-150 ease-out [&:not(:disabled)]:active:scale-[0.96] ${
-        tone === 'light' ? 'bg-white text-navy' : 'bg-blue text-white'
-      } ${big ? 'text-[16px]' : 'text-[15px]'}`}
+      className={`group relative flex items-center justify-center rounded-full bg-navy shadow-float transition-transform duration-200 ease-out hover:scale-[1.05] [&:not(:disabled)]:active:scale-[0.96] ${big ? 'size-[140px] md:size-[168px]' : 'size-[112px]'}`}
     >
-      <span className={`flex items-center justify-center rounded-full ${tone === 'light' ? 'bg-blue text-white' : 'bg-white text-blue'} ${big ? 'size-12' : 'size-11'}`}>
-        <svg className="ml-0.5 size-4" viewBox="0 0 34 34" aria-hidden="true">
+      {/* the ring of text turns slowly; the play disc stays still */}
+      <svg viewBox="0 0 140 140" aria-hidden="true" className="video-ring absolute inset-0 size-full text-white">
+        <defs>
+          <path id="video-ring-path" d="M70 70 m-52 0 a52 52 0 1 1 104 0 a52 52 0 1 1 -104 0" />
+        </defs>
+        <text fill="currentColor" fontSize="11.5" fontWeight="700" letterSpacing="2.2" className="font-body">
+          <textPath href="#video-ring-path" textLength="322" lengthAdjust="spacing">
+            PLAY VIDEO • PLAY VIDEO • PLAY VIDEO •
+          </textPath>
+        </text>
+      </svg>
+      <span className={`relative flex items-center justify-center rounded-full bg-white text-navy ${big ? 'size-[64px] md:size-[78px]' : 'size-[52px]'}`}>
+        <svg className="ml-1 size-[38%]" viewBox="0 0 34 34" aria-hidden="true">
           <path d="M9 5.5v23a1 1 0 0 0 1.5.86l19-11.5a1 1 0 0 0 0-1.72l-19-11.5A1 1 0 0 0 9 5.5Z" fill="currentColor" />
         </svg>
       </span>
-      Watch · {how.duration}
     </button>
   );
 });
