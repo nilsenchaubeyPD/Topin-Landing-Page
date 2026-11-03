@@ -52,18 +52,18 @@ export function Statement() {
   const progress = useTransform(scrollYProgress, [0.05, 0.85], [0, 1]);
 
   // Theme change (Mercury, Canopy): nothing changes while scrolling in. Once the section has fully landed the page eases to dark
-  // over 0.7s, and eases back to light once you scroll on past it (a timed animation, not tied to scroll position).
+  // over 0.7s and stays dark as you scroll on; it only eases back to light when you scroll up above the section (a timed animation, not tied to scroll position).
   const { scrollYProgress: landed } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   const dark = useMotionValue(0);
   const isDark = useRef(false);
   const setTheme = (v: number) => {
-    const on = v > 0.005 && v < 0.995;
+    const on = v > 0.005;
     if (on === isDark.current) return;
     isDark.current = on;
     animate(dark, on ? 1 : 0, { duration: 0.7, ease: [0.22, 1, 0.36, 1] });
   };
   useMotionValueEvent(landed, 'change', setTheme);
-  const bg = useTransform(dark, [0, 1], ['rgb(255,255,255)', 'rgb(12,22,56)']);
+  const bg = useTransform(dark, [0, 1], ['rgb(255,255,255)', 'rgb(4,8,22)']);
 
   return (
     <motion.section ref={ref} aria-label="What Topin does" className={`relative ${reduce ? 'bg-white' : 'h-[220svh]'}`} style={reduce ? undefined : { backgroundColor: bg }}>
