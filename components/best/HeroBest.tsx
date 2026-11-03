@@ -108,8 +108,8 @@ function ProductPanel() {
  */
 export function HeroBest() {
   return (
-    <section id="top" aria-labelledby="hero-title" className="relative bg-snow">
-      <div className="wrap grid gap-10 pb-12 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-stretch lg:gap-12">
+    <section id="top" aria-labelledby="hero-title" className="relative flex min-h-[calc(100svh-72px)] flex-col bg-snow">
+      <div className="wrap grid flex-1 gap-10 pb-12 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-stretch lg:gap-12">
         <div className="flex flex-col justify-center py-4">
           <div className="hero-fade" style={{ animationDelay: '0s' }}>
             <Link href={links.start} className="group inline-flex items-center gap-2.5 text-[14px] font-medium text-navy-2 transition-colors hover:text-navy">
@@ -162,7 +162,7 @@ export function HeroBest() {
         <ProductPanel />
       </div>
 
-      <div className="border-t border-navy/[.08] bg-white py-8">
+      <div className="mt-auto border-t border-navy/[.08] bg-white py-8">
         <div className="wrap">
           <TrustLogos />
         </div>
