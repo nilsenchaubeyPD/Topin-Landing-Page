@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0c1638;
+  --navy-2: #1f355a;
+  --blue: #2563eb;
+  --blue-deep: #0763ff;
+  --cyan: #33b5d9;
+  --cyan-soft: #ceeef3;
+  --white: #ffffff;
+  --snow: #faf6f2;
+  --stone: #efece4;
+  --sand: #d9d5cd;
+  --green: #465c35;
+  --green-soft: #e9f5e0;
+  --wine: #65303d;
+  --yellow-soft: #fff5c8;
+  --red-soft: #f5ecec;
+  --rec-red: #e5484d;
+
+  --gradient-brand: linear-gradient(135deg, #0763ff 0%, #33b5d9 60%, #33b5d9 100%);
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* page gutter and section rhythm (1440 design: 120 / 120) */
+  --pad: 20px;
+  --section-y: 72px;
+}
+@media (min-width: 768px) {
+  :root { --pad: 32px; --section-y: 96px; }
+}
+@media (min-width: 1024px) {
+  :root { --pad: 64px; --section-y: 96px; }
+}
+@media (min-width: 1280px) {
+  :root { --pad: 40px; --section-y: 120px; }
+}
+@media (min-width: 1440px) {
+  :root { --pad: 120px; }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  body {
+    @apply font-body bg-white text-navy-2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  /* Brandbook: Geist for H1/H2, Manrope Semibold for H3 (card titles) */
+  h1, h2 {
+    @apply font-display text-navy;
+  }
+  h3 {
+    @apply font-body font-semibold text-navy;
+  }
+  /* baseline-ui: balanced headings, no orphans in body copy, aligned figures in data */
+  h1, h2, h3, blockquote {
+    text-wrap: balance;
+  }
+  p, li, dd, dt, figcaption {
+    text-wrap: pretty;
+  }
+  dl, table, [role='table'], [aria-hidden='true'] {
+    font-variant-numeric: tabular-nums;
+  }
+  [id] {
+    scroll-margin-top: 88px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: calc(1200px + 2 * var(--pad));
+    margin-inline: auto;
+    padding-inline: var(--pad);
+  }
+  .section-y {
+    padding-top: var(--section-y);
+    padding-bottom: var(--section-y);
+  }
+  .dot-grid {
+    position: relative;
+    isolation: isolate;
+  }
+  .dot-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(#e4dfd4 1.1px, transparent 1.1px);
+    background-size: 24px 24px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  /* Hero: white page with a soft brand wash at the top */
+  .hero-bg {
+    background:
+      radial-gradient(60% 50% at 50% 0%, rgba(206, 238, 243, 0.55) 0%, rgba(206, 238, 243, 0) 70%),
+      linear-gradient(180deg, #fff 0%, #fff 100%);
+  }
+  /* Stage the product window sits on: cyan-soft into snow, with a faint grid */
+  .stage-snow {
+    background:
+      var(--snow);
+  }
+  .stage-cyan {
+    background:
+      #eef4f8;
+  }
+  .closing-panel {
+    background-image: none;
+  }
+  /* Features variant 2: cards become wide two-column rows, the product stage drifts (parallax) */
+  @media (min-width: 1024px) {
+    .feature-row > article {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      align-items: stretch;
+    }
+    .feature-row > article > :last-child {
+      margin: 12px 12px 12px 0;
+    }
+  }
+  .feature-row > article > :last-child > * {
+    translate: 0 var(--drift, 0px);
+  }
+  .hairline-x > * + * {
+    border-left: 1px solid rgba(12, 22, 56, 0.08);
+  }
+  .photo-slot {
+    background: linear-gradient(135deg, var(--stone), var(--cyan-soft));
+  }
+}
+
+/* Hero load sequence (CSS so it starts at first paint) */
+@keyframes hero-line {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+@keyframes gradient-sweep {
+  from { background-position: 100% 0; }
+  to { background-position: 0 0; }
+}
+@keyframes hero-fade {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-line { animation: hero-line 0.7s var(--ease-out-expo) both; }
+.hero-fade { animation: hero-fade 0.6s var(--ease-out-expo) both; }
+
+/* Loops pause when off-screen or the tab is hidden (see lib/useLoop.ts) */
+.loops-paused,
+.loops-paused * {
+  animation-play-state: paused !important;
+}
+.loops-paused .hero-line,
+.loops-paused .hero-fade {
+  animation-play-state: running !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 150ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hero B: brand gradient on the second headline line, with one light sweep after it lands */
+.hero-gradient-text {
+  background: linear-gradient(100deg, #6ea1ff 0%, #33b5d9 45%, #ceeef3 50%, #33b5d9 55%, #6ea1ff 100%) 0 0 / 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-gradient-text {
+    animation: hero-line 0.7s var(--ease-out-expo) both, gradient-sweep 2.4s 0.9s ease-out both;
+  }
+}
+
+/* Best version: hero pill pops in after the headline lands; doodle arrows draw themselves */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-pill {
+    animation: pill-pop 0.5s 0.55s cubic-bezier(0.2, 0, 0, 1) both;
+  }
+  .doodle-draw {
+    stroke-dasharray: 120;
+    animation: doodle-draw 0.9s 0.9s ease-out both;
+  }
+  .doodle-note {
+    animation: hero-fade 0.4s 1.4s ease-out both;
+  }
+}
+@keyframes pill-pop {
+  from { transform: scale(0.6) rotate(-4deg); opacity: 0; }
+  to { transform: scale(1) rotate(-2deg); opacity: 1; }
+}
+@keyframes doodle-draw {
+  from { stroke-dashoffset: 120; }
+  to { stroke-dashoffset: 0; }
+}
+.hero-pill { transform: rotate(-2deg); }
+
+/* How it works (best): soft brand-gradient frame around the video */
+.how-frame {
+  background: #eef4f8;
+  border: 1px solid rgba(12, 22, 56, 0.08);
+}
+
+
+/* Apple-style highlights rail: hide the scrollbar, keep swipe and keyboard scrolling */
+.highlights-track { scrollbar-width: none; }
+.highlights-track::-webkit-scrollbar { display: none; }
+
+/* Features tile: soft blue wash so it separates from the snow section background */
+.tile-blue {
+  background: #eef4f8;
+}
+
+/* emil-design-eng: dialogs fade and settle in (ease-out, under 250ms) instead of hard-cutting */
+@media (prefers-reduced-motion: no-preference) {
+  .dialog-overlay[data-state='open'] {
+    animation: overlay-in 200ms ease-out;
+  }
+  .dialog-content[data-state='open'] {
+    animation: dialog-in 220ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+@keyframes overlay-in {
+  from { opacity: 0; }
+}
+@keyframes dialog-in {
+  from { opacity: 0; scale: 0.96; }
+}
+
+/* better-typography: brand selection colour, underlines drawn from the font */
+::selection {
+  background: rgba(37, 99, 235, 0.18);
+  color: #0c1638;
+}
+a {
+  text-underline-position: from-font;
+  text-decoration-thickness: from-font;
+}
+
+/* Isometric hiring line: anatomy kit tokens tuned to the Topin palette (navy ink, brand blue accent) */
+.iso.topin-iso[data-theme='light'] {
+  --anatomy-card: #ffffff;
+  --anatomy-text: #1f355a;
+  --anatomy-muted: #4a5a78;
+  --anatomy-face: #ffffff;
+  --anatomy-top: #ffffff;
+  --anatomy-shade-0: #d3dbe7;
+  --anatomy-shade-1: #dfe5ee;
+  --anatomy-shade-2: #e9edf4;
+  --anatomy-shade-3: #f3f5f9;
+  --anatomy-lit-top: #e4edff;
+  --anatomy-lit-shade: #c9dafc;
+  --anatomy-hi: #0c1638;
+  --anatomy-mid: #7a88a3;
+  --anatomy-lo: #b3bdcd;
+  --anatomy-faint: #d8dee8;
+  --anatomy-lit: #2563eb;
+  --anatomy-halo: #6a7896;
+  --anatomy-halo-opacity: 0.26;
+  --anatomy-dot: #1f355a;
+  --anatomy-weight: 0.7px;
+}
+.topin-iso .iso-plate {
+  border-radius: 28px;
+  box-shadow: 0 0 0 1px rgba(12, 22, 56, 0.08);
+  padding: 56px 32px 64px;
+  cursor: pointer;
+}
+.topin-iso .iso-plate-corners {
+  inset: 22px 28px;
+}
+.topin-iso .iso-plate-corner {
+  font-size: 11.5px;
+}
+.topin-iso .iso-plate-corner[data-corner='hint'] {
+  bottom: 0;
+}
+.topin-iso .iso-svg {
+  max-width: 1040px;
+}
+@media (max-width: 640px) {
+  .topin-iso .iso-plate {
+    padding: 48px 4px 60px;
+  }
+  .topin-iso .iso-plate-corners {
+    inset: 18px 16px;
+  }
+  .topin-iso .iso-plate-corner[data-corner='title'],
+  .topin-iso .iso-plate-corner[data-corner='hint'] {
+    display: none;
+  }
+}
