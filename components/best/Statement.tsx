@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+import { animate, motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { useRef } from 'react';
 
 // Built from the approved section titles: creation, proctoring, reporting, and the hero promise.
@@ -51,10 +51,18 @@ export function Statement() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   const progress = useTransform(scrollYProgress, [0.05, 0.85], [0, 1]);
 
-  // Theme change on scroll (Mercury, Canopy): the page goes from light to dark as this section arrives, and back as it leaves
-  const { scrollYProgress: enter } = useScroll({ target: ref, offset: ['start 85%', 'start 15%'] });
-  const { scrollYProgress: leave } = useScroll({ target: ref, offset: ['end 85%', 'end 15%'] });
-  const dark = useTransform([enter, leave], ([a, b]: number[]) => Math.max(0, Math.min(1, a)) - Math.max(0, Math.min(1, b)));
+  // Theme change (Mercury, Canopy): nothing changes while scrolling in. Once the section has fully landed the page eases to dark
+  // over 0.7s, and eases back to light once you scroll on past it (a timed animation, not tied to scroll position).
+  const { scrollYProgress: landed } = useScroll({ target: ref, offset: ['start start', 'end end'] });
+  const dark = useMotionValue(0);
+  const isDark = useRef(false);
+  const setTheme = (v: number) => {
+    const on = v > 0.005 && v < 0.995;
+    if (on === isDark.current) return;
+    isDark.current = on;
+    animate(dark, on ? 1 : 0, { duration: 0.7, ease: [0.22, 1, 0.36, 1] });
+  };
+  useMotionValueEvent(landed, 'change', setTheme);
   const bg = useTransform(dark, [0, 1], ['rgb(255,255,255)', 'rgb(12,22,56)']);
 
   return (
