@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import { TrustLogos } from '@/components/sections/TrustBand';
 import { Button } from '@/components/ui/Button';
-import { CountUp } from '@/components/ui/CountUp';
 import { links } from '@/content/flags';
 import { hero } from '@/content/hero';
 
@@ -28,27 +27,19 @@ function ProductPanel() {
     reduce
       ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.2 } }
       : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.7, delay: d, ease } };
-  const top = rows[0];
 
   return (
-    <div aria-hidden="true" className="relative flex h-full flex-col gap-4 overflow-hidden rounded-[28px] bg-blue p-6 md:block md:min-h-[540px] md:p-0">
+    <div aria-hidden="true" className="relative flex h-full flex-col gap-4 overflow-hidden rounded-[28px] bg-blue p-6 md:flex md:min-h-[540px] md:items-center md:p-8">
       {/* brand mark, oversized, as a quiet graphic */}
       <svg viewBox="0 0 120 80" className="absolute -right-16 -top-10 w-[420px] text-white/[.07]" fill="currentColor">
         <path d="M0 0h52L36 26H18L0 54z" />
         <path d="M62 0h58L92 44 80 30h22z" />
       </svg>
 
-      <motion.div {...enter(0.25)} className="relative flex items-center justify-between text-white md:absolute md:left-8 md:right-8 md:top-7">
-        <div>
-          <p className="text-[13px] font-medium text-white">Assessment</p>
-          <p className="mt-0.5 font-display text-[22px] font-semibold tracking-[-0.02em]">{hero.app.title}</p>
-        </div>
-        <span className="rounded-[8px] bg-white/15 px-3 py-1.5 text-[13px] font-semibold">48 candidates</span>
-      </motion.div>
 
       <motion.div
         {...enter(0.35)}
-        className="relative rounded-[18px] bg-white p-5 shadow-[0_24px_48px_-16px_rgba(12,22,56,.45)] md:absolute md:left-8 md:right-8 md:top-[108px] xl:right-[96px]"
+        className="relative rounded-[18px] bg-white p-5 shadow-[0_24px_48px_-16px_rgba(12,22,56,.45)] md:w-full"
       >
         <div className="flex items-center justify-between">
           <p className="text-[15px] font-semibold text-navy">{hero.visual.cardB.title}</p>
@@ -77,27 +68,6 @@ function ProductPanel() {
         </ul>
       </motion.div>
 
-      <motion.div {...enter(0.5)} className="relative rounded-[18px] bg-navy p-5 text-white shadow-[0_24px_48px_-16px_rgba(12,22,56,.6)] md:absolute md:bottom-7 md:left-8 md:w-[230px]">
-        <p className="text-[12.5px] font-medium text-cyan-soft">{hero.visual.cardB.pill}</p>
-        <div className="mt-2 flex items-end gap-2">
-          <span className="font-display text-[44px] font-semibold leading-none tracking-[-0.04em]">{top.score}</span>
-          <span className="mb-1 rounded-[6px] bg-green-soft px-2 py-0.5 text-[12px] font-bold text-green">{top.trust}</span>
-        </div>
-        <p className="mt-2 text-[13px] text-cyan-soft">{top.name}</p>
-      </motion.div>
-
-      <motion.ul
-        {...enter(0.6)}
-        className="absolute bottom-7 right-8 hidden w-[250px] rounded-[18px] bg-white p-5 shadow-[0_24px_48px_-16px_rgba(12,22,56,.45)] md:block"
-      >
-        <li className="pb-2 text-[13px] font-semibold text-navy">{hero.visual.pill}</li>
-        {hero.app.live.checks.map((c) => (
-          <li key={c.label} className="flex items-center justify-between border-t border-navy/[.07] py-2 text-[13px]">
-            <span className="text-navy-2">{c.label}</span>
-            <span className="font-semibold text-green">{c.value}</span>
-          </li>
-        ))}
-      </motion.ul>
     </div>
   );
 }
@@ -139,24 +109,11 @@ export function HeroBest() {
             <Button href={links.demo} size="big" track={{ label: hero.ctaPrimary, location: 'hero' }}>
               {hero.ctaPrimary}
             </Button>
-            <Button variant="outline" size="big" opensStart track={{ label: hero.ctaSecondary, location: 'hero' }}>
-              {hero.ctaSecondary}
-            </Button>
           </div>
           <p className="hero-fade mt-4 text-[14px] text-navy-2" style={{ animationDelay: '0.35s' }}>
             {hero.badge.strong}. {hero.badge.rest}.
           </p>
 
-          <dl className="hero-fade mt-12 grid grid-cols-3 border-t border-navy/15 pt-6" style={{ animationDelay: '0.4s' }}>
-            {hero.stats.map((st, i) => (
-              <div key={st.label} className={`flex flex-col gap-1 ${i > 0 ? 'border-l border-navy/15 pl-4 md:pl-6' : 'pr-4'}`}>
-                <dt className="order-2 text-[13px] text-navy-2 md:text-[14px]">{st.label}</dt>
-                <dd className="order-1 font-display text-[30px] font-semibold leading-[34px] tracking-[-0.035em] text-navy md:text-[40px] md:leading-[44px]">
-                  <CountUp value={st.value} decimals={st.decimals} suffix={st.suffix} delay={0.4} />
-                </dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         <ProductPanel />
