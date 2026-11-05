@@ -1,5 +1,6 @@
 'use client';
 
+import { SectionTag } from '@/components/ui/SectionTag';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
@@ -63,7 +64,10 @@ export function Comparison() {
   return (
     <section id="compare" aria-labelledby="compare-title" className="section-y border-t border-navy/[.08] bg-white">
       <div className="wrap flex flex-col gap-14 md:gap-16">
-        <SectionHead id="compare-title" title={comparison.title} />
+        <div>
+          <SectionTag>How we&apos;re different</SectionTag>
+          <SectionHead id="compare-title" title={comparison.title} />
+        </div>
 
         <div ref={tableRef} role="table" aria-label="Topin compared with other assessment platforms" className="relative w-full">
           {/* highlighted Topin column, drawn behind the rows */}

@@ -16,17 +16,21 @@ function RotatingWord() {
   const [i, setI] = useState(0);
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const t = setInterval(() => setI((n) => (n + 1) % WORDS.length), 2400);
+    const t = setInterval(() => setI((n) => (n + 1) % WORDS.length), 2600);
     return () => clearInterval(t);
   }, []);
   return (
-    <span className="inline-grid overflow-hidden align-bottom">
+    <span className="relative inline-grid overflow-hidden rounded-[0.22em] bg-blue/[.09] px-[0.22em] align-bottom">
       {WORDS.map((w, k) => (
         <span
           key={w}
           aria-hidden={k !== i}
-          className="col-start-1 row-start-1 text-blue [-webkit-text-fill-color:#2563eb] transition-[transform,opacity] duration-500 ease-out"
-          style={{ visibility: k === i ? 'visible' : 'hidden', opacity: k === i ? 1 : 0, transform: k === i ? 'translateY(0)' : 'translateY(60%)' }}
+          className="col-start-1 row-start-1 text-blue [-webkit-text-fill-color:#2563eb] transition-[transform,opacity,filter] duration-[650ms] ease-[cubic-bezier(.22,1,.36,1)]"
+          style={{
+            opacity: k === i ? 1 : 0,
+            filter: k === i ? 'blur(0)' : 'blur(6px)',
+            transform: k === i ? 'translateY(0)' : k === (i + WORDS.length - 1) % WORDS.length ? 'translateY(-70%)' : 'translateY(70%)',
+          }}
         >
           {w}
         </span>
@@ -135,9 +139,6 @@ export function HeroPill() {
               <span className="bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">Hire</span>{' '}
               <span className="relative inline-block text-blue">
                 <RotatingWord />
-                <svg aria-hidden="true" className="absolute -bottom-1 left-0 h-3 w-full text-blue opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
-                </svg>
               </span>
             </span>
           </h1>

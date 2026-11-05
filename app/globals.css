@@ -279,12 +279,15 @@ a {
 .noir-ping { animation: noir-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite; }
 .noir-grid { animation: noir-drift 6s linear infinite; }
 .noir-cta {
-  --noir-angle: 0deg; position: relative; isolation: isolate; overflow: hidden; border-radius: 9999px; border: 2px solid transparent; cursor: pointer;
-  background: linear-gradient(#2563eb, #2563eb) padding-box,
-    conic-gradient(from var(--noir-angle), rgba(12,22,56,0) 0%, #0c1638 8%, #0c1638 24%, rgba(12,22,56,0) 42%, rgba(12,22,56,0) 100%) border-box;
-  animation: noir-border-spin 2.5s linear infinite;
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 9999px; border: 0; cursor: pointer;
+  background: linear-gradient(180deg, #3b7bff 0%, #2563eb 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 8px 20px -8px rgba(37,99,235,.6);
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-.noir-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #fff 0.5px, transparent 0); background-size: 4px 4px; opacity: .1; z-index: 0; }
+.noir-cta:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 12px 24px -8px rgba(37,99,235,.7); }
+.noir-cta:active { transform: translateY(0); }
+.noir-cta::after { content: ''; position: absolute; inset: 0; z-index: 0; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%); transform: translateX(-120%); animation: noir-shine 3.6s ease-in-out infinite; }
+@keyframes noir-shine { 0%, 55% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
 /* browsers paint autofilled inputs blue: keep the hero email field white */
 .noir-field input:-webkit-autofill,
 .noir-field input:-webkit-autofill:hover,
@@ -299,7 +302,7 @@ a {
 .noir-select::selection { background: #2563eb; color: #fff; }
 @media (prefers-reduced-motion: reduce) {
   .noir-up { opacity: 1; animation: none; }
-  .noir-cta, .noir-ping, .noir-grid { animation: none; }
+  .noir-cta::after, .noir-ping, .noir-grid { animation: none; }
 }
 
 /* Feature cards: a dot runs along the line, a playhead sweeps the session (both still under reduced motion) */

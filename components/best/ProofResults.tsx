@@ -1,5 +1,6 @@
 'use client';
 
+import { SectionTag } from '@/components/ui/SectionTag';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
 import { flags } from '@/content/flags';
 import { testimonials } from '@/content/testimonials';
@@ -24,6 +25,7 @@ export function ProofResults() {
       <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-20">
         <div>
           <div className="lg:sticky lg:top-28">
+            <SectionTag>Testimonials</SectionTag>
             <h2 id="testimonials-title" className="text-h2-m md:text-h2">
               Real results. <span className="text-navy/55">Not projections.</span>
             </h2>
