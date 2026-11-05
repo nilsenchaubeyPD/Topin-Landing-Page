@@ -301,3 +301,13 @@ a {
   .noir-up { opacity: 1; animation: none; }
   .noir-cta, .noir-ping, .noir-grid { animation: none; }
 }
+
+/* Feature cards: a dot runs along the line, a playhead sweeps the session (both still under reduced motion) */
+@keyframes fx-line-run { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 7px); opacity: 0; } }
+@keyframes fx-sweep { from { left: 4%; } to { left: 96%; } }
+.fx-line-dot { animation: fx-line-run 2.4s ease-in-out infinite; }
+.fx-playhead { animation: fx-sweep 9s linear infinite alternate; }
+@media (prefers-reduced-motion: reduce) {
+  .fx-line-dot { animation: none; left: 50%; }
+  .fx-playhead { animation: none; left: 50%; }
+}

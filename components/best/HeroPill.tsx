@@ -82,13 +82,13 @@ export function HeroPill() {
         />
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 size-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue/[.07] blur-[110px]" />
 
-        <div className="relative mx-auto max-w-[1000px] text-center">
+        <div className="relative mx-auto w-full max-w-[1000px] text-center">
           <Link
             href={links.start}
             style={delay(0.1)}
-            className="noir-up group mb-8 inline-flex items-center gap-2.5 rounded-pill border border-navy/10 bg-white/70 px-4 py-1.5 text-[13px] font-semibold text-navy-2 backdrop-blur-md transition-colors hover:border-blue/30"
+            className="noir-up group mb-8 inline-flex max-w-full items-center gap-2.5 rounded-[20px] border sm:rounded-pill border-navy/10 bg-white/70 px-4 py-1.5 text-[13px] font-semibold text-navy-2 backdrop-blur-md transition-colors hover:border-blue/30"
           >
-            <span className="relative flex size-2">
+            <span className="relative flex size-2 shrink-0">
               <span className="noir-ping absolute inline-flex size-full rounded-full bg-blue/60" />
               <span className="relative inline-flex size-2 rounded-full bg-blue" />
             </span>

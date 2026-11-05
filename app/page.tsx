@@ -1,8 +1,7 @@
-import { FeaturesTiles } from '@/components/best/FeaturesTiles';
+import { FeaturesCards } from '@/components/best/FeaturesCards';
 import { HeroPill } from '@/components/best/HeroPill';
 import { HowStory } from '@/components/best/HowStory';
 import { Statement } from '@/components/best/Statement';
-import { TrustBlock } from '@/components/best/TrustBlock';
 import { ProofResults } from '@/components/best/ProofResults';
 import { ClosingCTA } from '@/components/sections/ClosingCTA';
 import { Comparison } from '@/components/sections/Comparison';
@@ -26,9 +25,8 @@ export default function Home() {
         <Variant section="hero" options={{ a: HeroPill, b: HeroV2 }} />
         <Statement />
         <Variant section="how" options={{ a: HowStory, b: HowItWorks }} />
-        <Variant section="features" options={{ a: FeaturesTiles, b: FeaturesParallax }} />
+        <Variant section="features" options={{ a: FeaturesCards, b: FeaturesParallax }} />
         <Variant section="proof" options={{ a: ProofResults, b: Testimonials }} />
-        <TrustBlock />
         <Comparison />
         <ClosingCTA />
         <FAQ />
