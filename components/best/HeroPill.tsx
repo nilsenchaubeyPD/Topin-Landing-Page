@@ -1,54 +1,68 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState, type FormEvent } from 'react';
 import { TrustLogos } from '@/components/sections/TrustBand';
-import { Button } from '@/components/ui/Button';
-import { Logo } from '@/components/ui/Logo';
+import { ctaClick } from '@/lib/analytics';
 import { links } from '@/content/flags';
 import { hero } from '@/content/hero';
-import { nav } from '@/content/nav';
 
 const SUB = 'AI-proctored assessments that rank your candidates for you.';
 const delay = (s: number) => ({ animationDelay: `${s}s` });
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-/** Floating pill nav: soft glass bar that settles in at the top, with a blur band behind it. */
-function PillNav() {
-  const [solid, setSolid] = useState(false);
-  useEffect(() => {
-    const on = () => setSolid(window.scrollY > 24);
-    on();
-    window.addEventListener('scroll', on, { passive: true });
-    return () => window.removeEventListener('scroll', on);
-  }, []);
+/** Work email + Book a Demo. The address is kept for the booking step (not put in the URL). */
+function DemoForm() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [err, setErr] = useState('');
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!EMAIL.test(email.trim())) {
+      setErr('Enter a valid work email.');
+      return;
+    }
+    try {
+      sessionStorage.setItem('topin-demo-email', email.trim());
+    } catch {}
+    ctaClick(hero.ctaPrimary, 'hero');
+    router.push(links.demo);
+  };
   return (
-    <>
-      <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-40 h-[120px] bg-gradient-to-b from-white/90 to-transparent backdrop-blur-[6px] [mask-image:linear-gradient(to_bottom,black,transparent)]" />
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-5">
-        <nav
-          aria-label="Primary"
-          className={`mx-auto flex max-w-[1040px] items-center justify-between rounded-pill border px-5 py-2.5 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-300 ${
-            solid ? 'border-navy/10 bg-white/85 shadow-[0_12px_40px_-16px_rgba(12,22,56,.25)]' : 'border-navy/[.08] bg-white/60'
-          }`}
-        >
-          <a href="#top" aria-label="topin.tech home" className="shrink-0">
-            <Logo priority className="h-auto w-[124px] sm:w-[140px]" />
-          </a>
-          <ul className="hidden items-center gap-1 nav:flex">
-            {nav.links.map((l) => (
-              <li key={l.id}>
-                <a href={l.href} className="block rounded-pill px-4 py-2 text-[14.5px] font-semibold text-navy-2 transition-colors hover:bg-navy/[.05] hover:text-navy">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <Button opensStart variant="outline" className="!rounded-pill !px-5 !py-2 !text-[14px]" track={{ label: nav.ctaSecondary, location: 'nav' }}>
-            {nav.ctaSecondary}
-          </Button>
-        </nav>
-      </header>
-    </>
+    <form onSubmit={submit} noValidate className="mx-auto w-full max-w-[560px]">
+      <div className="noir-field flex flex-col gap-2 rounded-[28px] border border-navy/10 bg-white/80 p-2 shadow-[0_12px_40px_-20px_rgba(12,22,56,.25)] backdrop-blur-md transition-[border-color,box-shadow] duration-200 focus-within:border-blue focus-within:shadow-[0_0_0_4px_rgba(37,99,235,.12)] sm:flex-row sm:items-center sm:rounded-pill">
+        <label htmlFor="hero-email" className="sr-only">
+          Work email
+        </label>
+        <input
+          id="hero-email"
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          placeholder="Enter your work email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (err) setErr('');
+          }}
+          aria-invalid={err ? true : undefined}
+          aria-describedby={err ? 'hero-email-err' : undefined}
+          className="min-w-0 flex-1 bg-transparent px-5 py-3 text-[16px] text-navy outline-none placeholder:text-navy-2/60"
+        />
+        <button type="submit" className="noir-cta group px-8 py-3.5 text-[16px] font-semibold text-white">
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            {hero.ctaPrimary}
+            <span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-1">
+              →
+            </span>
+          </span>
+        </button>
+      </div>
+      <p id="hero-email-err" role="alert" className="mt-2 min-h-[20px] text-center text-[13.5px] text-[#B42318]">
+        {err}
+      </p>
+    </form>
   );
 }
 
@@ -60,8 +74,6 @@ function PillNav() {
 export function HeroPill() {
   return (
     <div className="noir-select relative overflow-x-clip bg-white">
-      <PillNav />
-
       <section id="top" aria-labelledby="pill-title" className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-32">
         {/* drifting line grid, masked to the middle (Superdesign) */}
         <div
@@ -107,19 +119,10 @@ export function HeroPill() {
             {SUB}
           </p>
 
-          <div style={delay(0.4)} className="noir-up mt-11 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
-            <Button href={links.demo} className="noir-cta !min-h-0 !bg-transparent !px-10 !py-4 !text-[16px] !text-white hover:!translate-y-0" track={{ label: hero.ctaPrimary, location: 'hero' }}>
-              <span className="relative z-10 flex items-center gap-2">
-                {hero.ctaPrimary}
-                <span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-1">→</span>
-              </span>
-            </Button>
-            <a href="#how" className="group inline-flex items-center gap-2 rounded-pill border border-navy/10 bg-white/70 px-7 py-4 text-[16px] font-semibold text-navy-2 backdrop-blur transition-colors hover:border-navy/20 hover:text-navy">
-              See how it works
-              <span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-y-0.5">↓</span>
-            </a>
+          <div style={delay(0.4)} className="noir-up mt-11">
+            <DemoForm />
           </div>
-          <p style={delay(0.5)} className="noir-up mt-5 text-[14px] text-navy-2/80">
+          <p style={delay(0.5)} className="noir-up -mt-1 text-[14px] text-navy-2/80">
             {hero.badge.strong}. {hero.badge.rest}.
           </p>
         </div>

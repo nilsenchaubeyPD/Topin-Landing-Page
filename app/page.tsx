@@ -1,5 +1,5 @@
 import { FeaturesTiles } from '@/components/best/FeaturesTiles';
-import { HeroBest } from '@/components/best/HeroBest';
+import { HeroPill } from '@/components/best/HeroPill';
 import { HowStory } from '@/components/best/HowStory';
 import { Statement } from '@/components/best/Statement';
 import { TrustBlock } from '@/components/best/TrustBlock';
@@ -11,7 +11,7 @@ import { FeaturesParallax } from '@/components/sections/FeaturesParallax';
 import { Footer } from '@/components/sections/Footer';
 import { HeroV2 } from '@/components/sections/HeroV2';
 import { HowItWorks } from '@/components/sections/HowItWorks';
-import { Nav } from '@/components/sections/Nav';
+import { PillNav } from '@/components/sections/PillNav';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { Variant } from '@/components/variants/VariantContext';
 import { VariantPicker } from '@/components/variants/VariantPicker';
@@ -21,9 +21,9 @@ import { flags } from '@/content/flags';
 export default function Home() {
   return (
     <>
-      <Nav />
+      <PillNav />
       <main id="main">
-        <Variant section="hero" options={{ a: HeroBest, b: HeroV2 }} />
+        <Variant section="hero" options={{ a: HeroPill, b: HeroV2 }} />
         <Statement />
         <Variant section="how" options={{ a: HowStory, b: HowItWorks }} />
         <Variant section="features" options={{ a: FeaturesTiles, b: FeaturesParallax }} />
