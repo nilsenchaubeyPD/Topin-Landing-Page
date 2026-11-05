@@ -223,14 +223,14 @@ function FeatureCard({ c }: { c: Card }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={inViewOnce}
       transition={{ duration: 0.7, ease }}
-      className={`group flex flex-col overflow-hidden rounded-[24px] border border-navy/[.07] bg-[#f6f7fa] transition-colors duration-300 hover:border-navy/20 ${c.wide ? 'md:col-span-2' : ''}`}
+      className={`group flex flex-col overflow-hidden rounded-[24px] bg-[#f6f7fa] ${c.wide ? 'md:col-span-2' : ''}`}
     >
       <div aria-hidden="true" className="relative h-[300px] w-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.012] [mask-image:linear-gradient(to_bottom,#000_72%,transparent)]">
         <c.Graphic />
       </div>
       <div className={`flex flex-1 flex-col gap-5 px-6 pb-7 pt-1 md:px-8 ${c.wide ? 'lg:flex-row lg:items-end lg:justify-between lg:gap-12' : ''}`}>
         <div>
-          <p className="flex items-center gap-2 text-[13.5px] font-semibold text-navy-2">
+          <p className="flex items-center gap-2 text-[15px] font-semibold capitalize text-blue">
             {c.dot && <span className={`h-[7px] w-3.5 rounded-pill ${c.dot}`} />}
             {c.label}
           </p>
@@ -240,7 +240,7 @@ function FeatureCard({ c }: { c: Card }) {
         {f.chips && (
           <ul className={`flex flex-wrap gap-1.5 ${c.wide ? 'lg:max-w-[440px] lg:justify-end' : 'mt-auto'}`}>
             {f.chips.map((chip) => (
-              <li key={chip} className="rounded-pill border border-navy/[.08] bg-white px-3 py-1.5 text-[13px] font-medium text-navy-2">
+              <li key={chip} className="rounded-pill bg-blue-50 px-2.5 py-1 text-[12px] font-semibold capitalize leading-4 text-blue">
                 {chip}
               </li>
             ))}
