@@ -304,9 +304,10 @@ a {
 
 /* Feature cards: a dot runs along the line, a playhead sweeps the session (both still under reduced motion) */
 @keyframes fx-line-run { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 7px); opacity: 0; } }
-@keyframes fx-sweep { from { left: 4%; } to { left: 96%; } }
+@keyframes fx-sweep { 0% { left: 0%; opacity: 0; } 8% { opacity: 1; } 88% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
 .fx-line-dot { animation: fx-line-run 2.4s ease-in-out infinite; }
-.fx-playhead { animation: fx-sweep 9s linear infinite alternate; }
+.fx-playhead { animation: fx-sweep 4.5s cubic-bezier(.4,0,.6,1) infinite; }
+.fx-playhead::before { content: ''; position: absolute; top: 0; bottom: 0; right: 100%; width: 90px; background: linear-gradient(to right, rgba(37,99,235,0), rgba(37,99,235,.2)); pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
   .fx-line-dot { animation: none; left: 50%; }
   .fx-playhead { animation: none; left: 50%; }
