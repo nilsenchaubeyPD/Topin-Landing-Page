@@ -3,7 +3,8 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
-import { ScreenShortlist, StepStage } from './StepStage';
+import { HowDeck } from './HowDeck';
+import { ScreenShortlist } from './StepStage';
 import { how } from '@/content/how';
 
 // the poster is laid out at this width, then scaled to fill the frame at any screen size
@@ -11,7 +12,7 @@ const POSTER_W = 900;
 
 /**
  * How it works (best): the video frame pins and grows from a small card to the full width of the screen (Apple),
- * then the three steps sit beside the hands-on demo (StepStage).
+ * then the three steps as a framed deck of working demos (HowDeck).
  */
 export function HowStory() {
   const stage = useRef<HTMLDivElement>(null);
@@ -68,9 +69,9 @@ export function HowStory() {
         </div>
       </div>
 
-      {/* steps left, interactive demo right */}
+      {/* three alternating steps, each a working demo */}
       <div className="wrap py-[var(--section-y)]">
-        <StepStage />
+        <HowDeck />
       </div>
     </section>
   );

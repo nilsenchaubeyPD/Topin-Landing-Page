@@ -10,9 +10,9 @@
   --cyan: #33b5d9;
   --cyan-soft: #ceeef3;
   --white: #ffffff;
-  --snow: #faf6f2;
-  --stone: #efece4;
-  --sand: #d9d5cd;
+  --snow: #f7f8fb;
+  --stone: #eef0f5;
+  --sand: #d8dce5;
   --green: #465c35;
   --green-soft: #e9f5e0;
   --wine: #65303d;
@@ -311,3 +311,8 @@ a {
   .fx-line-dot { animation: none; left: 50%; }
   .fx-playhead { animation: none; left: 50%; }
 }
+
+/* How it works deck: a light line sweeps the assessment while it builds */
+@keyframes fx-laser { from { top: 0; } to { top: calc(100% - 3px); } }
+.fx-laser { animation: fx-laser 0.9s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .fx-laser { animation: none; top: 50%; } }
