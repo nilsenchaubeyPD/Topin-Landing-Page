@@ -3,7 +3,6 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
-import { VideoPlay } from '@/components/ui/VideoPlay';
 import { ScreenShortlist, StepStage } from './StepStage';
 import { how } from '@/content/how';
 
@@ -49,10 +48,6 @@ export function HowStory() {
                   ))}
                 </div>
                 <ScreenShortlist />
-              </div>
-              <div aria-hidden="true" className="absolute inset-0 bg-navy/45" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <VideoPlay size="lg" />
               </div>
             </div>
           </div>
