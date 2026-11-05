@@ -2,7 +2,6 @@
 
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
 import { HowDeck } from './HowDeck';
-import { HowVideo } from './HowVideo';
 import { how } from '@/content/how';
 
 /**
@@ -25,12 +24,8 @@ export function HowStory() {
         </Reveal>
       </div>
 
-      <div className="mt-10 md:mt-12">
-        <HowVideo />
-      </div>
-
       {/* three alternating steps, each a working demo */}
-      <div className="wrap mt-16 md:mt-20">
+      <div className="wrap mt-12 md:mt-14">
         <HowDeck />
       </div>
     </section>

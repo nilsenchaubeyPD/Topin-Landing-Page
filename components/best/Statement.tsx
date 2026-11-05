@@ -4,7 +4,7 @@ import { animate, motion, useMotionValue, useMotionValueEvent, useReducedMotion,
 import { useRef } from 'react';
 
 // Built from the approved section titles: creation, proctoring, reporting, and the hero promise.
-const LINES = ['Go live in minutes.', 'Protect every test.', 'Find the right candidates first.', 'Decide faster.'];
+const LINES = ['Build the test in minutes.', 'Trust every result.', 'See your best candidates first.', 'Decide faster.'];
 const WORDS = LINES.flatMap((l, li) => l.split(' ').map((w, wi, arr) => ({ w, br: wi === arr.length - 1 && li < LINES.length - 1 })));
 
 // Words run from navy to brand blue across the statement (Apple's gradient headline, done per word)

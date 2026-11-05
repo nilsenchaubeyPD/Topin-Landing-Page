@@ -1,13 +1,39 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { TrustLogos } from '@/components/sections/TrustBand';
 import { useStartModal } from '@/components/ui/StartModal';
 import { ctaClick } from '@/lib/analytics';
 import { links } from '@/content/flags';
 import { nav } from '@/content/nav';
 import { hero } from '@/content/hero';
+
+const WORDS = ['better.', 'smarter.', 'sharper.'];
+
+/** Cycles the last word of the headline; all words share one grid cell so the width never jumps. */
+function RotatingWord() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const t = setInterval(() => setI((n) => (n + 1) % WORDS.length), 2400);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <span className="inline-grid overflow-hidden align-bottom">
+      {WORDS.map((w, k) => (
+        <span
+          key={w}
+          aria-hidden={k !== i}
+          className="col-start-1 row-start-1 text-blue [-webkit-text-fill-color:#2563eb] transition-[transform,opacity] duration-500 ease-out"
+          style={{ opacity: k === i ? 1 : 0, transform: k === i ? 'translateY(0)' : 'translateY(60%)' }}
+        >
+          {w}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 const SUB = 'AI-proctored assessments that rank your candidates for you.';
 const delay = (s: number) => ({ animationDelay: `${s}s` });
@@ -108,7 +134,7 @@ export function HeroPill() {
             <span className="block bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">
               Hire{' '}
               <span className="relative inline-block text-blue">
-                <span className="text-blue [-webkit-text-fill-color:#2563eb]">better.</span>
+                <RotatingWord />
                 <svg aria-hidden="true" className="absolute -bottom-1 left-0 h-3 w-full text-blue opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
                   <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
                 </svg>
@@ -123,8 +149,15 @@ export function HeroPill() {
           <div style={delay(0.4)} className="noir-up mt-7 md:mt-8">
             <DemoForm />
           </div>
-          <p style={delay(0.5)} className="noir-up -mt-2 text-[14px] text-navy-2/80">
-            {hero.badge.strong}. {hero.badge.rest}.
+          <p style={delay(0.5)} className="noir-up mt-1 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[16px] font-semibold text-navy md:text-[17px]">
+            <span className="inline-flex items-center gap-2">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#2563eb" /><path d="M6 10.3l2.6 2.6L14 7.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              {hero.badge.strong}
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#2563eb" /><path d="M6 10.3l2.6 2.6L14 7.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              {hero.badge.rest}
+            </span>
           </p>
         </div>
       </section>
