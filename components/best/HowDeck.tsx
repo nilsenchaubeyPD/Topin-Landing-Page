@@ -279,28 +279,24 @@ const POINTS: { title: string; line: string }[][] = [
   ],
 ];
 
-/** One row of the deck: thin side rails, a demo on one side and the text on the other. */
-function Row({ i, demo, last }: { i: number; demo: ReactNode; last?: boolean }) {
+/** One row of the deck: a demo on one side and the text on the other, with no lines between them. */
+function Row({ i, demo }: { i: number; demo: ReactNode }) {
   const flip = i % 2 === 1;
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-[12px_minmax(0,1fr)_12px] ${last ? '' : 'border-b border-navy/10'}`}>
-      <span aria-hidden="true" className="hidden border-r border-navy/10 md:block" />
-      <div className="grid grid-cols-1 divide-y divide-navy/10 lg:grid-cols-2 lg:divide-x lg:divide-y-0">
-        <div className={`flex min-h-[440px] items-center justify-center bg-[#f6f7fa] p-5 md:p-10 ${flip ? 'lg:order-2' : ''}`}>{demo}</div>
-        <div className={`flex flex-col justify-center bg-white p-7 md:p-12 xl:p-16 ${flip ? 'lg:order-1 lg:!border-l-0 lg:border-r lg:border-navy/10' : ''}`}>
-          <h3 className="font-display text-[28px] font-medium leading-[34px] tracking-[-0.02em] text-navy md:text-[34px] md:leading-[42px]">{names[i]}.</h3>
-          <p className="mt-4 text-[16px] leading-[26px] text-navy-2">{how.stepDetails[i]}</p>
-          <div className="mt-7 grid gap-5 border-t border-navy/10 pt-6 sm:grid-cols-2">
-            {POINTS[i].map((p) => (
-              <div key={p.title}>
-                <p className="text-[15px] font-semibold text-navy">{p.title}</p>
-                <p className="mt-1 text-[14px] leading-[22px] text-navy-2">{p.line}</p>
-              </div>
-            ))}
-          </div>
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <div className={`flex min-h-[440px] items-center justify-center rounded-[16px] bg-[#f6f7fa] p-5 md:p-10 ${flip ? 'lg:order-2' : ''}`}>{demo}</div>
+      <div className={`flex flex-col justify-center p-5 md:p-12 xl:p-16 ${flip ? 'lg:order-1' : ''}`}>
+        <h3 className="font-display text-[28px] font-medium leading-[34px] tracking-[-0.02em] text-navy md:text-[34px] md:leading-[42px]">{names[i]}.</h3>
+        <p className="mt-4 text-[16px] leading-[26px] text-navy-2">{how.stepDetails[i]}</p>
+        <div className="mt-7 grid gap-5 sm:grid-cols-2">
+          {POINTS[i].map((p) => (
+            <div key={p.title}>
+              <p className="text-[15px] font-semibold text-navy">{p.title}</p>
+              <p className="mt-1 text-[14px] leading-[22px] text-navy-2">{p.line}</p>
+            </div>
+          ))}
         </div>
       </div>
-      <span aria-hidden="true" className="hidden border-l border-navy/10 md:block" />
     </div>
   );
 }
@@ -319,19 +315,15 @@ export function HowDeck() {
   };
 
   return (
-    <div className="overflow-hidden rounded-[24px] border border-navy/10 bg-white shadow-[0_8px_32px_rgba(12,22,56,.03)]">
-      <div className="grid grid-cols-1 border-b border-navy/10 md:grid-cols-[12px_minmax(0,1fr)_12px]">
-        <span aria-hidden="true" className="hidden border-r border-navy/10 md:block" />
-        <div className="flex flex-col items-center bg-[#f6f7fa] px-6 pb-14 pt-16 text-center md:px-14 md:pb-16 md:pt-20">
-          <p className="text-[13px] font-semibold tracking-[0.08em] text-blue">{how.eyebrow}</p>
-          <h3 className="mt-3 max-w-[760px] font-display text-[32px] font-medium leading-[38px] tracking-[-0.02em] text-navy md:text-[44px] md:leading-[52px]">{howOptions[1].title}</h3>
-          <p className="mt-4 max-w-[620px] text-[17px] leading-[27px] text-navy-2">{howOptions[1].lead}</p>
-        </div>
-        <span aria-hidden="true" className="hidden border-l border-navy/10 md:block" />
+    <div className="flex flex-col gap-3 overflow-hidden rounded-[24px] border border-navy/10 bg-white p-3 shadow-[0_8px_32px_rgba(12,22,56,.03)]">
+      <div className="flex flex-col items-center px-6 pb-10 pt-14 text-center md:px-14 md:pb-12 md:pt-16">
+        <p className="text-[13px] font-semibold tracking-[0.08em] text-blue">{how.eyebrow}</p>
+        <h3 className="mt-3 max-w-[760px] font-display text-[32px] font-medium leading-[38px] tracking-[-0.02em] text-navy md:text-[44px] md:leading-[52px]">{howOptions[1].title}</h3>
+        <p className="mt-4 max-w-[620px] text-[17px] leading-[27px] text-navy-2">{howOptions[1].lead}</p>
       </div>
       <Row i={0} demo={<StepBrief role={role} setRole={pickRole} phase={brief} setPhase={setBrief} />} />
       <Row i={1} demo={<StepAssessment role={role} phase={build} setPhase={setBuild} />} />
-      <Row i={2} demo={<StepShortlist phase={report} setPhase={setReport} />} last />
+      <Row i={2} demo={<StepShortlist phase={report} setPhase={setReport} />} />
     </div>
   );
 }
