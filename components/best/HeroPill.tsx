@@ -26,7 +26,7 @@ function RotatingWord() {
           key={w}
           aria-hidden={k !== i}
           className="col-start-1 row-start-1 text-blue [-webkit-text-fill-color:#2563eb] transition-[transform,opacity] duration-500 ease-out"
-          style={{ opacity: k === i ? 1 : 0, transform: k === i ? 'translateY(0)' : 'translateY(60%)' }}
+          style={{ visibility: k === i ? 'visible' : 'hidden', opacity: k === i ? 1 : 0, transform: k === i ? 'translateY(0)' : 'translateY(60%)' }}
         >
           {w}
         </span>
@@ -131,8 +131,8 @@ export function HeroPill() {
             className="noir-up font-display text-[clamp(44px,min(8.4vw,13.5svh),116px)] font-semibold leading-[1.02] tracking-[-0.05em]"
           >
             <span className="block bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">Decide faster.</span>
-            <span className="block bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">
-              Hire{' '}
+            <span className="block">
+              <span className="bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">Hire</span>{' '}
               <span className="relative inline-block text-blue">
                 <RotatingWord />
                 <svg aria-hidden="true" className="absolute -bottom-1 left-0 h-3 w-full text-blue opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
