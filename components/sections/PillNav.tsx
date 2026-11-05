@@ -19,7 +19,7 @@ export function PillNav() {
   }, []);
   return (
     <>
-      <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-40 h-[120px] bg-gradient-to-b from-white/90 to-transparent backdrop-blur-[6px] [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+      <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-40 h-[110px] backdrop-blur-[10px] [mask-image:linear-gradient(to_bottom,black,transparent)]" />
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-5">
         <nav
           aria-label="Primary"
