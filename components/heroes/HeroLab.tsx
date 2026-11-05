@@ -167,7 +167,7 @@ function Hero3() {
 }
 
 const HEROES = [Hero1, Hero2, Hero3];
-const NAMES = ['Dark stage', 'Three cards', 'Blue stage'];
+const NAMES = ['Dark stage', 'Three cards', 'Blue stage', 'Pill'];
 
 export function HeroLab({ id }: { id: number }) {
   const H = HEROES[id - 1];

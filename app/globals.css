@@ -268,3 +268,25 @@ a {
 .video-ring { animation: video-ring-spin 16s linear infinite; transform-origin: 50% 50%; }
 .group:hover .video-ring { animation-duration: 6s; }
 @media (prefers-reduced-motion: reduce) { .video-ring { animation: none; } }
+
+/* ---- Hero "pill" style: floating pill nav, fade-up, shiny CTA with a turning border (light theme) ---- */
+@property --noir-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes noir-border-spin { to { --noir-angle: 360deg; } }
+@keyframes noir-fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes noir-ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes noir-drift { from { background-position: 0 0; } to { background-position: 0 -40px; } }
+.noir-up { opacity: 0; animation: noir-fade-up 0.8s ease-out forwards; }
+.noir-ping { animation: noir-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite; }
+.noir-grid { animation: noir-drift 6s linear infinite; }
+.noir-cta {
+  --noir-angle: 0deg; position: relative; isolation: isolate; overflow: hidden; border-radius: 9999px; border: 2px solid transparent; cursor: pointer;
+  background: linear-gradient(#0c1638, #0c1638) padding-box,
+    conic-gradient(from var(--noir-angle), rgba(37,99,235,0) 0%, #2563eb 6%, #6ea1ff 16%, #2563eb 30%, rgba(37,99,235,0) 42%, rgba(37,99,235,0) 100%) border-box;
+  animation: noir-border-spin 2.5s linear infinite;
+}
+.noir-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #fff 0.5px, transparent 0); background-size: 4px 4px; opacity: .1; z-index: 0; }
+.noir-select::selection { background: #2563eb; color: #fff; }
+@media (prefers-reduced-motion: reduce) {
+  .noir-up { opacity: 1; animation: none; }
+  .noir-cta, .noir-ping, .noir-grid { animation: none; }
+}
