@@ -319,7 +319,7 @@ export function HowDeck() {
       <div className="flex flex-col items-center px-6 pb-10 pt-14 text-center md:px-14 md:pb-12 md:pt-16">
         <p className="text-[13px] font-semibold tracking-[0.08em] text-blue">{how.eyebrow}</p>
         <h3 className="mt-3 max-w-[760px] font-display text-[32px] font-medium leading-[38px] tracking-[-0.02em] text-navy md:text-[44px] md:leading-[52px]">{howOptions[1].title}</h3>
-        <p className="mt-4 max-w-[620px] text-[17px] leading-[27px] text-navy-2">{howOptions[1].lead}</p>
+        <p className="mt-4 text-[17px] leading-[27px] text-navy-2 md:whitespace-nowrap">{howOptions[1].lead}</p>
       </div>
       <Row i={0} demo={<StepBrief role={role} setRole={pickRole} phase={brief} setPhase={setBrief} />} />
       <Row i={1} demo={<StepAssessment role={role} phase={build} setPhase={setBuild} />} />
