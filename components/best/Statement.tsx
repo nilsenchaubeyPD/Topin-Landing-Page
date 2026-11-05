@@ -5,7 +5,6 @@ import { useRef } from 'react';
 
 // Built from the approved section titles: creation, proctoring, reporting, and the hero promise.
 const LINES = ['Build the test in minutes.', 'Trust every result.', 'See your best candidates first.', 'Decide faster.'];
-const WORDS = LINES.flatMap((l, li) => l.split(' ').map((w, wi, arr) => ({ w, br: wi === arr.length - 1 && li < LINES.length - 1 })));
 
 // Words run from navy to brand blue across the statement (Apple's gradient headline, done per word)
 const STOPS = [
@@ -27,16 +26,21 @@ function colorAt(t: number, stops = STOPS) {
   return `rgb(${c.join(',')})`;
 }
 
-function Word({ w, i, n, progress, dark, bg }: { w: string; i: number; n: number; progress: MotionValue<number>; dark: MotionValue<number>; bg: MotionValue<string> }) {
-  const start = i / n;
-  // a veil in the section's own background colour fades off each word (the text itself stays full-contrast for accessibility checks)
-  const veil = useTransform(progress, [start, start + 1.5 / n], [0.86, 0]);
+function Line({ text, i, n, progress, dark }: { text: string; i: number; n: number; progress: MotionValue<number>; dark: MotionValue<number> }) {
+  // each line owns one slice of the scroll: it rises in, holds, then lifts away as the next one arrives
+  const a = i / n;
+  const z = (i + 1) / n;
+  const w = 0.35 / n;
+  const first = i === 0;
+  const last = i === n - 1;
+  const opacity = useTransform(progress, first ? [0, z - w, z] : last ? [a, a + w, 1] : [a, a + w, z - w, z], first ? [1, 1, 0] : last ? [0, 1, 1] : [0, 1, 1, 0]);
+  const y = useTransform(progress, first ? [0, z - w, z] : last ? [a, a + w, 1] : [a, a + w, z - w, z], first ? [0, 0, -40] : last ? [40, 0, 0] : [40, 0, 0, -40]);
+  const blur = useTransform(progress, first ? [0, z - w, z] : last ? [a, a + w, 1] : [a, a + w, z - w, z], first ? [0, 0, 8] : last ? [8, 0, 0] : [8, 0, 0, 8]);
+  const filter = useTransform(blur, (v) => `blur(${v}px)`);
   const color = useTransform(dark, [0, 1], [colorAt(i / (n - 1)), colorAt(i / (n - 1), LIGHT_STOPS)]);
   return (
-    <motion.span className="relative inline-block" style={{ color }}>
-      {w}
-      <motion.span aria-hidden="true" className="pointer-events-none absolute -inset-x-1 inset-y-0" style={{ opacity: veil, backgroundColor: bg }} />
-      &nbsp;
+    <motion.span aria-hidden="true" className="absolute inset-x-0 top-1/2 -mt-[0.55em] block px-5 text-center" style={{ opacity, y, filter, color }}>
+      {text}
     </motion.span>
   );
 }
@@ -66,17 +70,22 @@ export function Statement() {
   const bg = useTransform(dark, [0, 1], ['rgb(255,255,255)', 'rgb(4,8,22)']);
 
   return (
-    <motion.section ref={ref} aria-label="What Topin does" className={`relative ${reduce ? 'bg-white' : 'h-[220svh]'}`} style={reduce ? undefined : { backgroundColor: bg }}>
+    <motion.section ref={ref} aria-label="What Topin does" className={`relative ${reduce ? 'bg-white' : 'h-[420svh]'}`} style={reduce ? undefined : { backgroundColor: bg }}>
       <div className={`${reduce ? 'py-[var(--section-y)]' : 'sticky top-0 h-svh'} flex items-center`}>
         <p className="sr-only">{LINES.join(' ')}</p>
-        <p aria-hidden="true" className="wrap mx-auto max-w-[1100px] text-center font-display text-[40px] font-semibold leading-[46px] tracking-[-0.035em] md:text-[64px] md:leading-[70px] xl:text-[80px] xl:leading-[86px]">
-          {WORDS.map(({ w, br }, i) => (
-            <span key={i}>
-              {reduce ? <span style={{ color: colorAt(i / (WORDS.length - 1)) }}>{w} </span> : <Word w={w} i={i} n={WORDS.length} progress={progress} dark={dark} bg={bg} />}
-              {br && <br className="hidden md:block" />}
-            </span>
-          ))}
-        </p>
+        {reduce ? (
+          <p aria-hidden="true" className="wrap mx-auto max-w-[1100px] text-center font-display text-[40px] font-semibold leading-[46px] tracking-[-0.035em] md:text-[64px] md:leading-[70px]">
+            {LINES.map((l, i) => (
+              <span key={l} className="block" style={{ color: colorAt(i / (LINES.length - 1)) }}>{l}</span>
+            ))}
+          </p>
+        ) : (
+          <div aria-hidden="true" className="relative mx-auto h-[2.4em] w-full max-w-[1200px] font-display text-[44px] font-semibold leading-[1.1] tracking-[-0.035em] md:text-[78px] xl:text-[92px]">
+            {LINES.map((l, i) => (
+              <Line key={l} text={l} i={i} n={LINES.length} progress={progress} dark={dark} />
+            ))}
+          </div>
+        )}
       </div>
     </motion.section>
   );
