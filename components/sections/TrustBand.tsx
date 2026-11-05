@@ -24,7 +24,7 @@ export function TrustLogos({ className = '', tone = 'light' }: { className?: str
   const ref = useRef<HTMLDivElement>(null);
   const on = useLoopActive(ref); // marquee pauses off-screen and in hidden tabs
   return (
-    <div ref={ref} className={`flex flex-col items-center gap-7 ${on ? '' : 'loops-paused'} ${className}`}>
+    <div ref={ref} className={`flex flex-col items-center gap-4 md:gap-5 ${on ? '' : 'loops-paused'} ${className}`}>
       <p className={`text-center text-[15px] font-semibold leading-[20px] ${tone === 'dark' ? 'text-cyan-soft' : 'text-navy-2'}`}>{hero.trustLabel}</p>
       {flags.logos && count > 0 && (
         <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">

@@ -26,6 +26,7 @@ export function StartForm({ variant = 'page' }: { variant?: 'page' | 'modal' }) 
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors, isSubmitting },
   } = useForm<StartValues>({ resolver: zodResolver(startSchema), mode: 'onTouched' });
@@ -33,6 +34,14 @@ export function StartForm({ variant = 'page' }: { variant?: 'page' | 'modal' }) 
   useEffect(() => {
     track('start_form_view', { variant });
   }, [variant]);
+
+  // the hero email field hands its address over, so nobody types it twice
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem('topin-start-email');
+      if (saved) setValue('email', saved);
+    } catch {}
+  }, [setValue]);
 
   const email = watch('email') || '';
   const freeMail = isFreeMail(email);

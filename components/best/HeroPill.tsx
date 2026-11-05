@@ -1,20 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState, type FormEvent } from 'react';
 import { TrustLogos } from '@/components/sections/TrustBand';
+import { useStartModal } from '@/components/ui/StartModal';
 import { ctaClick } from '@/lib/analytics';
 import { links } from '@/content/flags';
+import { nav } from '@/content/nav';
 import { hero } from '@/content/hero';
 
 const SUB = 'AI-proctored assessments that rank your candidates for you.';
 const delay = (s: number) => ({ animationDelay: `${s}s` });
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-/** Work email + Book a Demo. The address is kept for the booking step (not put in the URL). */
+/** Work email + Try for Free: opens the sign-up with the address already filled in (never put in the URL). */
 function DemoForm() {
-  const router = useRouter();
+  const { open } = useStartModal();
   const [email, setEmail] = useState('');
   const [err, setErr] = useState('');
   const submit = (e: FormEvent) => {
@@ -24,10 +25,10 @@ function DemoForm() {
       return;
     }
     try {
-      sessionStorage.setItem('topin-demo-email', email.trim());
+      sessionStorage.setItem('topin-start-email', email.trim());
     } catch {}
-    ctaClick(hero.ctaPrimary, 'hero');
-    router.push(links.demo);
+    ctaClick(nav.ctaSecondary, 'hero');
+    open();
   };
   return (
     <form onSubmit={submit} noValidate className="mx-auto w-full max-w-[560px]">
@@ -52,7 +53,7 @@ function DemoForm() {
         />
         <button type="submit" className="noir-cta group px-8 py-3.5 text-[16px] font-semibold text-white">
           <span className="relative z-10 flex items-center justify-center gap-2">
-            {hero.ctaPrimary}
+            {nav.ctaSecondary}
             <span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-1">
               →
             </span>
@@ -73,8 +74,8 @@ function DemoForm() {
  */
 export function HeroPill() {
   return (
-    <div className="noir-select relative overflow-x-clip bg-white">
-      <section id="top" aria-labelledby="pill-title" className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-32">
+    <div className="noir-select relative flex min-h-svh flex-col overflow-x-clip bg-white">
+      <section id="top" aria-labelledby="pill-title" className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-5 pb-6 pt-24 md:pt-28">
         {/* drifting line grid, masked to the middle (Superdesign) */}
         <div
           aria-hidden="true"
@@ -86,7 +87,7 @@ export function HeroPill() {
           <Link
             href={links.start}
             style={delay(0.1)}
-            className="noir-up group mb-8 inline-flex max-w-full items-center gap-2.5 rounded-[20px] border sm:rounded-pill border-navy/10 bg-white/70 px-4 py-1.5 text-[13px] font-semibold text-navy-2 backdrop-blur-md transition-colors hover:border-blue/30"
+            className="noir-up group mb-5 inline-flex md:mb-6 max-w-full items-center gap-2.5 rounded-[20px] border sm:rounded-pill border-navy/10 bg-white/70 px-4 py-1.5 text-[13px] font-semibold text-navy-2 backdrop-blur-md transition-colors hover:border-blue/30"
           >
             <span className="relative flex size-2 shrink-0">
               <span className="noir-ping absolute inline-flex size-full rounded-full bg-blue/60" />
@@ -101,7 +102,7 @@ export function HeroPill() {
           <h1
             id="pill-title"
             style={delay(0.2)}
-            className="noir-up font-display text-[clamp(48px,8.4vw,116px)] font-semibold leading-[1.02] tracking-[-0.05em]"
+            className="noir-up font-display text-[clamp(44px,min(8.4vw,13.5svh),116px)] font-semibold leading-[1.02] tracking-[-0.05em]"
           >
             <span className="block bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">Decide faster.</span>
             <span className="block bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">
@@ -115,20 +116,20 @@ export function HeroPill() {
             </span>
           </h1>
 
-          <p style={delay(0.3)} className="noir-up mx-auto mt-8 max-w-[600px] text-[19px] leading-[30px] text-navy-2 md:text-[22px] md:leading-[34px]">
+          <p style={delay(0.3)} className="noir-up mx-auto mt-5 max-w-[680px] text-[19px] leading-[29px] text-navy-2 md:mt-6 md:text-[22px] md:leading-[32px]">
             {SUB}
           </p>
 
-          <div style={delay(0.4)} className="noir-up mt-11">
+          <div style={delay(0.4)} className="noir-up mt-7 md:mt-8">
             <DemoForm />
           </div>
-          <p style={delay(0.5)} className="noir-up -mt-1 text-[14px] text-navy-2/80">
+          <p style={delay(0.5)} className="noir-up -mt-2 text-[14px] text-navy-2/80">
             {hero.badge.strong}. {hero.badge.rest}.
           </p>
         </div>
       </section>
 
-      <div className="relative border-y border-navy/[.07] bg-snow/70 py-9 backdrop-blur-sm">
+      <div className="relative border-y border-navy/[.07] bg-snow/70 py-5 backdrop-blur-sm md:py-6">
         <div className="wrap">
           <TrustLogos />
         </div>
