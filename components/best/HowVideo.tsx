@@ -37,10 +37,11 @@ const PlayGlyph = ({ size = 20 }: { size?: number }) => (
 
 /**
  * The How it works video, styled as a player: poster, big play button, progress bar and controls.
- * It sits in the section at a fixed size and only goes full screen when someone presses play.
+ * It pins below the top bar and grows to 75-80% of the screen while scrolling, and only goes full screen when someone presses play.
  * The product screen stands in for the video and the progress is simulated until the real file is supplied.
  */
 export function HowVideo() {
+  const stage = useRef<HTMLDivElement>(null);
   const box = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const [zoom, setZoom] = useState(1);
@@ -50,10 +51,19 @@ export function HowVideo() {
   const [muted, setMuted] = useState(false);
   const [captions, setCaptions] = useState(false);
   const [speed, setSpeed] = useState(0);
+  const [wide, setWide] = useState(false);
 
-  // grows a little as it scrolls in, from its top edge so nothing opens up under the text
-  const { scrollYProgress } = useScroll({ target: box, offset: ['start end', 'start 0.3'] });
-  const scale = useTransform(scrollYProgress, [0, 1], [0.86, 1]);
+  // pins below the top bar and grows from its top edge as you scroll, ending at 75-80% of the screen
+  const { scrollYProgress } = useScroll({ target: stage, offset: ['start 0.75', 'end end'] });
+  const scale = useTransform(scrollYProgress, [0, 0.9], [0.6, 1]);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const on = () => setWide(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
 
   useEffect(() => {
     const el = box.current;
@@ -103,10 +113,12 @@ export function HowVideo() {
   };
 
   return (
+    <div ref={stage} className={`relative ${reduce ? '' : 'md:h-[170svh]'}`}>
+    <div className={reduce ? '' : 'md:sticky md:top-[96px]'}>
     <motion.div
       ref={box}
-      className="group/video relative mx-auto aspect-video w-[min(1200px,calc(100vw-32px))] origin-top overflow-hidden rounded-[24px] bg-navy shadow-[0_40px_90px_-40px_rgba(12,22,56,.55)] [&:fullscreen]:h-screen [&:fullscreen]:w-screen [&:fullscreen]:rounded-none"
-      style={reduce || full ? undefined : { scale }}
+      className="group/video relative mx-auto aspect-video w-[calc(100vw-32px)] origin-top md:w-[min(92vw,calc((100svh-112px)*16/9))] overflow-hidden rounded-[24px] bg-navy shadow-[0_40px_90px_-40px_rgba(12,22,56,.55)] [&:fullscreen]:h-screen [&:fullscreen]:w-screen [&:fullscreen]:rounded-none"
+      style={reduce || full || !wide ? undefined : { scale }}
     >
       {/* poster: the product itself until a real video is supplied */}
       <div aria-hidden="true" ref={(el) => el?.setAttribute('inert', '')} className="pointer-events-none absolute left-0 top-0 origin-top-left bg-white pt-10" style={{ width: POSTER_W, height: `${100 / zoom}%`, transform: `scale(${zoom})` }}>
@@ -182,5 +194,7 @@ export function HowVideo() {
         </div>
       </div>
     </motion.div>
+    </div>
+    </div>
   );
 }
