@@ -285,6 +285,17 @@ a {
   animation: noir-border-spin 2.5s linear infinite;
 }
 .noir-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #fff 0.5px, transparent 0); background-size: 4px 4px; opacity: .1; z-index: 0; }
+/* browsers paint autofilled inputs blue: keep the hero email field white */
+.noir-field input:-webkit-autofill,
+.noir-field input:-webkit-autofill:hover,
+.noir-field input:-webkit-autofill:focus,
+.noir-field input:autofill {
+  -webkit-text-fill-color: #0c1638;
+  caret-color: #0c1638;
+  -webkit-box-shadow: 0 0 0 1000px #fff inset;
+  box-shadow: 0 0 0 1000px #fff inset;
+  transition: background-color 9999s ease-out 0s;
+}
 .noir-select::selection { background: #2563eb; color: #fff; }
 @media (prefers-reduced-motion: reduce) {
   .noir-up { opacity: 1; animation: none; }

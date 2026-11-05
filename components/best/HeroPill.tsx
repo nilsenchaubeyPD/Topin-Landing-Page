@@ -31,7 +31,7 @@ function DemoForm() {
   };
   return (
     <form onSubmit={submit} noValidate className="mx-auto w-full max-w-[560px]">
-      <div className="noir-field flex flex-col gap-2 rounded-[28px] border border-navy/10 bg-white/80 p-2 shadow-[0_12px_40px_-20px_rgba(12,22,56,.25)] backdrop-blur-md transition-[border-color,box-shadow] duration-200 focus-within:border-blue focus-within:shadow-[0_0_0_4px_rgba(37,99,235,.12)] sm:flex-row sm:items-center sm:rounded-pill">
+      <div className="noir-field flex flex-col gap-2 rounded-[28px] border border-navy/10 bg-white p-2 shadow-[0_12px_40px_-20px_rgba(12,22,56,.25)] backdrop-blur-md transition-[border-color,box-shadow] duration-200 focus-within:border-blue focus-within:shadow-[0_0_0_4px_rgba(37,99,235,.12)] sm:flex-row sm:items-center sm:rounded-pill">
         <label htmlFor="hero-email" className="sr-only">
           Work email
         </label>
@@ -48,7 +48,7 @@ function DemoForm() {
           }}
           aria-invalid={err ? true : undefined}
           aria-describedby={err ? 'hero-email-err' : undefined}
-          className="min-w-0 flex-1 bg-transparent px-5 py-3 text-[16px] text-navy outline-none placeholder:text-navy-2/60"
+          className="min-w-0 flex-1 rounded-pill bg-transparent px-5 py-3 text-[16px] text-navy outline-none placeholder:text-navy-2/60"
         />
         <button type="submit" className="noir-cta group px-8 py-3.5 text-[16px] font-semibold text-white">
           <span className="relative z-10 flex items-center justify-center gap-2">
