@@ -11,8 +11,9 @@ import { nav } from '@/content/nav';
 export function PillNav() {
   const [solid, setSolid] = useState(false);
   const [drawer, setDrawer] = useState(false);
+  const [past, setPast] = useState(false);
   useEffect(() => {
-    const on = () => setSolid(window.scrollY > 24);
+    const on = () => { setSolid(window.scrollY > 24); setPast(window.scrollY > window.innerHeight - 140); };
     on();
     window.addEventListener('scroll', on, { passive: true });
     return () => window.removeEventListener('scroll', on);
@@ -47,9 +48,15 @@ export function PillNav() {
             ))}
           </ul>
           <div className="flex items-center gap-1.5">
-            <Button opensStart variant="outline" className="!rounded-pill !px-5 !py-2 !text-[14px]" track={{ label: nav.ctaSecondary, location: 'nav' }}>
-              {nav.ctaSecondary}
-            </Button>
+            {past ? (
+              <Button key="free" opensStart variant="outline" className="noir-up !rounded-pill !px-5 !py-2 !text-[14px]" track={{ label: nav.ctaSecondary, location: 'nav' }}>
+                {nav.ctaSecondary}
+              </Button>
+            ) : (
+              <Button key="demo" href={links.demo} variant="outline" className="noir-up !rounded-pill !px-5 !py-2 !text-[14px]" track={{ label: nav.ctaPrimary, location: 'nav' }}>
+                {nav.ctaPrimary}
+              </Button>
+            )}
             <Dialog.Root open={drawer} onOpenChange={setDrawer}>
               <Dialog.Trigger className="flex size-10 items-center justify-center rounded-full text-navy hover:bg-navy/[.05] nav:hidden" aria-label="Open menu">
                 <svg width="20" height="20" viewBox="0 0 22 22" aria-hidden="true">
