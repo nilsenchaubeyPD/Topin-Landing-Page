@@ -1,12 +1,10 @@
 'use client';
 
-import * as Dialog from '@radix-ui/react-dialog';
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
 import { access, api, creation, devices, featuresSection, proctoring, reporting } from '@/content/features';
 import { hero } from '@/content/hero';
-import { track } from '@/lib/analytics';
 import { inViewOnce } from '@/lib/motion';
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -204,7 +202,7 @@ function GraphicDevices() {
 
 /* ---------- cards ---------- */
 
-type Feature = { key: string; eyebrow: string; title: string; desc: string; chips?: readonly string[] };
+type Feature = { key: string; chips?: readonly string[] };
 type Card = { f: Feature; label: string; dot?: string; head: string; line: string; Graphic: () => ReactNode; wide?: boolean };
 
 const CARDS: Card[] = [
@@ -216,69 +214,46 @@ const CARDS: Card[] = [
   { f: devices, label: 'Support', head: 'Assess anywhere.', line: 'Desktop, tablet, mobile, or a secure exam browser.', Graphic: GraphicDevices },
 ];
 
-/** A Linear-style card: graphic on top fading into the card, label and two-tone title below. The whole card opens the detail. */
+/** A Linear-style card: graphic on top fading into the card, then label, title, one short line and the capabilities. No pop-up. */
 function FeatureCard({ c }: { c: Card }) {
   const { f } = c;
   return (
-    <Dialog.Root onOpenChange={(o) => o && track('feature_more', { card: f.key })}>
-      <motion.li
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={inViewOnce}
-        transition={{ duration: 0.7, ease }}
-        className={c.wide ? 'md:col-span-2' : ''}
-      >
-        <Dialog.Trigger className="group flex h-full w-full flex-col overflow-hidden rounded-[24px] border border-navy/[.07] bg-[#f6f7fa] text-left transition-colors duration-300 hover:border-navy/20">
-          <div aria-hidden="true" className={`relative w-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.012] h-[300px] [mask-image:linear-gradient(to_bottom,#000_72%,transparent)]`}>
-            <c.Graphic />
-          </div>
-          <div className="flex w-full items-end justify-between gap-6 px-6 pb-6 pt-1 md:px-8 md:pb-7">
-            <div>
-              <p className="flex items-center gap-2 text-[13.5px] font-semibold text-navy-2">
-                {c.dot && <span className={`h-[7px] w-3.5 rounded-pill ${c.dot}`} />}
-                {c.label}
-              </p>
-              <p className="mt-2 max-w-[520px] font-display text-[22px] font-medium leading-[29px] tracking-[-0.02em] text-navy md:text-[24px] md:leading-[32px]">
-                {c.head} <span className="text-navy/50">{c.line}</span>
-              </p>
-            </div>
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-navy/[.06] text-navy transition-[background-color,color] duration-200 group-hover:bg-navy group-hover:text-white">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-px">
-                <path d="M4.5 2l4 4-4 4" />
-              </svg>
-            </span>
-          </div>
-        </Dialog.Trigger>
-      </motion.li>
-      <Dialog.Portal>
-        <Dialog.Overlay className="dialog-overlay fixed inset-0 z-[60] bg-navy/40 backdrop-blur-sm" />
-        <Dialog.Content className="dialog-content fixed left-1/2 top-1/2 z-[70] max-h-[90dvh] w-[calc(100%-32px)] max-w-[560px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto overscroll-contain rounded-[28px] bg-white p-7 shadow-float md:p-10">
-          <p className="text-[13.5px] font-semibold text-blue">{c.label}</p>
-          <Dialog.Title className="mt-3 font-display text-[30px] font-medium leading-[36px] tracking-[-0.02em] text-navy">{f.title.replace(' / ', '. ')}</Dialog.Title>
-          <Dialog.Description className="mt-4 text-[17px] leading-[27px] text-navy-2">{f.desc}</Dialog.Description>
-          {f.chips && (
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {f.chips.map((chip) => (
-                <li key={chip} className="rounded-pill bg-blue-50 px-3 py-1.5 text-[13.5px] font-semibold text-blue-700">
-                  {chip}
-                </li>
-              ))}
-            </ul>
-          )}
-          <Dialog.Close aria-label="Close" className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-full bg-navy/[.06] text-navy transition-colors hover:bg-navy/10">
-            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-              <path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
-          </Dialog.Close>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <motion.li
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={inViewOnce}
+      transition={{ duration: 0.7, ease }}
+      className={`group flex flex-col overflow-hidden rounded-[24px] border border-navy/[.07] bg-[#f6f7fa] transition-colors duration-300 hover:border-navy/20 ${c.wide ? 'md:col-span-2' : ''}`}
+    >
+      <div aria-hidden="true" className="relative h-[300px] w-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.012] [mask-image:linear-gradient(to_bottom,#000_72%,transparent)]">
+        <c.Graphic />
+      </div>
+      <div className={`flex flex-1 flex-col gap-5 px-6 pb-7 pt-1 md:px-8 ${c.wide ? 'lg:flex-row lg:items-end lg:justify-between lg:gap-12' : ''}`}>
+        <div>
+          <p className="flex items-center gap-2 text-[13.5px] font-semibold text-navy-2">
+            {c.dot && <span className={`h-[7px] w-3.5 rounded-pill ${c.dot}`} />}
+            {c.label}
+          </p>
+          <h3 className="mt-2 font-display text-[24px] font-medium leading-[31px] tracking-[-0.02em] text-navy md:text-[26px] md:leading-[33px]">{c.head}</h3>
+          <p className="mt-1.5 max-w-[480px] text-[16px] leading-[25px] text-navy-2">{c.line}</p>
+        </div>
+        {f.chips && (
+          <ul className={`flex flex-wrap gap-1.5 ${c.wide ? 'lg:max-w-[440px] lg:justify-end' : 'mt-auto'}`}>
+            {f.chips.map((chip) => (
+              <li key={chip} className="rounded-pill border border-navy/[.08] bg-white px-3 py-1.5 text-[13px] font-medium text-navy-2">
+                {chip}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </motion.li>
   );
 }
 
 /**
  * Features (Linear's features page, Durable's soft cards), on the light theme: two wide cards, then a two-column grid.
- * Short copy on the card, the full approved description and capabilities in the dialog each card opens.
+ * Everything is on the card: one short line and the capabilities, no pop-ups.
  */
 export function FeaturesCards() {
   return (

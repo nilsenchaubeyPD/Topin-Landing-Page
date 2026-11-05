@@ -59,6 +59,7 @@ export const access = {
   title: 'Hire Together / Collaborate Without the Chaos.',
   desc: 'Give recruiters, hiring managers, and interviewers the right level of access without creating confusion. Invite candidates in bulk, collaborate across teams, and keep hiring organized as you grow.',
   tooltip: 'Role-based access',
+  chips: ['Role-based access', 'Bulk candidate invites', 'Team collaboration'],
   roles: [
     { letter: 'A', name: 'Admin', sub: 'Approves assessments', tone: 'blue' },
     { letter: 'R', name: 'Recruiter', sub: 'Invites candidates in bulk', tone: 'cyan' },
