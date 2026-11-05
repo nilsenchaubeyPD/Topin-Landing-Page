@@ -240,7 +240,7 @@ function FeatureCard({ c }: { c: Card }) {
         {f.chips && (
           <ul className={`flex flex-wrap gap-1.5 ${c.wide ? 'lg:max-w-[440px] lg:justify-end' : 'mt-auto'}`}>
             {f.chips.map((chip) => (
-              <li key={chip} className="rounded-pill bg-blue-50 px-2.5 py-1 text-[12px] font-semibold capitalize leading-4 text-blue">
+              <li key={chip} className="rounded-pill border border-navy/[.08] bg-white px-3 py-1.5 text-[13px] font-medium text-navy-2">
                 {chip}
               </li>
             ))}
