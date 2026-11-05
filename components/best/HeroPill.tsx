@@ -59,7 +59,7 @@ const delay = (s: number) => ({ animationDelay: `${s}s` });
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /** Work email + Try for Free: opens the sign-up with the address already filled in (never put in the URL). */
-function DemoForm() {
+export function DemoForm() {
   const { open } = useStartModal();
   const [email, setEmail] = useState('');
   const [err, setErr] = useState('');
