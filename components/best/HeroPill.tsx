@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { TrustLogos } from '@/components/sections/TrustBand';
 import { useStartModal } from '@/components/ui/StartModal';
 import { ctaClick } from '@/lib/analytics';
@@ -14,18 +14,33 @@ const WORDS = ['better.', 'smarter.', 'sharper.'];
 /** Cycles the last word of the headline; all words share one grid cell so the width never jumps. */
 function RotatingWord() {
   const [i, setI] = useState(0);
+  const [widths, setWidths] = useState<number[]>([]);
+  const refs = useRef<(HTMLSpanElement | null)[]>([]);
+  useEffect(() => {
+    const measure = () => setWidths(refs.current.map((r) => r?.offsetWidth ?? 0));
+    measure();
+    document.fonts?.ready.then(measure);
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const t = setInterval(() => setI((n) => (n + 1) % WORDS.length), 2600);
     return () => clearInterval(t);
   }, []);
   return (
-    <span className="relative inline-grid overflow-hidden rounded-[0.22em] bg-blue/[.09] px-[0.22em] align-bottom">
+    <span
+      className="relative inline-block -rotate-2 overflow-hidden rounded-[0.22em] bg-blue/[.09] px-[0.22em] align-bottom transition-[width] duration-[650ms] ease-[cubic-bezier(.22,1,.36,1)]"
+      style={widths[i] ? { width: `calc(${widths[i]}px + 0.44em)` } : undefined}
+    >
+      <span aria-hidden="true" className="invisible block h-0 overflow-hidden">{WORDS[0]}</span>
+      <span className="invisible block">&nbsp;</span>
       {WORDS.map((w, k) => (
         <span
           key={w}
+          ref={(el) => { refs.current[k] = el; }}
           aria-hidden={k !== i}
-          className="col-start-1 row-start-1 text-blue [-webkit-text-fill-color:#2563eb] transition-[transform,opacity,filter] duration-[650ms] ease-[cubic-bezier(.22,1,.36,1)]"
+          className="absolute left-[0.22em] top-0 whitespace-nowrap text-blue [-webkit-text-fill-color:#2563eb] transition-[transform,opacity,filter] duration-[650ms] ease-[cubic-bezier(.22,1,.36,1)]"
           style={{
             opacity: k === i ? 1 : 0,
             filter: k === i ? 'blur(0)' : 'blur(6px)',
@@ -150,13 +165,13 @@ export function HeroPill() {
           <div style={delay(0.4)} className="noir-up mt-7 md:mt-8">
             <DemoForm />
           </div>
-          <p style={delay(0.5)} className="noir-up mt-1 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[16px] font-semibold text-navy md:text-[17px]">
-            <span className="inline-flex items-center gap-2">
-              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#2563eb" /><path d="M6 10.3l2.6 2.6L14 7.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <p style={delay(0.5)} className="noir-up mt-1 inline-flex flex-wrap items-center justify-center gap-2.5 text-[15px] font-semibold text-navy md:text-[16px]">
+            <span className="inline-flex items-center gap-2 rounded-pill border border-navy/10 bg-white px-4 py-2 capitalize shadow-[0_6px_16px_-10px_rgba(12,22,56,.25)]">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#16a34a" /><path d="M6 10.3l2.6 2.6L14 7.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               {hero.badge.strong}
             </span>
-            <span className="inline-flex items-center gap-2">
-              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#2563eb" /><path d="M6 10.3l2.6 2.6L14 7.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            <span className="inline-flex items-center gap-2 rounded-pill border border-navy/10 bg-white px-4 py-2 capitalize shadow-[0_6px_16px_-10px_rgba(12,22,56,.25)]">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#16a34a" /><path d="M6 10.3l2.6 2.6L14 7.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               {hero.badge.rest}
             </span>
           </p>
