@@ -30,12 +30,12 @@ function Line({ text, i, n, progress, dark }: { text: string; i: number; n: numb
   // each line owns one slice of the scroll: it rises in, holds, then lifts away as the next one arrives
   const a = i / n;
   const z = (i + 1) / n;
-  const w = 0.35 / n;
+  const w = 0.16 / n;
   const first = i === 0;
   const last = i === n - 1;
   const opacity = useTransform(progress, first ? [0, z - w, z] : last ? [a, a + w, 1] : [a, a + w, z - w, z], first ? [1, 1, 0] : last ? [0, 1, 1] : [0, 1, 1, 0]);
   const y = useTransform(progress, first ? [0, z - w, z] : last ? [a, a + w, 1] : [a, a + w, z - w, z], first ? [0, 0, -40] : last ? [40, 0, 0] : [40, 0, 0, -40]);
-  const blur = useTransform(progress, first ? [0, z - w, z] : last ? [a, a + w, 1] : [a, a + w, z - w, z], first ? [0, 0, 8] : last ? [8, 0, 0] : [8, 0, 0, 8]);
+  const blur = useTransform(progress, first ? [0, z - w, z] : last ? [a, a + w, 1] : [a, a + w, z - w, z], first ? [0, 0, 6] : last ? [6, 0, 0] : [6, 0, 0, 6]);
   const filter = useTransform(blur, (v) => `blur(${v}px)`);
   const color = useTransform(dark, [0, 1], [colorAt(i / (n - 1)), colorAt(i / (n - 1), LIGHT_STOPS)]);
   return (
