@@ -20,12 +20,9 @@ export function PillNav() {
   return (
     <>
       <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-40 h-[120px]">
-        {[
-          [0.5, 'linear-gradient(to bottom,#000 0%,#000 40%,transparent 60%)'],
-          [1, 'linear-gradient(to bottom,#000 0%,#000 30%,transparent 50%)'],
-          [2, 'linear-gradient(to bottom,#000 0%,#000 22%,transparent 42%)'],
-          [4, 'linear-gradient(to bottom,#000 0%,#000 15%,transparent 34%)'],
-          [8, 'linear-gradient(to bottom,#000 0%,#000 8%,transparent 26%)'],
+        { [
+          [3, 'linear-gradient(to bottom,#000 0%,#000 30%,transparent 100%)'],
+          [10, 'linear-gradient(to bottom,#000 0%,transparent 55%)'],
         ].map(([b, m]) => (
           <span key={String(b)} className="absolute inset-0" style={{ backdropFilter: `blur(${b}px)`, WebkitBackdropFilter: `blur(${b}px)`, maskImage: m as string, WebkitMaskImage: m as string }} />
         ))}
@@ -33,7 +30,7 @@ export function PillNav() {
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-5">
         <nav
           aria-label="Primary"
-          className={`mx-auto flex max-w-[1040px] items-center justify-between rounded-pill border px-5 py-2.5 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-300 ${
+          className={`mx-auto flex max-w-[1040px] items-center justify-between rounded-pill border px-5 py-2.5 backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-300 ${
             solid ? 'border-navy/10 bg-white/85 shadow-[0_12px_40px_-16px_rgba(12,22,56,.25)]' : 'border-navy/[.08] bg-white/60'
           }`}
         >

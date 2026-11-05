@@ -129,7 +129,7 @@ export function HeroPill() {
         </div>
       </section>
 
-      <div className="relative border-y border-navy/[.07] bg-snow/70 py-5 backdrop-blur-sm md:py-6">
+      <div className="relative border-y border-navy/[.07] bg-snow py-5 md:py-6">
         <div className="wrap">
           <TrustLogos />
         </div>
