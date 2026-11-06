@@ -20,41 +20,51 @@ export function ProofResults() {
   const items = testimonials.items;
   if (!flags.testimonials || items.length < 2) return null;
 
+  const Card = ({ t, hidden = false }: { t: (typeof items)[number]; hidden?: boolean }) => (
+    <li aria-hidden={hidden || undefined} className="flex w-[340px] shrink-0 flex-col justify-between rounded-[20px] bg-[#f6f7fa] p-7 md:w-[400px]">
+      <blockquote className="text-[17px] leading-[27px] text-navy">“{t.quote}”</blockquote>
+      <div className="mt-6 flex items-center gap-3">
+        <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[13px] font-bold text-blue-700">
+          {initials(t.name)}
+        </span>
+        <span className="min-w-0">
+          <span className="block text-[15px] font-semibold text-navy">{t.name}</span>
+          <span className="block text-[13px] leading-[18px] text-navy-2">
+            {t.role}, {t.company}
+          </span>
+        </span>
+      </div>
+    </li>
+  );
+
   return (
-    <section aria-labelledby="testimonials-title" className="section-y border-t border-navy/[.08] bg-white">
-      <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-20">
-        <div>
-          <div className="lg:sticky lg:top-28">
-            <SectionTag>Testimonials</SectionTag>
+    <section aria-labelledby="testimonials-title" className="section-y overflow-hidden border-t border-navy/[.08] bg-white">
+      <div className="wrap">
+        <Reveal staggerChildren className="flex max-w-[760px] flex-col gap-4">
+          <RevealItem>
+            <SectionTag className="!mb-0">Testimonials</SectionTag>
+          </RevealItem>
+          <RevealItem>
             <h2 id="testimonials-title" className="text-h2-m md:text-h2">
               Real results. <span className="text-navy/55">Not projections.</span>
             </h2>
-            <p className="mt-5 max-w-[360px] text-[17px] leading-[27px] text-navy-2">{testimonials.lead}</p>
-          </div>
-        </div>
-
-        <Reveal staggerChildren as="ul" className="flex flex-col">
-          {items.map((t) => {
-            return (
-              <RevealItem as="li" key={t.name} className="grid gap-6 border-t border-navy/[.08] py-8 md:py-9">
-                <figure>
-                  <blockquote className="text-[19px] leading-[30px] text-navy md:text-[21px] md:leading-[33px]">“{t.quote}”</blockquote>
-                  <figcaption className="mt-5 flex items-center gap-3">
-                    <span aria-hidden="true" className="flex size-10 items-center justify-center rounded-full bg-blue-50 text-[13px] font-bold text-blue-700">
-                      {initials(t.name)}
-                    </span>
-                    <span>
-                      <span className="block text-[15px] font-semibold text-navy">{t.name}</span>
-                      <span className="block text-[13px] text-navy-2">
-                        {t.role}, {t.company}
-                      </span>
-                    </span>
-                  </figcaption>
-                </figure>
-              </RevealItem>
-            );
-          })}
+          </RevealItem>
+          <RevealItem>
+            <p className="max-w-[520px] text-[17px] leading-[27px] text-navy-2">{testimonials.lead}</p>
+          </RevealItem>
         </Reveal>
+      </div>
+
+      {/* a slow row of quote cards moving sideways; pauses on hover, scrolls by hand under reduced motion */}
+      <div className="t-marquee mt-12 md:mt-14 [mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)]">
+        <ul className="t-track flex w-max items-stretch gap-4">
+          {items.map((t) => (
+            <Card key={t.name} t={t} />
+          ))}
+          {items.map((t) => (
+            <Card key={t.name + '-2'} t={t} hidden />
+          ))}
+        </ul>
       </div>
     </section>
   );

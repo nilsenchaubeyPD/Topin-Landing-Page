@@ -320,3 +320,12 @@ a {
 @keyframes fx-laser { from { top: 0; } to { top: calc(100% - 3px); } }
 .fx-laser { animation: fx-laser 0.9s ease-in-out infinite alternate; }
 @media (prefers-reduced-motion: reduce) { .fx-laser { animation: none; top: 50%; } }
+
+/* Testimonials: a slow sideways row of quotes, paused on hover or focus */
+@keyframes t-scroll { from { transform: translateX(calc(-50% - 8px)); } to { transform: translateX(0); } }
+.t-track { animation: t-scroll 70s linear infinite; }
+.t-marquee:hover .t-track, .t-marquee:focus-within .t-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .t-marquee { overflow-x: auto; }
+  .t-track { animation: none; }
+}
