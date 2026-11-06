@@ -4,7 +4,7 @@ export const flags = {
   variantPicker: false, // floating A/B/C switcher for reviewing section variations (turn off for launch)
   dummyLogos: true, // placeholder logos until the real files are supplied (set false then)
   testimonials: true, // section on (needs 2+ quotes)
-  dummyTestimonials: true, // quotes in content/testimonials.ts are PLACEHOLDERS: replace before launch
+  dummyTestimonials: false, // real approved quotes are in content/testimonials.ts
   video: Boolean(process.env.NEXT_PUBLIC_VIDEO_URL), // true when NEXT_PUBLIC_VIDEO_URL is set
   unverifiedProctoring: false, // "Candidate impersonation", "Keystrokes recording"
   jdPlainTextVoice: false, // doc bullet "Generate Assessments with JD / Plain text / Voice using AI"

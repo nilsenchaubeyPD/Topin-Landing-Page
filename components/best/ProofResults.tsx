@@ -34,11 +34,11 @@ export function ProofResults() {
         </div>
 
         <Reveal staggerChildren as="ul" className="flex flex-col">
-          {items.slice(0, 3).map((t) => {
+          {items.map((t) => {
             return (
-              <RevealItem as="li" key={t.name} className="grid gap-6 border-t border-navy/[.08] py-10">
+              <RevealItem as="li" key={t.name} className="grid gap-6 border-t border-navy/[.08] py-8 md:py-9">
                 <figure>
-                  <blockquote className="text-[22px] leading-[33px] text-navy md:text-[24px] md:leading-[36px]">“{t.quote}”</blockquote>
+                  <blockquote className="text-[19px] leading-[30px] text-navy md:text-[21px] md:leading-[33px]">“{t.quote}”</blockquote>
                   <figcaption className="mt-5 flex items-center gap-3">
                     <span aria-hidden="true" className="flex size-10 items-center justify-center rounded-full bg-blue-50 text-[13px] font-bold text-blue-700">
                       {initials(t.name)}
