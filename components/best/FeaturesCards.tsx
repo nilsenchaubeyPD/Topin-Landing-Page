@@ -203,16 +203,17 @@ function GraphicDevices() {
 
 /* ---------- cards ---------- */
 
-type Feature = { key: string; chips?: readonly string[] };
-type Card = { f: Feature; label: string; dot?: string; head: string; line: string; Graphic: () => ReactNode; wide?: boolean };
+type Feature = { key: string; title: string; desc: string; chips?: readonly string[] };
+type Card = { f: Feature; label: string; dot?: string; Graphic: () => ReactNode; wide?: boolean };
 
+// headlines, descriptions and capabilities come straight from the copy doc (content/features.ts)
 const CARDS: Card[] = [
-  { f: creation, label: 'Assessment creation', dot: 'bg-blue', head: 'Go live in minutes.', line: 'Generate role-specific assessments from a job description.', Graphic: GraphicCreate, wide: true },
-  { f: proctoring, label: 'Proctoring', dot: 'bg-green-mid', head: 'Protect every test.', line: 'AI monitoring, face detection and plagiarism checks.', Graphic: GraphicProctor, wide: true },
-  { f: reporting, label: 'Candidate reporting', head: 'Find the right candidates first.', line: 'AI ranks candidates the moment an assessment ends.', Graphic: GraphicRank },
-  { f: access, label: 'Workspace access control', head: 'Hire together.', line: 'The right access for every recruiter, manager and interviewer.', Graphic: GraphicTeam },
-  { f: api, label: 'API integrations', head: 'Fits into your workflow.', line: 'Connect assessments and candidate data to your tools.', Graphic: GraphicApi },
-  { f: devices, label: 'Support', head: 'Assess anywhere.', line: 'Desktop, tablet, mobile, or a secure exam browser.', Graphic: GraphicDevices },
+  { f: creation, label: 'Assessment creation', dot: 'bg-blue', Graphic: GraphicCreate, wide: true },
+  { f: proctoring, label: 'Proctoring', dot: 'bg-green-mid', Graphic: GraphicProctor, wide: true },
+  { f: reporting, label: 'Candidate reporting', Graphic: GraphicRank },
+  { f: access, label: 'Workspace access control', Graphic: GraphicTeam },
+  { f: api, label: 'API integrations', Graphic: GraphicApi },
+  { f: devices, label: 'Support', Graphic: GraphicDevices },
 ];
 
 /** A Linear-style card: graphic on top fading into the card, then label, title, one short line and the capabilities. No pop-up. */
@@ -235,8 +236,8 @@ function FeatureCard({ c }: { c: Card }) {
             {c.dot && <span className={`h-[7px] w-3.5 rounded-pill ${c.dot}`} />}
             {c.label}
           </p>
-          <h3 className="mt-2 font-display text-[24px] font-medium leading-[31px] tracking-[-0.02em] text-navy md:text-[26px] md:leading-[33px]">{c.head}</h3>
-          <p className="mt-1.5 max-w-[480px] text-[16px] leading-[25px] text-navy-2">{c.line}</p>
+          <h3 className="mt-2 font-display text-[24px] font-medium leading-[31px] tracking-[-0.02em] text-navy md:text-[26px] md:leading-[33px]">{f.title}</h3>
+          <p className="mt-1.5 max-w-[520px] text-[16px] leading-[25px] text-navy-2">{f.desc}</p>
         </div>
         {f.chips && (
           <ul className={`flex flex-wrap gap-1.5 ${c.wide ? 'lg:max-w-[440px] lg:justify-end' : 'mt-auto'}`}>

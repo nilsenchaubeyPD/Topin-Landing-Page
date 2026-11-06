@@ -4,7 +4,7 @@ import { DemoForm } from '@/components/best/HeroPill';
 import { hero } from '@/content/hero';
 import { CardCreate, CardProtect, Shortlist, Window } from './parts';
 
-const SUB = 'AI-proctored assessments that rank your candidates for you.';
+const SUB = 'Built on assessment integrity, so you can hire with confidence across every role, team, and hiring volume.';
 const TAG = 'The AI Assessment Platform for Hiring';
 const STEPS = ['Create Assessments', 'Proctor Every Test', 'Rank Candidates'];
 

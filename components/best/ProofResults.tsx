@@ -46,7 +46,7 @@ export function ProofResults() {
           </RevealItem>
           <RevealItem>
             <h2 id="testimonials-title" className="text-h2-m md:text-h2">
-              Real results. <span className="text-navy/55">Not projections.</span>
+              {testimonials.title}
             </h2>
           </RevealItem>
           <RevealItem>

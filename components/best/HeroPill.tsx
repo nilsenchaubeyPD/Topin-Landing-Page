@@ -54,7 +54,7 @@ function RotatingWord() {
   );
 }
 
-const SUB = 'AI-proctored assessments that rank your candidates for you.';
+const SUB = 'Built on assessment integrity, so you can hire with confidence across every role, team, and hiring volume.';
 const delay = (s: number) => ({ animationDelay: `${s}s` });
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 

@@ -10,9 +10,9 @@ export const featuresSection = {
 export const creation = {
   key: 'creation',
   eyebrow: 'ASSESSMENT CREATION',
-  title: 'Get Started Faster / Go Live in Minutes.',
+  title: 'Go Live in Minutes.',
   desc: 'Generate role-specific assessments from a job description, start with reusable templates, or build from scratch. However your team hires, getting started takes minutes instead of days.',
-  chips: ['Role templates', 'Custom assessments', '10,000+ question bank', 'Generate Questions using AI'],
+  chips: ['Generate Assessments with JD/Plain text/Voice using AI', 'Role templates', 'Custom assessments', '10,000+ question bank', 'Generate Questions using AI'],
   // Doc bullet, surfaced inside the UI panel. The JD / Plain text / Voice wording is unverified (flags.jdPlainTextVoice).
   bullet: flags.jdPlainTextVoice
     ? 'Generate Assessments with JD / Plain text / Voice using AI'
@@ -31,14 +31,15 @@ export const creation = {
 export const proctoring = {
   key: 'proctoring',
   eyebrow: 'PROCTORING',
-  title: 'Protect the Integrity of Every Test / AI Proctoring Suite',
-  desc: 'AI-powered monitoring, face detection, screen recording, plagiarism checks, and violation tracking help ensure every score reflects real skill, not shortcuts.',
+  title: 'Protect the Integrity of Every Test',
+  desc: 'Our AI proctoring suite combines AI-powered monitoring, face detection, screen recording, plagiarism checks, and violation tracking to help ensure every score reflects real skill, not shortcuts.',
   chips: [
     'AI proctoring',
     'Camera Proctoring with Face Recognition',
     'Screen recording',
     'Plagiarism detection',
-    ...(flags.unverifiedProctoring ? ['Candidate impersonation', 'Keystrokes recording'] : []),
+    'Candidate impersonation',
+    'Keystrokes recording',
   ],
   faceTag: 'Face detected',
   recPill: 'Screen recording',
@@ -56,10 +57,10 @@ export const reporting = {
 export const access = {
   key: 'access',
   eyebrow: 'WORKSPACE ACCESS CONTROL',
-  title: 'Hire Together / Collaborate Without the Chaos.',
+  title: 'Collaborate Without the Chaos.',
   desc: 'Give recruiters, hiring managers, and interviewers the right level of access without creating confusion. Invite candidates in bulk, collaborate across teams, and keep hiring organized as you grow.',
   tooltip: 'Role-based access',
-  chips: ['Role-based access', 'Bulk candidate invites', 'Team collaboration'],
+  chips: ['Role-based access', 'Admin approvals', 'Bulk candidate invites'],
   roles: [
     { letter: 'A', name: 'Admin', sub: 'Approves assessments', tone: 'blue' },
     { letter: 'R', name: 'Recruiter', sub: 'Invites candidates in bulk', tone: 'cyan' },
@@ -74,14 +75,14 @@ export const api = {
   title: 'Fits Into Your Workflow',
   desc: 'Connect assessments, candidate data, and hiring insights to the tools your team already uses. Automate routine work and keep your hiring workflow moving.',
   code: ['GET /assessments', 'GET /candidates', 'POST /invites   → automation-ready'],
-  chips: ['Assessment APIs', 'Candidate APIs', 'ATS exports'],
+  chips: ['Assessment APIs', 'Candidate APIs', 'ATS exports', 'Automation-ready'],
 };
 
 export const devices = {
   key: 'devices',
   eyebrow: 'SUPPORT',
-  title: 'Built for Flexible Assessments / Assess Candidates Anywhere',
+  title: 'Let Candidates Take Assessments on Any Device',
   desc: 'Let candidates complete assessments on desktop, tablet, or mobile, and run high-stakes exams through a dedicated secure browser when integrity matters most.',
-  chips: ['Mobile', 'Tablet', 'In-browser', 'Secure exam browser'],
+  chips: ['Mobile support', 'Tablet support', 'In-browser exams', 'Secure exam browser'],
   photoAlt: 'A woman on a sofa takes an assessment on a tablet.',
 };

@@ -4,8 +4,9 @@ export const howOptions = [
     lead: 'See how role-specific assessments become trusted, ranked shortlists in just a few steps.',
   },
   {
-    title: 'Every Step Built for Better Hiring',
-    lead: 'See how Topin helps teams hire faster with trusted assessments and ranked shortlists.',
+    // Mohit's suggested headline (doc comment) with option 1's description
+    title: 'From Job Description to Ranked Shortlist',
+    lead: 'See how role-specific assessments become trusted, ranked shortlists in just a few steps.',
   },
   {
     title: 'Watch Topin in Action',
