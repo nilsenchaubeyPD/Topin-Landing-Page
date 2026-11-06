@@ -10,7 +10,7 @@ const available = fs.existsSync(imagesDir)
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: { formats: ['image/avif', 'image/webp'] },
+  images: { formats: ['image/avif', 'image/webp'], remotePatterns: [{ protocol: 'https', hostname: 'blog.topin.tech' }] },
   env: { NEXT_PUBLIC_AVAILABLE_IMAGES: available.join(',') },
 };
 export default nextConfig;

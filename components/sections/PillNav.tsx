@@ -1,6 +1,7 @@
 'use client';
 
 import * as Dialog from '@radix-ui/react-dialog';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
@@ -9,6 +10,9 @@ import { nav } from '@/content/nav';
 
 /** Floating pill nav: soft glass bar that settles in at the top, with a blur band behind it. */
 export function PillNav() {
+  const home = usePathname() === '/';
+  // section links (#how) point back to the home page when the nav is shown on another page, such as the blog
+  const to = (h: string) => (h.startsWith('#') && !home ? `/${h}` : h);
   const [solid, setSolid] = useState(false);
   const [drawer, setDrawer] = useState(false);
   const [past, setPast] = useState(false);
@@ -35,13 +39,13 @@ export function PillNav() {
             solid ? 'border-navy/10 bg-white/85 shadow-[0_12px_40px_-16px_rgba(12,22,56,.25)]' : 'border-navy/[.08] bg-white/60'
           }`}
         >
-          <a href="#top" aria-label="topin.tech home" className="shrink-0">
+          <a href={to('#top')} aria-label="topin.tech home" className="shrink-0">
             <Logo priority className="h-auto w-[124px] sm:w-[140px]" />
           </a>
           <ul className="hidden items-center gap-1 nav:flex">
             {nav.links.map((l) => (
               <li key={l.id}>
-                <a href={l.href} className="block rounded-pill px-4 py-2 text-[14.5px] font-semibold text-navy-2 transition-colors hover:bg-navy/[.05] hover:text-navy">
+                <a href={to(l.href)} className="block rounded-pill px-4 py-2 text-[14.5px] font-semibold text-navy-2 transition-colors hover:bg-navy/[.05] hover:text-navy">
                   {l.label}
                 </a>
               </li>
@@ -82,7 +86,7 @@ export function PillNav() {
                   <ul className="flex flex-col">
                     {nav.links.map((l) => (
                       <li key={l.id}>
-                        <a href={l.href} onClick={() => setDrawer(false)} className="block rounded-[12px] px-3 py-3.5 text-[17px] font-bold text-navy hover:bg-snow">
+                        <a href={to(l.href)} onClick={() => setDrawer(false)} className="block rounded-[12px] px-3 py-3.5 text-[17px] font-bold text-navy hover:bg-snow">
                           {l.label}
                         </a>
                       </li>

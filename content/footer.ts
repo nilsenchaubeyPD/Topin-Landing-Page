@@ -15,7 +15,7 @@ export const footer = {
       heading: 'RESOURCES',
       // destinations to be provided
       links: [
-        { label: 'Blogs', href: '#' },
+        { label: 'Blog', href: '/blog' },
         { label: 'YouTube', href: '#' },
         { label: 'LinkedIn', href: '#' },
       ],

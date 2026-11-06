@@ -48,7 +48,7 @@ export function track(event: string, props: Props = {}) {
   }
 }
 
-export type CtaLocation = 'nav' | 'hero' | 'comparison' | 'closing' | 'footer';
+export type CtaLocation = 'nav' | 'hero' | 'comparison' | 'closing' | 'footer' | 'blog';
 export const ctaClick = (label: string, location: CtaLocation) => {
   track('cta_click', { label, location });
   if (label === 'Book a Demo') track('demo_click', { location });

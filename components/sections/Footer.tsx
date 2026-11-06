@@ -1,11 +1,13 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
 import { footer } from '@/content/footer';
 import { links } from '@/content/flags';
 
 export function Footer() {
+  const home = usePathname() === '/';
   return (
     <footer className="overflow-hidden bg-navy pb-10 pt-20">
       <div className="wrap flex flex-col gap-14">
@@ -23,7 +25,7 @@ export function Footer() {
                 <h2 className="font-body font-medium text-[11.5px] font-normal uppercase leading-[16px] tracking-[0.08em] text-cyan-soft/75">{col.heading}</h2>
                 <ul className="mt-4 flex flex-col gap-3">
                   {col.links.map((l) => {
-                    const href = l.href === 'mailto:' ? (links.supportEmail ? `mailto:${links.supportEmail}` : '#') : l.href;
+                    const href = l.href === 'mailto:' ? (links.supportEmail ? `mailto:${links.supportEmail}` : '#') : l.href.startsWith('#') && l.href.length > 1 && !home ? `/${l.href}` : l.href;
                     return (
                       <li key={l.label}>
                         <a
