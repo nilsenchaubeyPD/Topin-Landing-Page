@@ -9,7 +9,8 @@ import { links } from '@/content/flags';
 import { nav } from '@/content/nav';
 import { hero } from '@/content/hero';
 
-const WORDS = ['better.', 'smarter.', 'sharper.'];
+// outcomes taken from the copy doc ("hire with confidence", "real skill, not shortcuts", "at any scale")
+const WORDS = ['with confidence.', 'on real skill.', 'at any scale.'];
 
 /** Cycles the last word of the headline; all words share one grid cell so the width never jumps. */
 function RotatingWord() {
@@ -147,7 +148,7 @@ export function HeroPill() {
           <h1
             id="pill-title"
             style={delay(0.2)}
-            className="noir-up font-display text-[clamp(44px,min(8.4vw,13.5svh),116px)] font-semibold leading-[1.02] tracking-[-0.05em]"
+            className="noir-up font-display text-[clamp(32px,min(8.4vw,13.5svh),116px)] font-semibold leading-[1.02] tracking-[-0.05em]"
           >
             <span className="block bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">Decide faster.</span>
             <span className="block">
