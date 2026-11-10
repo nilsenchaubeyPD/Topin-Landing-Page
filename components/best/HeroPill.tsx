@@ -148,14 +148,11 @@ export function HeroPill() {
           <h1
             id="pill-title"
             style={delay(0.2)}
-            className="noir-up font-display text-[clamp(30px,min(7.4vw,12.5svh),104px)] font-semibold leading-[1.02] tracking-[-0.05em]"
+            className="noir-up font-display text-[clamp(30px,min(7.4vw,12.5svh),108px)] font-semibold leading-[1.02] tracking-[-0.05em]"
           >
-            <span className="block bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">Decide faster.</span>
-            <span className="block whitespace-nowrap">
-              <span className="bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">Hire</span>{' '}
-              <span className="relative inline-block text-blue">
-                <RotatingWord />
-              </span>
+            <span className="block whitespace-nowrap bg-gradient-to-b from-navy via-navy to-navy/55 bg-clip-text text-transparent">Decide faster. Hire</span>
+            <span className="relative mt-1 block md:mt-2">
+              <RotatingWord />
             </span>
           </h1>
 
