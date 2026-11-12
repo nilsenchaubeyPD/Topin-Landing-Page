@@ -35,6 +35,8 @@ export function PillNav() {
       window.removeEventListener('topin:surface', on);
     };
   }, []);
+  // hover: the bar fills, lifts and gains a shadow; the colours follow the surface behind the nav
+  const cta = `!duration-300 hover:-translate-y-0.5 ${onDark ? '!border-white/30 !bg-transparent !text-white hover:!border-white hover:!bg-white hover:!text-navy hover:shadow-[0_10px_24px_-10px_rgba(255,255,255,.45)]' : 'hover:!bg-navy hover:!text-white hover:shadow-[0_10px_24px_-10px_rgba(12,22,56,.55)]'}`;
   return (
     <>
       <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-40 h-[130px]">
@@ -73,15 +75,18 @@ export function PillNav() {
             ))}
           </ul>
           <div className="flex items-center gap-1.5">
+            {/* the entrance animation lives on this stable wrapper, so swapping the button never replays it */}
+            <div className="noir-up">
             {past ? (
-              <Button key="free" opensStart variant="outline" className={`noir-up !rounded-pill !px-5 !py-2 !text-[14px] ${onDark ? '!border-white/30 !bg-transparent !text-white hover:!bg-white/10' : ''}`} track={{ label: nav.ctaSecondary, location: 'nav' }}>
+              <Button key="free" opensStart variant="outline" className={`!rounded-pill !px-5 !py-2 !text-[14px] ${cta}`} track={{ label: nav.ctaSecondary, location: 'nav' }}>
                 {nav.ctaSecondary}
               </Button>
             ) : (
-              <Button key="demo" href={links.demo} variant="outline" className={`noir-up !rounded-pill !px-5 !py-2 !text-[14px] ${onDark ? '!border-white/30 !bg-transparent !text-white hover:!bg-white/10' : ''}`} track={{ label: nav.ctaPrimary, location: 'nav' }}>
+              <Button key="demo" href={links.demo} variant="outline" className={`!rounded-pill !px-5 !py-2 !text-[14px] ${cta}`} track={{ label: nav.ctaPrimary, location: 'nav' }}>
                 {nav.ctaPrimary}
               </Button>
             )}
+            </div>
             <Dialog.Root open={drawer} onOpenChange={setDrawer}>
               <Dialog.Trigger className={`flex size-10 items-center justify-center rounded-full nav:hidden ${onDark ? 'text-white hover:bg-white/10' : 'text-navy hover:bg-navy/[.05]'}`} aria-label="Open menu">
                 <svg width="20" height="20" viewBox="0 0 22 22" aria-hidden="true">
