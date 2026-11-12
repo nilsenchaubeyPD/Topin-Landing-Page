@@ -1,6 +1,5 @@
 'use client';
 
-import { SectionTag } from '@/components/ui/SectionTag';
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
@@ -262,9 +261,6 @@ export function FeaturesCards() {
     <section id="features" aria-labelledby="features-title" className="section-y border-t border-navy/[.08] bg-white">
       <div className="wrap">
         <Reveal staggerChildren className="flex max-w-[760px] flex-col gap-4">
-          <RevealItem>
-            <SectionTag className="!mb-0">Features</SectionTag>
-          </RevealItem>
           <RevealItem>
             <h2 id="features-title" className="text-h2-m md:text-h2">
               {featuresSection.title}

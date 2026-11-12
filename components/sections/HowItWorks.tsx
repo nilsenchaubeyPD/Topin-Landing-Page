@@ -44,7 +44,7 @@ const pop = (i: number) => ({
   show: { opacity: 1, y: 0, transition: { delay: 0.35 + i * 0.12, duration: 0.5, ease } },
 });
 const SKILLS = ['React', 'TypeScript', 'Accessibility', '3–5 yrs'];
-const SOURCES = ['Job description', 'Role template', 'From scratch'];
+const SOURCES = ['Job Description', 'Role Template', 'From Scratch'];
 
 function MockBrief() {
   return (

@@ -1,6 +1,5 @@
 'use client';
 
-import { SectionTag } from '@/components/ui/SectionTag';
 import * as Tabs from '@radix-ui/react-tabs';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -52,9 +51,6 @@ export function FAQ() {
       <div className="wrap">
       <Tabs.Root value={tab} onValueChange={changeTab} className="grid gap-10 lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-16 xl:gap-24">
         <Reveal staggerChildren className="flex min-w-0 flex-col gap-4">
-          <RevealItem>
-            <SectionTag className="!mb-0">FAQs</SectionTag>
-          </RevealItem>
           <RevealItem>
             <h2 id="faq-title" className="text-balance text-h2-m md:text-h2 lg:max-w-[400px]">
               {faqSection.title}

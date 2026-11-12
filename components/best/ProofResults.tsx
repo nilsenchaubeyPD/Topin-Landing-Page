@@ -1,6 +1,5 @@
 'use client';
 
-import { SectionTag } from '@/components/ui/SectionTag';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
 import { flags } from '@/content/flags';
 import { testimonials } from '@/content/testimonials';
@@ -41,9 +40,6 @@ export function ProofResults() {
     <section aria-labelledby="testimonials-title" className="section-y overflow-hidden border-t border-navy/[.08] bg-white">
       <div className="wrap">
         <Reveal staggerChildren className="flex max-w-[760px] flex-col gap-4">
-          <RevealItem>
-            <SectionTag className="!mb-0">Testimonials</SectionTag>
-          </RevealItem>
           <RevealItem>
             <h2 id="testimonials-title" className="text-h2-m md:text-h2">
               {testimonials.title}

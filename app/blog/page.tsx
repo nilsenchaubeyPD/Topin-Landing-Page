@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { PostCard } from '@/components/blog/PostCard';
 import { Footer } from '@/components/sections/Footer';
 import { PillNav } from '@/components/sections/PillNav';
-import { SectionTag } from '@/components/ui/SectionTag';
 import { getPosts, REVALIDATE } from '@/lib/blog';
 
 export const revalidate = REVALIDATE;
@@ -21,7 +20,6 @@ export default async function BlogPage() {
       <PillNav />
       <main id="main" className="bg-white">
         <section aria-labelledby="blog-title" className="wrap pb-20 pt-32 md:pb-28 md:pt-40">
-          <SectionTag>Blog</SectionTag>
           <h1 id="blog-title" className="text-h2-m md:text-h2">Topin Blog</h1>
           <p className="mt-4 max-w-[560px] text-[18px] leading-[28px] text-navy-2">Insights on AI-powered skill assessments and recruitment.</p>
 

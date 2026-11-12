@@ -1,6 +1,5 @@
 'use client';
 
-import { SectionTag } from '@/components/ui/SectionTag';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
@@ -65,7 +64,6 @@ export function Comparison() {
     <section id="compare" aria-labelledby="compare-title" className="section-y border-t border-navy/[.08] bg-white">
       <div className="wrap flex flex-col gap-14 md:gap-16">
         <div>
-          <SectionTag>How we&apos;re different</SectionTag>
           <SectionHead id="compare-title" title={comparison.title} />
         </div>
 

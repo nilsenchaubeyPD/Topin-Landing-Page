@@ -22,7 +22,7 @@ export const how = {
   eyebrow: 'HOW IT WORKS',
   ...howOptions[0],
   duration: 'Under 2 min',
-  steps: ['1 · Job description', '2 · Role assessment', '3 · Shortlisting'],
+  steps: ['1 · Job Description', '2 · Role Assessment', '3 · Shortlisting'],
   /** One line under each step. Drawn from the feature copy; edit freely. */
   stepDetails: [
     'Paste a job description, pick a role template, or start from scratch.',

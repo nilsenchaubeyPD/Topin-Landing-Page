@@ -19,17 +19,17 @@ type Go = (i: number) => void;
 
 const SOURCES = {
   jd: {
-    label: 'Job description',
+    label: 'Job Description',
     text: 'We are hiring a Frontend Engineer to build fast, accessible React interfaces for our hiring products. 3–5 years of experience.',
     skills: ['React', 'TypeScript', 'Accessibility', 'Performance', 'Testing'],
   },
   template: {
-    label: 'Role template',
+    label: 'Role Template',
     text: 'Template · Frontend Engineer (mid-level). Aptitude, role skills and a coding round, tuned for product teams.',
     skills: ['React', 'JavaScript', 'CSS', 'APIs', 'Problem solving'],
   },
   scratch: {
-    label: 'From scratch',
+    label: 'From Scratch',
     text: 'Start empty and pick sections and questions yourself from the question bank.',
     skills: ['Aptitude', 'Communication', 'Coding'],
   },
