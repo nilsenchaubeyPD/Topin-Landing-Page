@@ -37,13 +37,18 @@ export function PillNav() {
   }, []);
   return (
     <>
-      <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-40 h-[120px]">
-        { [
-          [3, 'linear-gradient(to bottom,#000 0%,#000 30%,transparent 100%)'],
-          [10, 'linear-gradient(to bottom,#000 0%,transparent 55%)'],
-        ].map(([b, m]) => (
-          <span key={String(b)} className="absolute inset-0" style={{ backdropFilter: `blur(${b}px)`, WebkitBackdropFilter: `blur(${b}px)`, maskImage: m as string, WebkitMaskImage: m as string }} />
-        ))}
+      <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-40 h-[130px]">
+        {/* progressive blur: each layer is stronger and reaches a little less far down, so it eases out with no visible edge */}
+        {[
+          [0.6, 100],
+          [1.5, 82],
+          [3, 64],
+          [6, 46],
+          [12, 28],
+        ].map(([b, end]) => {
+          const m = `linear-gradient(to bottom,#000 0%,#000 ${Number(end) * 0.35}%,transparent ${end}%)`;
+          return <span key={String(b)} className="absolute inset-0" style={{ backdropFilter: `blur(${b}px)`, WebkitBackdropFilter: `blur(${b}px)`, maskImage: m, WebkitMaskImage: m }} />;
+        })}
       </div>
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-5">
         <nav
