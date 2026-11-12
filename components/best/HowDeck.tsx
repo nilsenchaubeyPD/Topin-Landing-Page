@@ -264,10 +264,38 @@ function StepShortlist({ phase, setPhase }: { phase: Phase; setPhase: (p: Phase)
 
 /* ---------- deck ---------- */
 
-const POINTS: { title: string; line: string }[][] = [
+const ico = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
+const Icon = ({ children }: { children: ReactNode }) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" {...ico}>
+    {children}
+  </svg>
+);
+const icons = {
+  template: (
+    <Icon>
+      <rect x="4" y="4" width="16" height="16" rx="3" />
+      <path d="M4 10h16M10 10v10" />
+    </Icon>
+  ),
+  ai: (
+    <Icon>
+      <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" />
+      <path d="M19 16v4M17 18h4" />
+    </Icon>
+  ),
+  manual: (
+    <Icon>
+      <path d="M4 20h4L19 9a2.8 2.8 0 00-4-4L4 16v4z" />
+      <path d="M13.5 6.5l4 4" />
+    </Icon>
+  ),
+};
+
+const POINTS: { title: string; line: string; icon?: ReactNode }[][] = [
   [
-    { title: 'Role templates', line: 'Start with reusable templates, or build from scratch.' },
-    { title: 'Generate using AI', line: 'Go from a job description to an assessment in minutes.' },
+    { title: 'Role Template', line: 'Start from a reusable template for the role.', icon: icons.template },
+    { title: 'Generate Using AI', line: 'Go from a job description to an assessment in minutes.', icon: icons.ai },
+    { title: 'Manual', line: 'Build from scratch, however your team hires.', icon: icons.manual },
   ],
   [
     { title: '10,000+ question bank', line: 'Or generate questions using AI.' },
@@ -288,11 +316,14 @@ function Row({ i, demo }: { i: number; demo: ReactNode }) {
       <div className={`flex flex-col justify-center p-5 md:p-12 xl:p-16 ${flip ? 'lg:order-1' : ''}`}>
         <h3 className="font-display text-[28px] font-medium leading-[34px] tracking-[-0.02em] text-navy md:text-[34px] md:leading-[42px]">{names[i]}.</h3>
         <p className="mt-4 text-[16px] leading-[26px] text-navy-2">{how.stepDetails[i]}</p>
-        <div className="mt-7 grid gap-5 sm:grid-cols-2">
+        <div className={`mt-7 grid gap-5 ${POINTS[i][0].icon ? '' : 'sm:grid-cols-2'}`}>
           {POINTS[i].map((p) => (
-            <div key={p.title}>
-              <p className="text-[15px] font-semibold text-navy">{p.title}</p>
-              <p className="mt-1 text-[14px] leading-[22px] text-navy-2">{p.line}</p>
+            <div key={p.title} className={p.icon ? 'flex items-start gap-4' : ''}>
+              {p.icon && <span className="flex size-10 shrink-0 items-center justify-center rounded-[12px] bg-blue-50 text-blue">{p.icon}</span>}
+              <div>
+                <p className="text-[15px] font-semibold text-navy">{p.title}</p>
+                <p className="mt-1 text-[14px] leading-[22px] text-navy-2">{p.line}</p>
+              </div>
             </div>
           ))}
         </div>
