@@ -319,7 +319,7 @@ const POINTS: { title: string; line: string; icon?: ReactNode }[][] = [
   [
     { title: 'Role Template', line: 'Start from a reusable template for the role.', icon: icons.template },
     { title: 'Generate Using AI', line: 'Go from a job description to an assessment in minutes.', icon: icons.ai },
-    { title: 'Manual', line: 'Build from scratch, however your team hires.', icon: icons.manual },
+    { title: 'Custom Assessment', line: 'Build from scratch, however your team hires.', icon: icons.manual },
   ],
   [
     { title: '10,000+ Question Bank', line: 'Or generate questions using AI.', icon: icons.bank },
@@ -342,11 +342,11 @@ function Row({ i, demo }: { i: number; demo: ReactNode }) {
         <p className="mt-4 text-[16px] leading-[26px] text-navy-2">{how.stepDetails[i]}</p>
         <div className={`mt-7 grid gap-5 ${POINTS[i][0].icon ? '' : 'sm:grid-cols-2'}`}>
           {POINTS[i].map((p) => (
-            <div key={p.title} className={p.icon ? 'flex items-start gap-4' : ''}>
+            <div key={p.title} className={p.icon ? 'flex items-center gap-4' : ''}>
               {p.icon && <span className="flex size-10 shrink-0 items-center justify-center rounded-[12px] bg-blue-50 text-blue">{p.icon}</span>}
               <div>
-                <p className="text-[15px] font-semibold text-navy">{p.title}</p>
-                <p className="mt-1 text-[14px] leading-[22px] text-navy-2">{p.line}</p>
+                <p className="text-[15px] font-semibold leading-[20px] text-navy">{p.title}</p>
+                <p className="mt-0.5 text-[14px] leading-[20px] text-navy-2">{p.line}</p>
               </div>
             </div>
           ))}
