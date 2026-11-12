@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 
-/** The label above every section title: a blue chip with a dot, so the eye lands on it first. */
+/** The label above every section title: bold brand-blue text led by a short rule, no box around it. */
 export function SectionTag({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <p className={`mb-5 inline-flex items-center gap-2 rounded-pill border border-blue/25 bg-blue/10 px-3.5 py-1.5 text-[13px] font-bold uppercase tracking-[0.08em] text-blue ${className}`}>
-      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-blue" />
+    <p className={`mb-5 flex items-center gap-3 text-[15px] font-bold uppercase tracking-[0.1em] text-blue ${className}`}>
+      <span aria-hidden="true" className="h-[2px] w-7 rounded-full bg-blue" />
       {children}
     </p>
   );
