@@ -57,12 +57,12 @@
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
-  /* Brandbook: Geist for H1/H2, Manrope Semibold for H3 (card titles) */
+  /* Geist for all titles and headings (H1 to H3), Manrope for everything else */
   h1, h2 {
     @apply font-display text-navy;
   }
   h3 {
-    @apply font-body font-semibold text-navy;
+    @apply font-display font-semibold text-navy;
   }
   /* baseline-ui: balanced headings, no orphans in body copy, aligned figures in data */
   h1, h2, h3, blockquote {

@@ -38,7 +38,7 @@ export function Accordion({ items, openIndex, onChange }: Props) {
         const pid = `${id}-p-${i}`;
         return (
           <div key={it.q} className="border-b border-navy/10">
-            <h3 className="font-body">
+            <h3 className="font-display">
               <button
                 ref={(el) => {
                   btns.current[i] = el;
