@@ -149,8 +149,8 @@ function GraphicTeam() {
 
 function GraphicApi() {
   return (
-    <div className="mx-auto h-full w-full max-w-[440px] px-6 pt-8">
-      <div className="h-full rounded-t-[16px] bg-navy px-5 pb-10 pt-4 font-mono text-[13.5px] leading-[28px] text-cyan-soft shadow-[0_18px_40px_-20px_rgba(12,22,56,.6)]">
+    <div className="mx-auto flex h-full w-full max-w-[440px] items-center px-6">
+      <div className="w-full rounded-[16px] bg-navy px-5 pb-7 pt-4 font-mono text-[13.5px] leading-[28px] text-cyan-soft shadow-[0_18px_40px_-20px_rgba(12,22,56,.6)]">
         <div className="mb-3 flex gap-1.5">
           {[0, 1, 2].map((i) => (
             <span key={i} className="size-2.5 rounded-full bg-white/20" />
@@ -204,7 +204,7 @@ function GraphicDevices() {
 /* ---------- cards ---------- */
 
 type Feature = { key: string; title: string; desc: string; chips?: readonly string[] };
-type Card = { f: Feature; label: string; dot?: string; Graphic: () => ReactNode; wide?: boolean };
+type Card = { f: Feature; label: string; dot?: string; Graphic: () => ReactNode; wide?: boolean; noFade?: boolean };
 
 // headlines, descriptions and capabilities come straight from the copy doc (content/features.ts)
 const CARDS: Card[] = [
@@ -212,7 +212,7 @@ const CARDS: Card[] = [
   { f: proctoring, label: 'Proctoring', dot: 'bg-green-mid', Graphic: GraphicProctor, wide: true },
   { f: reporting, label: 'Candidate reporting', Graphic: GraphicRank },
   { f: access, label: 'Workspace access control', Graphic: GraphicTeam },
-  { f: api, label: 'API integrations', Graphic: GraphicApi },
+  { f: api, label: 'API integrations', Graphic: GraphicApi, noFade: true },
   { f: devices, label: 'Support', Graphic: GraphicDevices },
 ];
 
@@ -227,7 +227,7 @@ function FeatureCard({ c }: { c: Card }) {
       transition={{ duration: 0.7, ease }}
       className={`group flex flex-col overflow-hidden rounded-[24px] bg-[#f6f7fa] ${c.wide ? 'md:col-span-2' : ''}`}
     >
-      <div aria-hidden="true" className="relative h-[300px] w-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.012] [mask-image:linear-gradient(to_bottom,#000_60%,rgba(0,0,0,.55)_82%,transparent)]">
+      <div aria-hidden="true" className={`relative h-[300px] w-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.012] ${c.noFade ? '' : '[mask-image:linear-gradient(to_bottom,#000_60%,rgba(0,0,0,.55)_82%,transparent)]'}`}>
         <c.Graphic />
       </div>
       <div className={`flex flex-1 flex-col gap-5 px-6 pb-7 pt-1 md:px-8 ${c.wide ? 'lg:flex-row lg:items-end lg:justify-between lg:gap-12' : ''}`}>
