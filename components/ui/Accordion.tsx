@@ -49,7 +49,7 @@ export function Accordion({ items, openIndex, onChange }: Props) {
                 aria-controls={pid}
                 onClick={() => onChange(open ? -1 : i)}
                 onKeyDown={(e) => onKey(e, i)}
-                className={`flex w-full items-center justify-between gap-6 py-6 text-left text-[17px] font-bold leading-[24px] text-navy md:text-[19px] md:leading-[26px]`}
+                className={`flex w-full items-center justify-between gap-6 py-6 text-left text-[17px] font-medium leading-[24px] text-navy md:text-[19px] md:leading-[26px]`}
               >
                 <span>{it.q}</span>
                 <span
