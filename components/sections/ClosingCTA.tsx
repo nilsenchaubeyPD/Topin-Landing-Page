@@ -3,20 +3,18 @@
 import { Button } from '@/components/ui/Button';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
 import { closing } from '@/content/closing';
-import { flags, links } from '@/content/flags';
+import { nav } from '@/content/nav';
 import { hero } from '@/content/hero';
 
 const Check = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" className="shrink-0 text-[#5b9bff]">
-    <circle cx="8" cy="8" r="8" fill="currentColor" fillOpacity=".18" />
+  <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true" className="shrink-0 text-[#7db0ff]">
+    <circle cx="8" cy="8" r="8" fill="currentColor" fillOpacity=".25" />
     <path d="M4.8 8.3l2 2 4.4-4.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 /** Closing: one centred call to action on a navy panel with a soft blue glow. No decoration that competes with the buttons. */
 export function ClosingCTA() {
-  const exploreHref = flags.closingProductTour && links.productTour ? links.productTour : '#features';
-
   return (
     <section id="cta" aria-labelledby="cta-title" className="bg-white pb-6">
       <div className="wrap">
@@ -36,20 +34,17 @@ export function ClosingCTA() {
               <p className="mt-5 max-w-[560px] text-[18px] leading-[28px] text-white/70">{closing.lead}</p>
             </RevealItem>
             <RevealItem className="mt-9 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
-              <Button href={exploreHref} size="big" className="w-full !bg-white !text-navy hover:!bg-white/90 sm:w-auto" track={{ label: closing.ctaPrimary, location: 'closing' }}>
-                {closing.ctaPrimary}
-              </Button>
-              <Button href={links.demo} variant="ghost-light" size="big" className="w-full !text-white hover:!bg-white/10 sm:w-auto" track={{ label: closing.ctaSecondary, location: 'closing' }}>
-                {closing.ctaSecondary}
+              <Button opensStart size="big" className="w-full !bg-white !text-navy hover:!bg-white/90 sm:w-auto" track={{ label: nav.ctaSecondary, location: 'closing' }}>
+                {nav.ctaSecondary}
               </Button>
             </RevealItem>
             <RevealItem>
-              <p className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[14px] text-white/65">
-                <span className="inline-flex items-center gap-2">
+              <p className="mt-8 flex flex-wrap items-center justify-center gap-3 text-[15px] font-semibold text-white">
+                <span className="inline-flex items-center gap-2 rounded-pill border border-white/20 bg-white/10 px-4 py-2">
                   <Check />
                   {hero.badge.strong}
                 </span>
-                <span className="inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-2 rounded-pill border border-white/20 bg-white/10 px-4 py-2">
                   <Check />
                   {hero.badge.rest}
                 </span>

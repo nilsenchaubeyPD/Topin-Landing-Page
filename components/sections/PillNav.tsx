@@ -17,10 +17,14 @@ export function PillNav() {
   const [drawer, setDrawer] = useState(false);
   const [past, setPast] = useState(false);
   const [onDark, setOnDark] = useState(false);
+  const [atClose, setAtClose] = useState(false);
   useEffect(() => {
     const on = () => {
       setSolid(window.scrollY > 24);
       setPast(window.scrollY > window.innerHeight - 140);
+      // the closing section already offers Try for Free, so the nav offers Book a Demo there
+      const cta = document.getElementById('cta');
+      setAtClose(!!cta && cta.getBoundingClientRect().top < window.innerHeight);
       // over the dark statement section the bar goes dark too, so it does not pull attention from the text
       const el = document.querySelector<HTMLElement>('[data-surface-section]');
       if (!el) return setOnDark(false);
@@ -77,7 +81,7 @@ export function PillNav() {
           <div className="flex items-center gap-1.5">
             {/* the entrance animation lives on this stable wrapper, so swapping the button never replays it */}
             <div className="noir-up">
-            {past ? (
+            {past && !atClose ? (
               <Button key="free" opensStart variant="outline" className={`!rounded-pill !px-5 !py-2 !text-[14px] ${cta}`} track={{ label: nav.ctaSecondary, location: 'nav' }}>
                 {nav.ctaSecondary}
               </Button>
