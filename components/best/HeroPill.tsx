@@ -60,7 +60,7 @@ const delay = (s: number) => ({ animationDelay: `${s}s` });
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /** Work email + Try for Free: opens the sign-up with the address already filled in (never put in the URL). */
-export function DemoForm() {
+export function DemoForm({ location = 'hero', id = 'hero-email', onDark = false }: { location?: 'hero' | 'closing'; id?: string; onDark?: boolean }) {
   const { open } = useStartModal();
   const [email, setEmail] = useState('');
   const [err, setErr] = useState('');
@@ -73,17 +73,17 @@ export function DemoForm() {
     try {
       sessionStorage.setItem('topin-start-email', email.trim());
     } catch {}
-    ctaClick(nav.ctaSecondary, 'hero');
+    ctaClick(nav.ctaSecondary, location);
     open();
   };
   return (
     <form onSubmit={submit} noValidate className="mx-auto w-full max-w-[560px]">
       <div className="noir-field flex flex-col gap-2 rounded-[28px] border border-navy/10 bg-white p-2 shadow-[0_12px_40px_-20px_rgba(12,22,56,.25)] backdrop-blur-md transition-[border-color,box-shadow] duration-200 focus-within:border-blue focus-within:shadow-[0_0_0_4px_rgba(37,99,235,.12)] sm:flex-row sm:items-center sm:rounded-pill">
-        <label htmlFor="hero-email" className="sr-only">
+        <label htmlFor={id} className="sr-only">
           Work email
         </label>
         <input
-          id="hero-email"
+          id={id}
           type="email"
           inputMode="email"
           autoComplete="email"
@@ -94,7 +94,7 @@ export function DemoForm() {
             if (err) setErr('');
           }}
           aria-invalid={err ? true : undefined}
-          aria-describedby={err ? 'hero-email-err' : undefined}
+          aria-describedby={err ? `${id}-err` : undefined}
           className="min-w-0 flex-1 rounded-pill bg-transparent px-5 py-3 text-[16px] text-navy outline-none placeholder:text-navy-2/60"
         />
         <button type="submit" className="noir-cta group px-8 py-3.5 text-[16px] font-semibold text-white">
@@ -106,7 +106,7 @@ export function DemoForm() {
           </span>
         </button>
       </div>
-      <p id="hero-email-err" role="alert" className="mt-2 min-h-[20px] text-center text-[13.5px] text-[#B42318]">
+      <p id={`${id}-err`} role="alert" className={`mt-2 min-h-[20px] text-center text-[13.5px] ${onDark ? 'text-[#ffb4a8]' : 'text-[#B42318]'}`}>
         {err}
       </p>
     </form>

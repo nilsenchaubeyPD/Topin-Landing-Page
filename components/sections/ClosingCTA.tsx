@@ -1,9 +1,8 @@
 'use client';
 
-import { Button } from '@/components/ui/Button';
+import { DemoForm } from '@/components/best/HeroPill';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
 import { closing } from '@/content/closing';
-import { nav } from '@/content/nav';
 import { hero } from '@/content/hero';
 
 const Check = () => (
@@ -33,13 +32,11 @@ export function ClosingCTA() {
             <RevealItem>
               <p className="mt-5 max-w-[560px] text-[18px] leading-[28px] text-white/70">{closing.lead}</p>
             </RevealItem>
-            <RevealItem className="mt-9 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
-              <Button opensStart size="big" className="w-full !bg-white !text-navy hover:!bg-white/90 sm:w-auto" track={{ label: nav.ctaSecondary, location: 'closing' }}>
-                {nav.ctaSecondary}
-              </Button>
+            <RevealItem className="mt-9 w-full">
+              <DemoForm location="closing" id="closing-email" onDark />
             </RevealItem>
             <RevealItem>
-              <p className="mt-8 flex flex-wrap items-center justify-center gap-3 text-[15px] font-semibold text-white">
+              <p className="mt-4 flex flex-wrap items-center justify-center gap-3 text-[15px] font-semibold text-white">
                 <span className="inline-flex items-center gap-2 rounded-pill border border-white/20 bg-white/10 px-4 py-2">
                   <Check />
                   {hero.badge.strong}
