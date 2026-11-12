@@ -104,8 +104,8 @@ function GraphicProctor() {
 
 function GraphicRank() {
   return (
-    <div className="mx-auto w-full max-w-[440px] px-6 pt-8">
-      <div className="rounded-t-[16px] border border-b-0 border-navy/[.08] bg-white px-5 pt-4 shadow-[0_18px_40px_-24px_rgba(12,22,56,.3)]">
+    <div className="mx-auto h-full w-full max-w-[440px] px-6 pt-8">
+      <div className="h-full rounded-t-[16px] border border-b-0 border-navy/[.08] bg-white px-5 pt-4 shadow-[0_18px_40px_-24px_rgba(12,22,56,.3)]">
         <p className="text-[13.5px] font-semibold text-navy">{hero.visual.cardB.title}</p>
         <ul className="mt-2">
           {app.rows.slice(0, 4).map((r, i) => (
@@ -149,8 +149,8 @@ function GraphicTeam() {
 
 function GraphicApi() {
   return (
-    <div className="mx-auto w-full max-w-[440px] px-6 pt-8">
-      <div className="rounded-t-[16px] bg-navy px-5 pb-10 pt-4 font-mono text-[13.5px] leading-[28px] text-cyan-soft shadow-[0_18px_40px_-20px_rgba(12,22,56,.6)]">
+    <div className="mx-auto h-full w-full max-w-[440px] px-6 pt-8">
+      <div className="h-full rounded-t-[16px] bg-navy px-5 pb-10 pt-4 font-mono text-[13.5px] leading-[28px] text-cyan-soft shadow-[0_18px_40px_-20px_rgba(12,22,56,.6)]">
         <div className="mb-3 flex gap-1.5">
           {[0, 1, 2].map((i) => (
             <span key={i} className="size-2.5 rounded-full bg-white/20" />
@@ -227,7 +227,7 @@ function FeatureCard({ c }: { c: Card }) {
       transition={{ duration: 0.7, ease }}
       className={`group flex flex-col overflow-hidden rounded-[24px] bg-[#f6f7fa] ${c.wide ? 'md:col-span-2' : ''}`}
     >
-      <div aria-hidden="true" className="relative h-[300px] w-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.012] [mask-image:linear-gradient(to_bottom,#000_72%,transparent)]">
+      <div aria-hidden="true" className="relative h-[300px] w-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.012] [mask-image:linear-gradient(to_bottom,#000_60%,rgba(0,0,0,.55)_82%,transparent)]">
         <c.Graphic />
       </div>
       <div className={`flex flex-1 flex-col gap-5 px-6 pb-7 pt-1 md:px-8 ${c.wide ? 'lg:flex-row lg:items-end lg:justify-between lg:gap-12' : ''}`}>
@@ -240,7 +240,7 @@ function FeatureCard({ c }: { c: Card }) {
           <p className="mt-1.5 max-w-[520px] text-[16px] leading-[25px] text-navy-2">{f.desc}</p>
         </div>
         {f.chips && (
-          <ul className={`flex flex-wrap gap-1.5 ${c.wide ? 'lg:max-w-[440px] lg:justify-end' : 'mt-auto'}`}>
+          <ul className={`flex flex-wrap gap-1.5 ${c.wide ? 'lg:max-w-[440px] lg:justify-end' : ''}`}>
             {f.chips.map((chip) => (
               <li key={chip} className="rounded-pill border border-navy/[.08] bg-white px-3 py-1.5 text-[13px] font-medium text-navy-2">
                 {chip}
