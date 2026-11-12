@@ -271,6 +271,30 @@ const Icon = ({ children }: { children: ReactNode }) => (
   </svg>
 );
 const icons = {
+  bank: (
+    <Icon>
+      <ellipse cx="12" cy="6" rx="7" ry="3" />
+      <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
+    </Icon>
+  ),
+  custom: (
+    <Icon>
+      <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
+      <circle cx="15" cy="7" r="2" />
+      <circle cx="9" cy="17" r="2" />
+    </Icon>
+  ),
+  shield: (
+    <Icon>
+      <path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z" />
+      <path d="M9 12l2 2 4-4" />
+    </Icon>
+  ),
+  export: (
+    <Icon>
+      <path d="M12 15V4M8 8l4-4 4 4M5 14v5h14v-5" />
+    </Icon>
+  ),
   template: (
     <Icon>
       <rect x="4" y="4" width="16" height="16" rx="3" />
@@ -298,12 +322,12 @@ const POINTS: { title: string; line: string; icon?: ReactNode }[][] = [
     { title: 'Manual', line: 'Build from scratch, however your team hires.', icon: icons.manual },
   ],
   [
-    { title: '10,000+ question bank', line: 'Or generate questions using AI.' },
-    { title: 'Custom assessments', line: 'Build from scratch, however your team hires.' },
+    { title: '10,000+ Question Bank', line: 'Or generate questions using AI.', icon: icons.bank },
+    { title: 'Custom Assessments', line: 'Build from scratch, however your team hires.', icon: icons.custom },
   ],
   [
-    { title: 'Trust score', line: 'Every score reflects real skill, not shortcuts.' },
-    { title: 'Exportable reports', line: 'Comparative analysis, ready to export.' },
+    { title: 'Trust Score', line: 'Every score reflects real skill, not shortcuts.', icon: icons.shield },
+    { title: 'Exportable Reports', line: 'Comparative analysis, ready to export.', icon: icons.export },
   ],
 ];
 
