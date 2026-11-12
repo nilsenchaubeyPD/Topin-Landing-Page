@@ -16,11 +16,24 @@ export function PillNav() {
   const [solid, setSolid] = useState(false);
   const [drawer, setDrawer] = useState(false);
   const [past, setPast] = useState(false);
+  const [onDark, setOnDark] = useState(false);
   useEffect(() => {
-    const on = () => { setSolid(window.scrollY > 24); setPast(window.scrollY > window.innerHeight - 140); };
+    const on = () => {
+      setSolid(window.scrollY > 24);
+      setPast(window.scrollY > window.innerHeight - 140);
+      // over the dark statement section the bar goes dark too, so it does not pull attention from the text
+      const el = document.querySelector<HTMLElement>('[data-surface-section]');
+      if (!el) return setOnDark(false);
+      const r = el.getBoundingClientRect();
+      setOnDark(r.top <= 50 && r.bottom >= 50 && el.dataset.theme === 'dark');
+    };
     on();
     window.addEventListener('scroll', on, { passive: true });
-    return () => window.removeEventListener('scroll', on);
+    window.addEventListener('topin:surface', on);
+    return () => {
+      window.removeEventListener('scroll', on);
+      window.removeEventListener('topin:surface', on);
+    };
   }, []);
   return (
     <>
@@ -35,17 +48,20 @@ export function PillNav() {
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-5">
         <nav
           aria-label="Primary"
-          className={`mx-auto flex max-w-[1040px] items-center justify-between rounded-pill border px-5 py-2.5 backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-300 ${
-            solid ? 'border-navy/10 bg-white/85 shadow-[0_12px_40px_-16px_rgba(12,22,56,.25)]' : 'border-navy/[.08] bg-white/60'
+          className={`mx-auto flex max-w-[1040px] items-center justify-between rounded-pill border px-5 py-2.5 backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-500 ${
+            onDark
+              ? 'border-white/10 bg-[rgba(10,16,36,.55)] shadow-[0_12px_40px_-16px_rgba(0,0,0,.5)]'
+              : solid ? 'border-navy/10 bg-white/85 shadow-[0_12px_40px_-16px_rgba(12,22,56,.25)]' : 'border-navy/[.08] bg-white/60'
           }`}
         >
-          <a href={to('#top')} aria-label="topin.tech home" className="shrink-0">
-            <Logo priority className="h-auto w-[124px] sm:w-[140px]" />
+          <a href={to('#top')} aria-label="topin.tech home" className="relative shrink-0">
+            <Logo priority className={`h-auto w-[124px] transition-opacity duration-500 sm:w-[140px] ${onDark ? 'opacity-0' : 'opacity-100'}`} />
+            <Logo variant="white" className={`absolute inset-0 h-auto w-[124px] transition-opacity duration-500 sm:w-[140px] ${onDark ? 'opacity-100' : 'opacity-0'}`} />
           </a>
           <ul className="hidden items-center gap-1 nav:flex">
             {nav.links.map((l) => (
               <li key={l.id}>
-                <a href={to(l.href)} className="block rounded-pill px-4 py-2 text-[14.5px] font-semibold text-navy-2 transition-colors hover:bg-navy/[.05] hover:text-navy">
+                <a href={to(l.href)} className={`block rounded-pill px-4 py-2 text-[14.5px] font-semibold transition-colors duration-500 ${onDark ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-navy-2 hover:bg-navy/[.05] hover:text-navy'}`}>
                   {l.label}
                 </a>
               </li>
@@ -53,16 +69,16 @@ export function PillNav() {
           </ul>
           <div className="flex items-center gap-1.5">
             {past ? (
-              <Button key="free" opensStart variant="outline" className="noir-up !rounded-pill !px-5 !py-2 !text-[14px]" track={{ label: nav.ctaSecondary, location: 'nav' }}>
+              <Button key="free" opensStart variant="outline" className={`noir-up !rounded-pill !px-5 !py-2 !text-[14px] ${onDark ? '!border-white/30 !bg-transparent !text-white hover:!bg-white/10' : ''}`} track={{ label: nav.ctaSecondary, location: 'nav' }}>
                 {nav.ctaSecondary}
               </Button>
             ) : (
-              <Button key="demo" href={links.demo} variant="outline" className="noir-up !rounded-pill !px-5 !py-2 !text-[14px]" track={{ label: nav.ctaPrimary, location: 'nav' }}>
+              <Button key="demo" href={links.demo} variant="outline" className={`noir-up !rounded-pill !px-5 !py-2 !text-[14px] ${onDark ? '!border-white/30 !bg-transparent !text-white hover:!bg-white/10' : ''}`} track={{ label: nav.ctaPrimary, location: 'nav' }}>
                 {nav.ctaPrimary}
               </Button>
             )}
             <Dialog.Root open={drawer} onOpenChange={setDrawer}>
-              <Dialog.Trigger className="flex size-10 items-center justify-center rounded-full text-navy hover:bg-navy/[.05] nav:hidden" aria-label="Open menu">
+              <Dialog.Trigger className={`flex size-10 items-center justify-center rounded-full nav:hidden ${onDark ? 'text-white hover:bg-white/10' : 'text-navy hover:bg-navy/[.05]'}`} aria-label="Open menu">
                 <svg width="20" height="20" viewBox="0 0 22 22" aria-hidden="true">
                   <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>

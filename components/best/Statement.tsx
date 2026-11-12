@@ -68,9 +68,18 @@ export function Statement() {
   };
   useMotionValueEvent(landed, 'change', setTheme);
   const bg = useTransform(dark, [0, 1], ['rgb(255,255,255)', 'rgb(4,8,22)']);
+  // tell the nav when the section is dark, so the bar can blend in instead of glaring over it
+  useMotionValueEvent(dark, 'change', (v) => {
+    const el = ref.current;
+    if (!el) return;
+    const next = v > 0.5 ? 'dark' : 'light';
+    if (el.dataset.theme === next) return;
+    el.dataset.theme = next;
+    window.dispatchEvent(new Event('topin:surface'));
+  });
 
   return (
-    <motion.section ref={ref} aria-label="What Topin does" className={`relative ${reduce ? 'bg-white' : 'h-[420svh]'}`} style={reduce ? undefined : { backgroundColor: bg }}>
+    <motion.section ref={ref} data-surface-section="" aria-label="What Topin does" className={`relative ${reduce ? 'bg-white' : 'h-[420svh]'}`} style={reduce ? undefined : { backgroundColor: bg }}>
       <div className={`${reduce ? 'py-[var(--section-y)]' : 'sticky top-0 h-svh'} flex items-center`}>
         <p className="sr-only">{LINES.join(' ')}</p>
         {reduce ? (
