@@ -32,7 +32,7 @@ export const hero = {
     { value: 1.5, prefix: '', suffix: 'L+', decimals: 1, label: 'assessments' },
   ],
   statsCaption: '4× and 50%+ are customer-reported',
-  trustLabel: 'Trusted by 600+ Companies for Hiring at Scale',
+  trustLabel: 'Trusted by',
   visual: {
     photoAlt: 'A recruiter reviews candidates on a laptop at a bright office desk.',
     cardA: { title: 'Role-specific assessment', sub: 'Generated from a job description' },
