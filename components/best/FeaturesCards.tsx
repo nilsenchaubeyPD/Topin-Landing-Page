@@ -10,10 +10,10 @@ import { inViewOnce } from '@/lib/motion';
 const ease = [0.22, 1, 0.36, 1] as const;
 const app = hero.app;
 const inView = (d = 0) => ({
-  initial: { opacity: 0, y: 14 },
-  whileInView: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 28, scale: 0.97 },
+  whileInView: { opacity: 1, y: 0, scale: 1 },
   viewport: inViewOnce,
-  transition: { duration: 0.6, delay: d, ease },
+  transition: { duration: 0.9, delay: d, ease },
 });
 const initials = (n: string) =>
   n
@@ -220,10 +220,10 @@ function FeatureCard({ c }: { c: Card }) {
   const { f } = c;
   return (
     <motion.li
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 48, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={inViewOnce}
-      transition={{ duration: 0.7, ease }}
+      transition={{ duration: 1, ease }}
       className={`group flex flex-col overflow-hidden rounded-[24px] bg-[#f6f7fa] ${c.wide ? 'md:col-span-2' : ''}`}
     >
       <div aria-hidden="true" className={`relative h-[300px] w-full overflow-hidden transition-transform duration-500 ease-out group-hover:scale-[1.012] ${c.noFade ? '' : '[mask-image:linear-gradient(to_bottom,#000_60%,rgba(0,0,0,.55)_82%,transparent)]'}`}>

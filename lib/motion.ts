@@ -9,8 +9,9 @@ export const lenisOptions = {
 };
 
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOutExpo } },
+  // content rises, grows from 97% and fades in together, slow at the end: the soft settle used across the page
+  hidden: { opacity: 0, y: 36, scale: 0.97 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.9, ease: easeOutExpo } },
 };
 
 export const fadeOnly: Variants = {

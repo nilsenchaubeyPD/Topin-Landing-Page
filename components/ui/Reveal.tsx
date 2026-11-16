@@ -20,7 +20,7 @@ export function Reveal({ children, staggerChildren, delay = 0, as = 'div', ...re
     ? stagger(typeof staggerChildren === 'number' ? staggerChildren : 0.08, delay)
     : reduce
       ? fadeOnly
-      : { ...fadeUp, show: { ...(fadeUp.show as object), transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay } } };
+      : { ...fadeUp, show: { ...(fadeUp.show as object), transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1], delay } } };
   return (
     <Comp initial="hidden" whileInView="show" viewport={inViewOnce} variants={variants} {...rest}>
       {children}
