@@ -12,7 +12,7 @@ export function VariantPicker() {
   const [open, setOpen] = useState(false); // starts as a small pill so it never covers the page
 
   const jump = (key: string) => {
-    const id = { hero: 'top', how: 'how', features: 'features', proof: 'testimonials', compare: 'compare', cta: 'cta', faq: 'faq' }[key];
+    const id = { hero: 'top', statement: 'statement', how: 'how', features: 'features', proof: 'testimonials', compare: 'compare', cta: 'cta', faq: 'faq' }[key];
     const el = id === 'testimonials' ? document.getElementById('testimonials-title')?.closest('section') : document.getElementById(id || '');
     el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
