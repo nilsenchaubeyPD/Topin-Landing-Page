@@ -109,9 +109,12 @@ export function HeroSplit() {
 
       {/* the product rises out of a soft blue band, tilting flat as it arrives */}
       <div className="relative">
-        <div aria-hidden="true" className="absolute inset-x-0 top-16 bottom-0 bg-[linear-gradient(180deg,#f3f7ff_0%,#e3ecff_55%,#ffffff_100%)] [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]" />
+        {/* rounded blue panel with a dot grid, the window overlapping its lower edge (Zova) */}
+        <div aria-hidden="true" className="absolute inset-x-3 top-16 bottom-[22%] overflow-hidden rounded-[32px] bg-[linear-gradient(180deg,#f4f7ff_0%,#e6eeff_60%,#d6e3ff_100%)] md:inset-x-4 md:rounded-[40px]">
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(37,99,235,.28)_1.1px,transparent_1.3px)] bg-[size:14px_14px] [mask-image:linear-gradient(180deg,rgba(0,0,0,.35),#000)]" />
+        </div>
         <div className="wrap relative pb-20 [perspective:1600px] md:pb-28">
-          <motion.div ref={shot} style={reduce ? undefined : { scale, rotateX, y, transformOrigin: 'center top' }} className="mx-auto max-w-[1100px]">
+          <motion.div ref={shot} style={reduce ? undefined : { scale, rotateX, y, transformOrigin: 'center top' }} className="mx-auto max-w-[1100px] rounded-[28px] bg-[#e9ebf0] p-2 shadow-[0_50px_100px_-40px_rgba(12,22,56,.45)] ring-1 ring-navy/[.06] md:p-3">
             <AppShot />
           </motion.div>
         </div>
