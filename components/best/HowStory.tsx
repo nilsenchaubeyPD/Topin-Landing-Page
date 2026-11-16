@@ -19,13 +19,10 @@ export function HowStory() {
               {howOptions[1].title}
             </h2>
           </RevealItem>
-          <RevealItem>
-            <p className="text-[17px] leading-[27px] text-navy-2 md:text-[18px] md:leading-[28px]">{howOptions[1].lead}</p>
-          </RevealItem>
         </Reveal>
 
         <Reveal delay={0.1} className="mx-auto mt-12 max-w-[1180px] md:mt-16">
-          <div role="img" aria-label={`${how.comingSoon}: placeholder for the product video`} className="overflow-hidden rounded-[20px] shadow-[0_50px_120px_-50px_rgba(12,22,56,.45)] ring-1 ring-navy/[.06]">
+          <div role="img" aria-label={`${how.comingSoon}: placeholder for the product video`} className="overflow-hidden rounded-[8px] shadow-[0_50px_120px_-50px_rgba(12,22,56,.45)] ring-1 ring-navy/[.06]">
             {/* poster: the real Topin assessments screen until the video is supplied */}
             <Image src="/images/how-poster.png" alt="" width={2880} height={1744} sizes="(min-width: 1280px) 1160px, 94vw" className="pointer-events-none block h-auto w-full select-none" />
           </div>
