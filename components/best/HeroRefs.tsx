@@ -88,7 +88,7 @@ export function HeroCloseLeft() {
       {/* Closent's frame: two hairlines mark the page column from top to bottom; the product is cut off at the right line */}
       <div className="wrap">
         <div className={`relative ${FRAME_X}`}>
-          <section id="top" aria-labelledby="hd-title" className="relative overflow-hidden pb-16 pt-32 md:pb-20 md:pt-40">
+          <section id="top" aria-labelledby="hd-title" className="relative overflow-hidden pb-[var(--section-y)] pt-32 md:pt-40">
             <div className={`grid grid-cols-[minmax(0,1fr)] items-center gap-12 ${FRAME_PAD} lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:!pr-0`}>
               <div>
                 <NewPill />

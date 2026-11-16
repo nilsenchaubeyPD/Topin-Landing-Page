@@ -15,7 +15,7 @@ const Check = () => (
 /** Closing: one centred call to action on a navy panel with a soft blue glow. No decoration that competes with the buttons. */
 export function ClosingCTA() {
   return (
-    <section id="cta" aria-labelledby="cta-title" className="bg-white py-3 md:py-6 xl:py-8">
+    <section id="cta" aria-labelledby="cta-title" className="section-y bg-white">
       <div className="wrap">
         <div className="relative isolate overflow-hidden rounded-[28px] bg-navy">
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_50%_0%,rgba(37,99,235,.42),transparent_70%)]" />

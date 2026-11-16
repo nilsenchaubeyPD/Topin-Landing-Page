@@ -25,16 +25,16 @@
 
   /* page gutter and section rhythm (1440 design: 120 / 120) */
   --pad: 20px;
-  --section-y: 72px;
+  --section-y: 48px; /* 48px between a section's content and the line above or below it */
 }
 @media (min-width: 768px) {
-  :root { --pad: 32px; --section-y: 96px; }
+  :root { --pad: 32px; }
 }
 @media (min-width: 1024px) {
-  :root { --pad: 64px; --section-y: 96px; }
+  :root { --pad: 64px; }
 }
 @media (min-width: 1280px) {
-  :root { --pad: 40px; --section-y: 120px; }
+  :root { --pad: 40px; }
 }
 @media (min-width: 1440px) {
   :root { --pad: 120px; }
