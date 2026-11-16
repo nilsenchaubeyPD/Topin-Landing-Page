@@ -1,5 +1,6 @@
 'use client';
 
+import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
 import { flags } from '@/content/flags';
 import { testimonials } from '@/content/testimonials';
@@ -41,12 +42,12 @@ export function ProofResults() {
       <div className="wrap">
         <Reveal staggerChildren className="flex max-w-[760px] flex-col gap-4">
           <RevealItem>
+            <Eyebrow className="text-navy-2">Testimonials</Eyebrow>
+          </RevealItem>
+          <RevealItem>
             <h2 id="testimonials-title" className="text-h2-m md:text-h2">
               {testimonials.title}
             </h2>
-          </RevealItem>
-          <RevealItem>
-            <p className="max-w-[520px] text-[17px] leading-[27px] text-navy-2">{testimonials.lead}</p>
           </RevealItem>
         </Reveal>
       </div>

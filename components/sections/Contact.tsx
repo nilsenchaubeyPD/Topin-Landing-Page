@@ -1,5 +1,6 @@
 'use client';
 
+import { Eyebrow } from '@/components/ui/Eyebrow';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useId, useState, type ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
@@ -79,12 +80,12 @@ export function Contact() {
       <div className="wrap">
         <Reveal staggerChildren className="mx-auto flex max-w-[640px] flex-col items-center gap-4 text-center">
           <RevealItem>
+            <Eyebrow className="text-navy-2">Contact</Eyebrow>
+          </RevealItem>
+          <RevealItem>
             <h2 id="contact-title" className="text-h2-m md:text-h2">
               Get in Touch
             </h2>
-          </RevealItem>
-          <RevealItem>
-            <p className="text-[18px] leading-[28px] text-navy-2">Questions about assessments, credits or a custom plan? Send us a message and the Topin team will get back to you.</p>
           </RevealItem>
         </Reveal>
 

@@ -29,9 +29,9 @@ export default function Home() {
         <Variant section="features" options={{ a: FeaturesPinned, b: FeaturesCards, c: FeaturesParallax }} />
         <Variant section="proof" options={{ a: ProofResults, b: Testimonials }} />
         <Comparison />
+        <Contact />
         <ClosingCTA />
         <FAQ />
-        <Contact />
       </main>
       <Footer />
       {flags.variantPicker && <VariantPicker />}

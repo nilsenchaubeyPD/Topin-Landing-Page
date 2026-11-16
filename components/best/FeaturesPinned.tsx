@@ -1,5 +1,6 @@
 "use client";
 
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { FeatureChip } from "@/components/ui/FeatureChip";
 import {
   motion,
@@ -107,14 +108,12 @@ export function FeaturesPinned() {
       <div className="wrap">
         <Reveal staggerChildren className="flex max-w-[760px] flex-col gap-4">
           <RevealItem>
+            <Eyebrow className="text-navy-2">Features</Eyebrow>
+          </RevealItem>
+          <RevealItem>
             <h2 id="features-title" className="text-h2-m md:text-h2">
               {featuresSection.title}
             </h2>
-          </RevealItem>
-          <RevealItem>
-            <p className="text-[18px] leading-[28px] text-navy-2">
-              {featuresSection.lead}
-            </p>
           </RevealItem>
         </Reveal>
 
