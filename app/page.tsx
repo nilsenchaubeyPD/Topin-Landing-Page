@@ -3,6 +3,7 @@ import { FeaturesCards } from '@/components/best/FeaturesCards';
 import { HeroPill } from '@/components/best/HeroPill';
 import { HowStory } from '@/components/best/HowStory';
 import { ProofResults } from '@/components/best/ProofResults';
+import { Contact } from '@/components/sections/Contact';
 import { ClosingCTA } from '@/components/sections/ClosingCTA';
 import { Comparison } from '@/components/sections/Comparison';
 import { FAQ } from '@/components/sections/FAQ';
@@ -29,6 +30,7 @@ export default function Home() {
         <Comparison />
         <ClosingCTA />
         <FAQ />
+        <Contact />
       </main>
       <Footer />
       {flags.variantPicker && <VariantPicker />}
