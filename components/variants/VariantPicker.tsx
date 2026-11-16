@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { SECTIONS, useVariants, type VariantId } from './VariantContext';
 
-const IDS: VariantId[] = ['a', 'b', 'c'];
+const IDS: VariantId[] = ['a', 'b', 'c', 'd', 'e', 'f'];
 
 /** Floating review panel: pick A / B / C for each section. Review tool only (flags.variantPicker). */
 export function VariantPicker() {

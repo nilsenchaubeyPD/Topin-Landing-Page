@@ -353,3 +353,8 @@ a {
 .blog-prose th, .blog-prose td { border-bottom: 1px solid rgba(12,22,56,.1); padding: .7em .8em; text-align: left; vertical-align: top; }
 .blog-prose th { color: #0c1638; font-weight: 700; }
 @media (max-width: 767px) { .blog-prose { font-size: 16.5px; } .blog-prose h2 { font-size: 25px; } .blog-prose h3 { font-size: 20px; } }
+
+/* Hero option F: the aurora ribbons drift slowly (still under reduced motion) */
+@keyframes hero-aurora { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(4%, 6%, 0) scale(1.08); } }
+.hero-aurora { animation: hero-aurora 18s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .hero-aurora { animation: none; } }
