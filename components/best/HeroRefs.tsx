@@ -82,8 +82,6 @@ const Credits = ({ center = false }: { center?: boolean }) => (
 
 /* ---------- D · Closent: text left, product cut off at the column line, logos in a ruled grid ---------- */
 
-const HATCH = 'bg-[repeating-linear-gradient(135deg,rgba(12,22,56,.07)_0_1px,transparent_1px_9px)]';
-
 export function HeroCloseLeft() {
   return (
     <div className="noir-select overflow-x-clip bg-[#f6f7fa]">
@@ -114,8 +112,7 @@ export function HeroCloseLeft() {
               </div>
             </div>
           </section>
-          {/* hatched strip between the hero and the logos */}
-          <div aria-hidden="true" className={`h-12 border-y border-navy/[.09] ${HATCH}`} />
+          <div aria-hidden="true" className="border-t border-navy/[.09]" />
           <div className="grid grid-cols-2 md:grid-cols-[220px_repeat(4,minmax(0,1fr))]">
             <div className="col-span-2 flex items-center border-b border-navy/[.09] px-6 py-6 md:col-span-1 md:row-span-2 md:border-r">
               <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-navy-2">{hero.trustLabel}</p>
@@ -126,7 +123,7 @@ export function HeroCloseLeft() {
               </div>
             ))}
           </div>
-          <div aria-hidden="true" className={`h-12 ${HATCH}`} />
+
         </div>
       </div>
     </div>

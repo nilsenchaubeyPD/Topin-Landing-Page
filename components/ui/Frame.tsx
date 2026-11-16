@@ -12,11 +12,11 @@ export function FrameLines() {
   );
 }
 
-/** The break between two sections: a hatched strip inside the column, ruled top and bottom. */
+/** The break between two sections: one hairline across the column, from frame line to frame line. */
 export function Divider() {
   return (
     <div aria-hidden="true" className="wrap">
-      <div className={`${FRAME_X} h-12 border-y border-navy/[.09] bg-[repeating-linear-gradient(135deg,rgba(12,22,56,.07)_0_1px,transparent_1px_9px)]`} />
+      <div className={`${FRAME_X} border-t border-navy/[.09]`} />
     </div>
   );
 }
