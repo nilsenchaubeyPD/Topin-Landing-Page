@@ -25,7 +25,7 @@
 
   /* page gutter and section rhythm (1440 design: 120 / 120) */
   --pad: 20px;
-  --section-y: 48px; /* 48px between a section's content and the line above or below it */
+  --section-y: 64px; /* 64px between a section's content and the line above or below it */
 }
 @media (min-width: 768px) {
   :root { --pad: 32px; }
