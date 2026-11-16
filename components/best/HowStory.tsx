@@ -2,11 +2,11 @@
 
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
 import { how, howOptions } from '@/content/how';
-import { AppShot } from './HeroSplit';
+import Image from 'next/image';
 
 /**
  * How it works (Diagnose's second section): a full-width soft gradient, the title on it,
- * and the video in a light frame on top. Until the real video is supplied the product screen
+ * and the video in a light frame on top. Until the real video is supplied the My Assessments screen
  * stands in as its poster, with a play button and a "coming soon" note.
  */
 export function HowStory() {
@@ -28,9 +28,8 @@ export function HowStory() {
         <Reveal delay={0.1} className="mx-auto mt-12 max-w-[1180px] md:mt-16">
           <div className="rounded-[28px] bg-white/55 p-2 shadow-[0_50px_120px_-50px_rgba(12,22,56,.45)] ring-1 ring-white/70 backdrop-blur-sm md:p-3">
             <div role="img" aria-label={`${how.comingSoon}: placeholder for the product video`} className="group relative overflow-hidden rounded-[20px]">
-              <div aria-hidden="true" className="pointer-events-none select-none">
-                <AppShot />
-              </div>
+              {/* poster: the real Topin assessments screen until the video is supplied */}
+              <Image src="/images/how-poster.png" alt="" width={2880} height={1744} sizes="(min-width: 1280px) 1160px, 94vw" className="pointer-events-none block h-auto w-full select-none" priority={false} />
               {/* play overlay: dims the poster slightly so it reads as a video */}
               <div aria-hidden="true" className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy/[.18] transition-colors duration-300 group-hover:bg-navy/[.24]">
                 <span className="flex size-16 items-center justify-center rounded-full bg-white text-navy shadow-[0_16px_40px_-12px_rgba(4,8,22,.55)] transition-transform duration-300 group-hover:scale-105 md:size-[84px]">
