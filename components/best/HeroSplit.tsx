@@ -18,7 +18,7 @@ const Check = () => (
 );
 
 /** The product, as an app window: sidebar plus the ranked shortlist. Sample data. */
-function AppShot() {
+export function AppShot() {
   return (
     <Window url={hero.app.url} className="rounded-[20px]">
       <div className="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[200px_minmax(0,1fr)]">
