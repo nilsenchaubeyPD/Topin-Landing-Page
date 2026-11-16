@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { Button } from '@/components/ui/Button';
 import { DummyLogo, DUMMY_LOGO_COUNT } from '@/components/ui/DummyLogos';
@@ -19,22 +18,6 @@ const delay = (s: number) => ({ animationDelay: `${s}s` });
 const Shot = ({ className = '', priority = false }: { className?: string; priority?: boolean }) => (
   <Image src="/images/how-poster.png" alt="The Topin My Assessments screen" width={2880} height={1744} priority={priority} sizes="(min-width: 1280px) 1200px, 96vw" className={`block h-auto w-full ${className}`} />
 );
-
-function NewPill({ center = false }: { center?: boolean }) {
-  return (
-    <Link
-      href={links.start}
-      style={delay(0.1)}
-      className={`noir-up group inline-flex max-w-full items-center gap-2.5 rounded-pill border border-navy/10 bg-white/80 py-1 pl-1 pr-4 text-[13px] font-semibold text-navy-2 backdrop-blur-md transition-colors hover:border-blue/30 ${center ? 'mx-auto' : ''}`}
-    >
-      <span className="rounded-pill bg-blue px-2.5 py-0.5 text-[12px] font-bold text-white">New</span>
-      Generate assessments from a job description
-      <span aria-hidden="true" className="text-blue transition-transform duration-150 group-hover:translate-x-0.5">
-        →
-      </span>
-    </Link>
-  );
-}
 
 /** Closent's button text: on hover the label slides up and an identical copy rolls in from below. */
 function Roll({ children }: { children: string }) {
@@ -91,7 +74,6 @@ export function HeroCloseLeft() {
           <section id="top" aria-labelledby="hd-title" className="relative overflow-hidden pb-[var(--section-y)] pt-32 md:pt-40">
             <div className={`grid grid-cols-[minmax(0,1fr)] items-center gap-12 ${FRAME_PAD} lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:!pr-0`}>
               <div>
-                <NewPill />
                 <h1 id="hd-title" style={delay(0.2)} className="noir-up mt-6 font-display text-[clamp(38px,4.4vw,64px)] font-semibold leading-[1.04] tracking-[-0.045em] text-navy">
                   Decide faster.
                   <br />
@@ -113,15 +95,20 @@ export function HeroCloseLeft() {
             </div>
           </section>
           <div aria-hidden="true" className="border-t border-navy/[.09]" />
-          <div className="grid grid-cols-2 md:grid-cols-[220px_repeat(4,minmax(0,1fr))]">
-            <div className="col-span-2 flex items-center border-b border-navy/[.09] px-6 py-6 md:col-span-1 md:row-span-2 md:border-r">
-              <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-navy-2">{hero.trustLabel}</p>
+          {/* logos on one line: the label, then every logo in a single row that scrolls slowly */}
+          <div className="flex items-stretch border-b border-navy/[.09]">
+            <div className="flex shrink-0 items-center border-r border-navy/[.09] px-4 py-5 md:w-[200px] md:px-6">
+              <p className="whitespace-nowrap text-[13px] font-semibold uppercase tracking-[0.08em] text-navy-2">{hero.trustLabel}</p>
             </div>
-            {Array.from({ length: DUMMY_LOGO_COUNT }).map((_, i) => (
-              <div key={i} className={`flex items-center justify-center border-b border-navy/[.09] px-4 py-6 ${i % 4 !== 3 ? 'md:border-r' : ''} ${i % 2 === 0 ? 'border-r md:border-r' : ''}`}>
-                <DummyLogo i={i} className="scale-[.85] opacity-60" />
-              </div>
-            ))}
+            <div className="group relative min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+              <ul className="flex h-full w-max animate-marquee items-center group-hover:[animation-play-state:paused]">
+                {Array.from({ length: DUMMY_LOGO_COUNT * 2 }).map((_, i) => (
+                  <li key={i} aria-hidden={i >= DUMMY_LOGO_COUNT} className="px-8 md:px-10">
+                    <DummyLogo i={i % DUMMY_LOGO_COUNT} className="scale-[.9] opacity-60" />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -139,7 +126,6 @@ export function HeroGlow() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[720px] bg-[radial-gradient(rgba(12,22,56,.12)_1px,transparent_1.2px)] bg-[size:18px_18px] [mask-image:linear-gradient(180deg,#000,transparent_85%)]" />
       <section id="top" aria-labelledby="he-title" className="relative pt-32 text-center md:pt-40">
         <div className="wrap">
-          <NewPill center />
           <h1 id="he-title" style={delay(0.2)} className="noir-up mx-auto mt-6 max-w-[980px] font-display text-[clamp(38px,5.4vw,76px)] font-semibold leading-[1.05] tracking-[-0.045em] text-navy">
             Decide Faster.
             <br />
@@ -196,7 +182,6 @@ export function HeroAurora() {
       <Aurora />
       <section id="top" aria-labelledby="hf-title" className="relative pt-32 text-center md:pt-40">
         <div className="wrap">
-          <NewPill center />
           <h1 id="hf-title" style={delay(0.2)} className="noir-up mx-auto mt-6 font-display text-[clamp(30px,5vw,72px)] font-semibold leading-[1.04] tracking-[-0.045em] text-navy">
             <span className="block">Decide faster.</span>
             <span className="block whitespace-nowrap">

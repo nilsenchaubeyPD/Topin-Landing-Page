@@ -1,11 +1,9 @@
 'use client';
 
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
 import { useRef } from 'react';
 import { Shortlist, Window } from '@/components/heroes/parts';
 import { TrustLogos } from '@/components/sections/TrustBand';
-import { links } from '@/content/flags';
 import { hero } from '@/content/hero';
 import { DemoForm, RotatingWord } from './HeroPill';
 
@@ -62,20 +60,6 @@ export function HeroSplit() {
       <section id="top" aria-labelledby="split-title" className="wrap relative pb-14 pt-32 md:pb-16 md:pt-40">
         <div className="grid grid-cols-[minmax(0,1fr)] items-end gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16">
           <div>
-            <Link
-              href={links.start}
-              style={delay(0.1)}
-              className="noir-up group mb-6 inline-flex max-w-full items-center gap-2.5 rounded-pill border border-navy/10 bg-white px-4 py-1.5 text-[13px] font-semibold text-navy-2 transition-colors hover:border-blue/30"
-            >
-              <span className="relative flex size-2 shrink-0">
-                <span className="noir-ping absolute inline-flex size-full rounded-full bg-blue/60" />
-                <span className="relative inline-flex size-2 rounded-full bg-blue" />
-              </span>
-              New: generate assessments from a job description
-              <span aria-hidden="true" className="text-blue transition-transform duration-150 group-hover:translate-x-0.5">
-                →
-              </span>
-            </Link>
             <h1 id="split-title" style={delay(0.2)} className="noir-up font-display text-[clamp(28px,4.6vw,64px)] font-semibold leading-[1.02] tracking-[-0.045em] text-navy">
               <span className="block">Decide faster.</span>
               {/* always two lines: the rotating word never wraps, the size is set so the longest one fits */}
