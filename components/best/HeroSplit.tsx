@@ -76,9 +76,10 @@ export function HeroSplit() {
                 →
               </span>
             </Link>
-            <h1 id="split-title" style={delay(0.2)} className="noir-up font-display text-[clamp(40px,6vw,84px)] font-semibold leading-[1.02] tracking-[-0.045em] text-navy">
+            <h1 id="split-title" style={delay(0.2)} className="noir-up font-display text-[clamp(28px,4.6vw,64px)] font-semibold leading-[1.02] tracking-[-0.045em] text-navy">
               <span className="block">Decide faster.</span>
-              <span className="block">
+              {/* always two lines: the rotating word never wraps, the size is set so the longest one fits */}
+              <span className="block whitespace-nowrap">
                 Hire <RotatingWord />
               </span>
             </h1>
