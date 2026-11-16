@@ -5,7 +5,6 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 /** Sections with design options, in page order. "a" is the new version built from the reference sites; "b" is the previous approved one. */
 export const SECTIONS = [
   { key: 'hero', label: 'Hero', names: ['New', 'Previous'] },
-  { key: 'statement', label: 'Dark statement', names: ['Vertical', 'Horizontal'] },
   { key: 'how', label: 'How it works', names: ['New', 'Previous'] },
   { key: 'features', label: 'Features', names: ['Pinned', 'Cards', 'Previous'] },
   { key: 'proof', label: 'Testimonials', names: ['New', 'Previous'] },
