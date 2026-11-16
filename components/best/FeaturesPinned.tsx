@@ -103,7 +103,7 @@ export function FeaturesPinned() {
     <section
       id="features"
       aria-labelledby="features-title"
-      className="section-y border-t border-navy/[.08] bg-white"
+      className="section-y bg-white"
     >
       <div className="wrap">
         <Reveal staggerChildren className="flex max-w-[760px] flex-col gap-4">

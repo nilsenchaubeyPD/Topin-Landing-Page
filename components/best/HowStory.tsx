@@ -17,12 +17,12 @@ export function HowStory() {
         {howOptions[1].title}
       </h2>
 
-      {/* wider than the page column so the video reads larger */}
-      <div className="relative px-4 md:px-8">
-        <Reveal delay={0.1} className="mx-auto max-w-[1320px]">
+      {/* the video fills the page column, edge to edge between the frame lines */}
+      <div className="wrap relative">
+        <Reveal delay={0.1} className="mx-auto">
           <div role="img" aria-label={`${how.comingSoon}: placeholder for the product video`} className="overflow-hidden rounded-[8px] shadow-[0_50px_120px_-50px_rgba(12,22,56,.45)] ring-1 ring-navy/[.06]">
             {/* poster: the real Topin assessments screen until the video is supplied */}
-            <Image src="/images/how-poster.png" alt="" width={2880} height={1744} sizes="(min-width: 1400px) 1320px, 96vw" className="pointer-events-none block h-auto w-full select-none" />
+            <Image src="/images/how-poster.png" alt="" width={2880} height={1744} sizes="(min-width: 1280px) 1200px, 96vw" className="pointer-events-none block h-auto w-full select-none" />
           </div>
         </Reveal>
       </div>

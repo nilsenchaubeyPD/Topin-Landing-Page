@@ -38,7 +38,7 @@ export function ProofResults() {
   );
 
   return (
-    <section aria-labelledby="testimonials-title" className="section-y overflow-hidden border-t border-navy/[.08] bg-white">
+    <section aria-labelledby="testimonials-title" className="section-y overflow-hidden bg-white">
       <div className="wrap">
         <Reveal staggerChildren className="flex max-w-[760px] flex-col gap-4">
           <RevealItem>
@@ -53,7 +53,8 @@ export function ProofResults() {
       </div>
 
       {/* a slow row of quote cards moving sideways; pauses on hover, scrolls by hand under reduced motion */}
-      <div className="t-marquee mt-12 md:mt-14 [mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)]">
+      <div className="wrap">
+      <div className="t-marquee mt-12 overflow-hidden md:mt-14 [mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)]">
         <ul className="t-track flex w-max items-stretch gap-4">
           {items.map((t) => (
             <Card key={t.name} t={t} />
@@ -62,6 +63,7 @@ export function ProofResults() {
             <Card key={t.name + '-2'} t={t} hidden />
           ))}
         </ul>
+      </div>
       </div>
     </section>
   );

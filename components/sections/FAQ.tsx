@@ -45,7 +45,7 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" aria-labelledby="faq-title" className="section-y relative border-t border-navy/[.08] bg-white">
+    <section id="faq" aria-labelledby="faq-title" className="section-y relative bg-white">
       {/* hash targets for deep links */}
       <span id="faq-product" className="absolute top-0" aria-hidden="true" />
       <span id="faq-credits" className="absolute top-0" aria-hidden="true" />

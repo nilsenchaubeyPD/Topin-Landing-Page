@@ -9,6 +9,7 @@ import { TrustLogos } from '@/components/sections/TrustBand';
 import { links } from '@/content/flags';
 import { hero } from '@/content/hero';
 import { nav } from '@/content/nav';
+import { FRAME_PAD, FRAME_X } from '@/components/ui/Frame';
 import { DemoForm, RotatingWord } from './HeroPill';
 
 /* Three hero options built from the references nil shared (Closent, Agently, Luman), on Topin's light theme.
@@ -88,9 +89,9 @@ export function HeroCloseLeft() {
     <div className="noir-select overflow-x-clip bg-[#f6f7fa]">
       {/* Closent's frame: two hairlines mark the page column from top to bottom; the product is cut off at the right line */}
       <div className="wrap">
-        <div className="relative border-x border-navy/[.09]">
+        <div className={`relative ${FRAME_X}`}>
           <section id="top" aria-labelledby="hd-title" className="relative overflow-hidden pb-16 pt-32 md:pb-20 md:pt-40">
-            <div className="grid grid-cols-[minmax(0,1fr)] items-center gap-12 px-6 md:px-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:pr-0">
+            <div className={`grid grid-cols-[minmax(0,1fr)] items-center gap-12 ${FRAME_PAD} lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:!pr-0`}>
               <div>
                 <NewPill />
                 <h1 id="hd-title" style={delay(0.2)} className="noir-up mt-6 font-display text-[clamp(38px,4.4vw,64px)] font-semibold leading-[1.04] tracking-[-0.045em] text-navy">

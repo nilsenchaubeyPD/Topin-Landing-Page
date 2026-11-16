@@ -76,7 +76,7 @@ export function Contact() {
   const aria = (k: keyof ContactValues) => ({ 'aria-invalid': errors[k] ? true : undefined, 'aria-describedby': errors[k] ? `${id}-${k}-err` : undefined });
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="section-y border-t border-navy/[.08] bg-white">
+    <section id="contact" aria-labelledby="contact-title" className="section-y bg-white">
       <div className="wrap">
         <Reveal staggerChildren className="mx-auto flex max-w-[640px] flex-col items-center gap-4 text-center">
           <RevealItem>

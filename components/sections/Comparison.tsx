@@ -62,7 +62,7 @@ export function Comparison() {
   const grid = 'grid grid-cols-[minmax(0,1fr)_88px_104px] md:grid-cols-[minmax(0,1fr)_200px_240px]';
 
   return (
-    <section id="compare" aria-labelledby="compare-title" className="section-y border-t border-navy/[.08] bg-white">
+    <section id="compare" aria-labelledby="compare-title" className="section-y bg-white">
       <div className="wrap flex flex-col gap-14 md:gap-16">
         <div>
           <Eyebrow className="mb-4 text-navy-2">Comparison</Eyebrow>
