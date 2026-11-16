@@ -145,7 +145,7 @@ export function FeaturesPinned() {
                     type="button"
                     onClick={() => go(c.f.key)}
                     aria-current={i === active ? "true" : undefined}
-                    className={`block w-full py-2.5 pl-5 text-left text-[16px] font-medium transition-colors duration-300 ${i === active ? "text-navy" : "text-navy-2/55 hover:text-navy-2"}`}
+                    className={`block w-full py-2.5 pl-5 text-left text-[16px] font-semibold transition-colors duration-300 ${i === active ? "text-navy" : "text-navy-2/55 hover:text-navy-2"}`}
                   >
                     {cap(c.label)}
                   </button>

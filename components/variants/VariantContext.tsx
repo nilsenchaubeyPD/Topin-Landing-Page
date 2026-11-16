@@ -7,7 +7,7 @@ export const SECTIONS = [
   { key: 'hero', label: 'Hero', names: ['New', 'Previous'] },
   { key: 'statement', label: 'Dark statement', names: ['Vertical', 'Horizontal'] },
   { key: 'how', label: 'How it works', names: ['New', 'Previous'] },
-  { key: 'features', label: 'Features', names: ['New', 'Previous', 'Pinned'] },
+  { key: 'features', label: 'Features', names: ['Pinned', 'Cards', 'Previous'] },
   { key: 'proof', label: 'Testimonials', names: ['New', 'Previous'] },
 ] as const;
 

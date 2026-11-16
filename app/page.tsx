@@ -26,7 +26,7 @@ export default function Home() {
         <Variant section="hero" options={{ a: HeroPill, b: HeroV2 }} />
         <Variant section="statement" options={{ a: Statement, b: StatementHorizontal }} />
         <Variant section="how" options={{ a: HowStory, b: HowItWorks }} />
-        <Variant section="features" options={{ a: FeaturesCards, b: FeaturesParallax, c: FeaturesPinned }} />
+        <Variant section="features" options={{ a: FeaturesPinned, b: FeaturesCards, c: FeaturesParallax }} />
         <Variant section="proof" options={{ a: ProofResults, b: Testimonials }} />
         <Comparison />
         <ClosingCTA />
