@@ -1,3 +1,4 @@
+import { FeaturesPinned } from '@/components/best/FeaturesPinned';
 import { FeaturesCards } from '@/components/best/FeaturesCards';
 import { HeroPill } from '@/components/best/HeroPill';
 import { HowStory } from '@/components/best/HowStory';
@@ -25,7 +26,7 @@ export default function Home() {
         <Variant section="hero" options={{ a: HeroPill, b: HeroV2 }} />
         <Variant section="statement" options={{ a: Statement, b: StatementHorizontal }} />
         <Variant section="how" options={{ a: HowStory, b: HowItWorks }} />
-        <Variant section="features" options={{ a: FeaturesCards, b: FeaturesParallax }} />
+        <Variant section="features" options={{ a: FeaturesCards, b: FeaturesParallax, c: FeaturesPinned }} />
         <Variant section="proof" options={{ a: ProofResults, b: Testimonials }} />
         <Comparison />
         <ClosingCTA />

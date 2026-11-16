@@ -203,10 +203,10 @@ function GraphicDevices() {
 /* ---------- cards ---------- */
 
 type Feature = { key: string; title: string; desc: string; chips?: readonly string[] };
-type Card = { f: Feature; label: string; dot?: string; Graphic: () => ReactNode; wide?: boolean; noFade?: boolean };
+export type Card = { f: Feature; label: string; dot?: string; Graphic: () => ReactNode; wide?: boolean; noFade?: boolean };
 
 // headlines, descriptions and capabilities come straight from the copy doc (content/features.ts)
-const CARDS: Card[] = [
+export const CARDS: Card[] = [
   { f: creation, label: 'Assessment creation', dot: 'bg-blue', Graphic: GraphicCreate, wide: true },
   { f: proctoring, label: 'Proctoring', dot: 'bg-green-mid', Graphic: GraphicProctor, wide: true },
   { f: reporting, label: 'Candidate reporting', Graphic: GraphicRank },

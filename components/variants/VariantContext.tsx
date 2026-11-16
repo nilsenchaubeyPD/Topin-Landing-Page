@@ -7,12 +7,12 @@ export const SECTIONS = [
   { key: 'hero', label: 'Hero', names: ['New', 'Previous'] },
   { key: 'statement', label: 'Dark statement', names: ['Vertical', 'Horizontal'] },
   { key: 'how', label: 'How it works', names: ['New', 'Previous'] },
-  { key: 'features', label: 'Features', names: ['New', 'Previous'] },
+  { key: 'features', label: 'Features', names: ['New', 'Previous', 'Pinned'] },
   { key: 'proof', label: 'Testimonials', names: ['New', 'Previous'] },
 ] as const;
 
 export type SectionKey = (typeof SECTIONS)[number]['key'];
-export type VariantId = 'a' | 'b';
+export type VariantId = 'a' | 'b' | 'c';
 type State = Record<SectionKey, VariantId>;
 
 const DEFAULTS = Object.fromEntries(SECTIONS.map((s) => [s.key, 'a'])) as State;
@@ -24,7 +24,7 @@ const Ctx = createContext<{ v: State; set: (k: SectionKey, id: VariantId) => voi
   reset: () => {},
 });
 
-const isId = (x: unknown): x is VariantId => x === 'a' || x === 'b';
+const isId = (x: unknown): x is VariantId => x === 'a' || x === 'b' || x === 'c';
 
 /**
  * Holds the chosen variant per section. Reads ?hero=b&faq=c from the URL first, then localStorage,
@@ -80,8 +80,8 @@ export function VariantProvider({ children }: { children: ReactNode }) {
 export const useVariants = () => useContext(Ctx);
 
 /** Renders the chosen variant of one section. */
-export function Variant({ section, options }: { section: SectionKey; options: Record<VariantId, ComponentType> }) {
+export function Variant({ section, options }: { section: SectionKey; options: Partial<Record<VariantId, ComponentType>> & { a: ComponentType } }) {
   const { v } = useVariants();
-  const C = options[v[section]];
+  const C = options[v[section]] ?? options.a;
   return <C />;
 }

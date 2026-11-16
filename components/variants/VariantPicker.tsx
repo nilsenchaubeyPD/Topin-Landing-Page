@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { SECTIONS, useVariants, type VariantId } from './VariantContext';
 
-const IDS: VariantId[] = ['a', 'b'];
+const IDS: VariantId[] = ['a', 'b', 'c'];
 
 /** Floating review panel: pick A / B / C for each section. Review tool only (flags.variantPicker). */
 export function VariantPicker() {
@@ -48,7 +48,7 @@ export function VariantPicker() {
                     <span className="block truncate text-[11.5px] text-navy-2">{s.names[IDS.indexOf(v[s.key])]}</span>
                   </button>
                   <span role="radiogroup" aria-label={`${s.label} variation`} className="flex rounded-[9px] bg-stone p-0.5">
-                    {IDS.map((id, i) => {
+                    {IDS.slice(0, s.names.length).map((id, i) => {
                       const name = s.names[i];
                       const on = v[s.key] === id;
                       return (
