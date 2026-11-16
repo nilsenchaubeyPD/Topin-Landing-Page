@@ -1,6 +1,7 @@
 import { FeaturesPinned } from '@/components/best/FeaturesPinned';
 import { FeaturesCards } from '@/components/best/FeaturesCards';
 import { HeroPill } from '@/components/best/HeroPill';
+import { HeroSplit } from '@/components/best/HeroSplit';
 import { HowStory } from '@/components/best/HowStory';
 import { ProofResults } from '@/components/best/ProofResults';
 import { Contact } from '@/components/sections/Contact';
@@ -23,7 +24,7 @@ export default function Home() {
     <>
       <PillNav />
       <main id="main">
-        <Variant section="hero" options={{ a: HeroPill, b: HeroV2 }} />
+        <Variant section="hero" options={{ a: HeroPill, b: HeroV2, c: HeroSplit }} />
         <Variant section="how" options={{ a: HowStory, b: HowItWorks }} />
         <Variant section="features" options={{ a: FeaturesPinned, b: FeaturesCards, c: FeaturesParallax }} />
         <Variant section="proof" options={{ a: ProofResults, b: Testimonials }} />

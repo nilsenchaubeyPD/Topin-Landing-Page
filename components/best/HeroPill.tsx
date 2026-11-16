@@ -13,7 +13,7 @@ import { hero } from '@/content/hero';
 const WORDS = ['with confidence.', 'on real skill.', 'at any scale.'];
 
 /** Cycles the last word of the headline; all words share one grid cell so the width never jumps. */
-function RotatingWord() {
+export function RotatingWord() {
   const [i, setI] = useState(0);
   const [widths, setWidths] = useState<number[]>([]);
   const refs = useRef<(HTMLSpanElement | null)[]>([]);
