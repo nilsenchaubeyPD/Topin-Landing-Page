@@ -12,7 +12,8 @@ export const creation = {
   eyebrow: 'ASSESSMENT CREATION',
   title: 'Go Live in Minutes.',
   desc: 'Generate role-specific assessments from a job description, start with reusable templates, or build from scratch. However your team hires, getting started takes minutes instead of days.',
-  chips: ['Generate Assessments with JD/Plain text/Voice using AI', 'Role templates', 'Custom assessments', '10,000+ question bank', 'Generate Questions using AI'],
+  // four chips at most per feature, each with a brand-blue icon (components/ui/FeatureChip.tsx)
+  chips: ['Generate Using AI', 'Role Templates', 'Custom Assessments', '10,000+ Question Bank'],
   // Doc bullet, surfaced inside the UI panel. The JD / Plain text / Voice wording is unverified (flags.jdPlainTextVoice).
   bullet: flags.jdPlainTextVoice
     ? 'Generate Assessments with JD / Plain text / Voice using AI'
@@ -33,14 +34,7 @@ export const proctoring = {
   eyebrow: 'PROCTORING',
   title: 'Protect the Integrity of Every Test',
   desc: 'Our AI proctoring suite combines AI-powered monitoring, face detection, screen recording, plagiarism checks, and violation tracking to help ensure every score reflects real skill, not shortcuts.',
-  chips: [
-    'AI proctoring',
-    'Camera Proctoring with Face Recognition',
-    'Screen recording',
-    'Plagiarism detection',
-    'Candidate impersonation',
-    'Keystrokes recording',
-  ],
+  chips: ['AI Proctoring', 'Face Recognition', 'Screen Recording', 'Plagiarism Detection'],
   faceTag: 'Face detected',
   recPill: 'Screen recording',
   photoAlt: 'A candidate takes an online test on a laptop at home.',
@@ -51,7 +45,7 @@ export const reporting = {
   eyebrow: 'CANDIDATE REPORTING',
   title: 'Find the Right Candidates First',
   desc: 'AI ranks candidates the moment an assessment ends, so your team spends less time reviewing spreadsheets and more time interviewing the people who stand out.',
-  chips: ['Auto-ranked shortlist', 'Trust score', 'Comparative analysis', 'Exportable reports'],
+  chips: ['Auto-Ranked Shortlist', 'Trust Score', 'Comparative Analysis', 'Exportable Reports'],
 };
 
 export const access = {
@@ -60,7 +54,7 @@ export const access = {
   title: 'Collaborate Without the Chaos.',
   desc: 'Give recruiters, hiring managers, and interviewers the right level of access without creating confusion. Invite candidates in bulk, collaborate across teams, and keep hiring organized as you grow.',
   tooltip: 'Role-based access',
-  chips: ['Role-based access', 'Admin approvals', 'Bulk candidate invites'],
+  chips: ['Role-Based Access', 'Admin Approvals', 'Bulk Candidate Invites'],
   roles: [
     { letter: 'A', name: 'Admin', sub: 'Approves assessments', tone: 'blue' },
     { letter: 'R', name: 'Recruiter', sub: 'Invites candidates in bulk', tone: 'cyan' },
@@ -75,7 +69,7 @@ export const api = {
   title: 'Fits Into Your Workflow',
   desc: 'Connect assessments, candidate data, and hiring insights to the tools your team already uses. Automate routine work and keep your hiring workflow moving.',
   code: ['GET /assessments', 'GET /candidates', 'POST /invites   → automation-ready'],
-  chips: ['Assessment APIs', 'Candidate APIs', 'ATS exports', 'Automation-ready'],
+  chips: ['Assessment APIs', 'Candidate APIs', 'ATS Exports', 'Automation-Ready'],
 };
 
 export const devices = {
@@ -83,6 +77,6 @@ export const devices = {
   eyebrow: 'SUPPORT',
   title: 'Let Candidates Take Assessments on Any Device',
   desc: 'Let candidates complete assessments on desktop, tablet, or mobile, and run high-stakes exams through a dedicated secure browser when integrity matters most.',
-  chips: ['Mobile support', 'Tablet support', 'In-browser exams', 'Secure exam browser'],
+  chips: ['Mobile Support', 'Tablet Support', 'In-Browser Exams', 'Secure Exam Browser'],
   photoAlt: 'A woman on a sofa takes an assessment on a tablet.',
 };

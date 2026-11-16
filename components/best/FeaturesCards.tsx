@@ -1,5 +1,6 @@
 'use client';
 
+import { FeatureChip } from '@/components/ui/FeatureChip';
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { Reveal, RevealItem } from '@/components/ui/Reveal';
@@ -241,9 +242,7 @@ function FeatureCard({ c }: { c: Card }) {
         {f.chips && (
           <ul className={`flex flex-wrap gap-1.5 ${c.wide ? 'lg:max-w-[440px] lg:justify-end' : ''}`}>
             {f.chips.map((chip) => (
-              <li key={chip} className="rounded-pill border border-navy/[.08] bg-white px-3 py-1.5 text-[13px] font-medium text-navy-2">
-                {chip}
-              </li>
+              <FeatureChip key={chip} label={chip} />
             ))}
           </ul>
         )}

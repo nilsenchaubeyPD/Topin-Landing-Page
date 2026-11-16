@@ -1,5 +1,6 @@
 "use client";
 
+import { FeatureChip } from "@/components/ui/FeatureChip";
 import {
   motion,
   useReducedMotion,
@@ -73,12 +74,7 @@ function Panel({
       {f.chips && (
         <ul className="mt-6 flex flex-wrap gap-2">
           {f.chips.map((chip) => (
-            <li
-              key={chip}
-              className="rounded-pill bg-white/80 px-3.5 py-1.5 text-[13px] font-medium text-navy-2 shadow-[0_0_0_1px_rgba(12,22,56,.06)]"
-            >
-              {chip}
-            </li>
+            <FeatureChip key={chip} label={chip} />
           ))}
         </ul>
       )}
