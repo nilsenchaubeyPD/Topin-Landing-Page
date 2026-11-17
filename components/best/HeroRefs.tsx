@@ -71,7 +71,20 @@ export function HeroTeam() {
       <div className="wrap">
         <div className={`relative ${FRAME_X}`}>
           <section id="top" aria-labelledby="ht-title" className="relative pt-32 md:pt-40">
-            <div className={`flex flex-col items-center text-center ${FRAME_PAD}`}>
+            {/* background: a blue wash, a maths-notebook grid with a dot at every crossing, all faded toward the edges */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_0%,rgba(37,99,235,.22),rgba(37,99,235,.07)_55%,transparent_80%)]" />
+              <div
+                className="absolute inset-0 opacity-90 [mask-image:radial-gradient(ellipse_75%_70%_at_50%_30%,#000_25%,transparent_80%)]"
+                style={{
+                  backgroundImage:
+                    'radial-gradient(circle,rgba(37,99,235,.6) 1.5px,transparent 1.6px),linear-gradient(to right,rgba(37,99,235,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(37,99,235,.12) 1px,transparent 1px)',
+                  backgroundSize: '40px 40px,40px 40px,40px 40px',
+                  backgroundPosition: '-0.65px -0.65px,0 0,0 0',
+                }}
+              />
+            </div>
+            <div className={`relative flex flex-col items-center text-center ${FRAME_PAD}`}>
               <h1 id="ht-title" style={delay(0.2)} className="noir-up font-display text-[clamp(40px,7vw,96px)] font-semibold leading-[1.02] tracking-[-0.05em] text-navy">
                 Decide faster.
                 <br />
