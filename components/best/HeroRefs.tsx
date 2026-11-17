@@ -71,17 +71,12 @@ export function HeroTeam() {
       <div className="wrap">
         <div className={`relative ${FRAME_X}`}>
           <section id="top" aria-labelledby="ht-title" className="relative pt-32 md:pt-40">
-            {/* background: a blue wash, a maths-notebook grid with a dot at every crossing, all faded toward the edges */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_0%,rgba(37,99,235,.22),rgba(37,99,235,.07)_55%,transparent_80%)]" />
+            {/* background: dots only, strongest at the bottom and fading upward, over a soft blue rise from the bottom */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(37,99,235,.13),rgba(37,99,235,.04)_45%,transparent_75%)]" />
               <div
-                className="absolute inset-0 opacity-90 [mask-image:radial-gradient(ellipse_75%_70%_at_50%_30%,#000_25%,transparent_80%)]"
-                style={{
-                  backgroundImage:
-                    'radial-gradient(circle,rgba(37,99,235,.6) 1.5px,transparent 1.6px),linear-gradient(to right,rgba(37,99,235,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(37,99,235,.12) 1px,transparent 1px)',
-                  backgroundSize: '40px 40px,40px 40px,40px 40px',
-                  backgroundPosition: '-0.65px -0.65px,0 0,0 0',
-                }}
+                className="absolute inset-0 [mask-image:linear-gradient(to_top,#000_0%,rgba(0,0,0,.55)_35%,transparent_75%)]"
+                style={{ backgroundImage: 'radial-gradient(circle,rgba(37,99,235,.5) 1.4px,transparent 1.8px)', backgroundSize: '24px 24px' }}
               />
             </div>
             <div className={`relative flex flex-col items-center text-center ${FRAME_PAD}`}>
