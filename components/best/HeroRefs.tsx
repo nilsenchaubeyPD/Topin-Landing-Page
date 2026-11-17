@@ -31,9 +31,9 @@ function Roll({ children }: { children: string }) {
   );
 }
 
-function RollCtas() {
+function RollCtas({ center = false }: { center?: boolean }) {
   return (
-    <div style={delay(0.4)} className="noir-up flex flex-col gap-3 sm:flex-row">
+    <div style={delay(0.4)} className={`noir-up flex flex-col gap-3 sm:flex-row ${center ? 'justify-center' : ''}`}>
       <Button opensStart size="big" className="group !rounded-[12px] transition-colors duration-500 hover:!translate-y-0 hover:!bg-navy" track={{ label: nav.ctaSecondary, location: 'hero' }}>
         <Roll>{nav.ctaSecondary}</Roll>
       </Button>
@@ -62,6 +62,65 @@ const Credits = ({ center = false }: { center?: boolean }) => (
     {hero.badge.strong} · {hero.badge.rest}
   </p>
 );
+
+/* ---------- ClickUp + Notion: centred oversized headline, one highlighted word, two buttons, the product in a window that runs into the logo strip ---------- */
+
+export function HeroTeam() {
+  return (
+    <div className="noir-select overflow-x-clip bg-white">
+      <div className="wrap">
+        <div className={`relative ${FRAME_X}`}>
+          <section id="top" aria-labelledby="ht-title" className="relative pt-32 md:pt-40">
+            <div className={`flex flex-col items-center text-center ${FRAME_PAD}`}>
+              <h1 id="ht-title" style={delay(0.2)} className="noir-up font-display text-[clamp(40px,7vw,96px)] font-semibold leading-[1.02] tracking-[-0.05em] text-navy">
+                Decide faster.
+                <br />
+                <span className="whitespace-nowrap">
+                  Hire <RotatingWord />
+                </span>
+              </h1>
+              <p style={delay(0.3)} className="noir-up mt-6 max-w-[620px] text-[18px] leading-[28px] text-navy-2 md:text-[20px] md:leading-[30px]">
+                {hero.description}
+              </p>
+              <div className="mt-8">
+                <RollCtas center />
+                <Credits center />
+              </div>
+            </div>
+            {/* the product sits in a window frame that fades into the logo strip, as on Notion */}
+            <div style={delay(0.45)} className={`noir-up relative mx-auto mt-14 max-w-[1040px] md:mt-16 ${FRAME_PAD}`}>
+              <div className="overflow-hidden rounded-t-[14px] border border-b-0 border-navy/[.1] bg-white shadow-[0_-10px_80px_-30px_rgba(37,99,235,.35)]">
+                <div className="flex items-center gap-1.5 border-b border-navy/[.07] bg-[#f6f7fa] px-4 py-3" aria-hidden="true">
+                  <span className="size-2.5 rounded-full bg-navy/15" />
+                  <span className="size-2.5 rounded-full bg-navy/15" />
+                  <span className="size-2.5 rounded-full bg-navy/15" />
+                </div>
+                <Shot priority />
+              </div>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+            </div>
+          </section>
+          <div className="border-y border-navy/[.09]">
+            <div className="flex items-stretch">
+              <div className="flex shrink-0 items-center border-r border-navy/[.09] px-4 py-5 md:w-[200px] md:px-6">
+                <p className="whitespace-nowrap text-[13px] font-semibold uppercase tracking-[0.08em] text-navy-2">{hero.trustLabel}</p>
+              </div>
+              <div className="group relative min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+                <ul className="flex h-full w-max animate-marquee items-center group-hover:[animation-play-state:paused]">
+                  {Array.from({ length: DUMMY_LOGO_COUNT * 2 }).map((_, i) => (
+                    <li key={i} aria-hidden={i >= DUMMY_LOGO_COUNT} className="px-8 md:px-10">
+                      <DummyLogo i={i % DUMMY_LOGO_COUNT} className="scale-[.9] opacity-60" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ---------- D · Closent: text left, product cut off at the column line, logos in a ruled grid ---------- */
 

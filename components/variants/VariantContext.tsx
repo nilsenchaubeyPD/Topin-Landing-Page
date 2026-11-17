@@ -4,14 +4,14 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 
 /** Sections with design options, in page order. "a" is the new version built from the reference sites; "b" is the previous approved one. */
 export const SECTIONS = [
-  { key: 'hero', label: 'Hero', names: ['Closent', 'Previous', 'Split', 'Pill', 'Agently', 'Luman'] },
+  { key: 'hero', label: 'Hero', names: ['ClickUp', 'Previous', 'Split', 'Pill', 'Agently', 'Luman', 'Closent'] },
   { key: 'how', label: 'How it works', names: ['New', 'Previous'] },
   { key: 'features', label: 'Features', names: ['Pinned', 'Cards', 'Previous'] },
   { key: 'proof', label: 'Testimonials', names: ['New', 'Previous'] },
 ] as const;
 
 export type SectionKey = (typeof SECTIONS)[number]['key'];
-export type VariantId = 'a' | 'b' | 'c' | 'd' | 'e' | 'f';
+export type VariantId = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g';
 type State = Record<SectionKey, VariantId>;
 
 const DEFAULTS = Object.fromEntries(SECTIONS.map((s) => [s.key, 'a'])) as State;
@@ -23,7 +23,7 @@ const Ctx = createContext<{ v: State; set: (k: SectionKey, id: VariantId) => voi
   reset: () => {},
 });
 
-const isId = (x: unknown): x is VariantId => typeof x === 'string' && ['a', 'b', 'c', 'd', 'e', 'f'].includes(x);
+const isId = (x: unknown): x is VariantId => typeof x === 'string' && ['a', 'b', 'c', 'd', 'e', 'f', 'g'].includes(x);
 
 /**
  * Holds the chosen variant per section. Reads ?hero=b&faq=c from the URL first, then localStorage,
