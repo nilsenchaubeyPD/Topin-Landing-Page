@@ -3,6 +3,7 @@ import { FeaturesCards } from '@/components/best/FeaturesCards';
 import { HeroPill } from '@/components/best/HeroPill';
 import { HeroSplit } from '@/components/best/HeroSplit';
 import { HeroAurora, HeroCloseLeft, HeroGlow } from '@/components/best/HeroRefs';
+import { HowSteps } from '@/components/best/HowSteps';
 import { HowStory } from '@/components/best/HowStory';
 import { ProofResults } from '@/components/best/ProofResults';
 import { Contact } from '@/components/sections/Contact';
@@ -30,6 +31,8 @@ export default function Home() {
         <FrameLines />
         <Variant section="hero" options={{ a: HeroCloseLeft, b: HeroV2, c: HeroSplit, d: HeroPill, e: HeroGlow, f: HeroAurora }} />
         <Variant section="how" options={{ a: HowStory, b: HowItWorks }} />
+        <Divider />
+        <HowSteps />
         <Divider />
         <Variant section="features" options={{ a: FeaturesPinned, b: FeaturesCards, c: FeaturesParallax }} />
         <Divider />

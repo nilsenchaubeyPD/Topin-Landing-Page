@@ -2,7 +2,7 @@
 
 import { Reveal } from '@/components/ui/Reveal';
 import { FRAME_X } from '@/components/ui/Frame';
-import { how, howOptions } from '@/content/how';
+import { how } from '@/content/how';
 import Image from 'next/image';
 
 /**
@@ -11,11 +11,11 @@ import Image from 'next/image';
  */
 export function HowStory() {
   return (
-    <section id="how" aria-labelledby="how-title" className="relative overflow-hidden bg-[linear-gradient(180deg,#f3f6ff_0%,#e3eaff_32%,#ebe5fa_66%,#d9eee8_100%)] py-[var(--section-y)]">
+    <section id="video" aria-labelledby="video-title" className="relative overflow-hidden bg-[linear-gradient(180deg,#f3f6ff_0%,#e3eaff_32%,#ebe5fa_66%,#d9eee8_100%)] py-[var(--section-y)]">
       <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[38%] size-[900px] -translate-x-1/2 rounded-full bg-blue/[.08] blur-[140px]" />
-      {/* no visible title: the video is the section. The heading stays for screen readers and the #how link. */}
-      <h2 id="how-title" className="sr-only">
-        {howOptions[1].title}
+      {/* no visible title: the video is the section. The heading stays for screen readers. */}
+      <h2 id="video-title" className="sr-only">
+        Topin product video
       </h2>
 
       {/* the video runs edge to edge, from one frame line to the other */}
