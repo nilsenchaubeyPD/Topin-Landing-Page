@@ -73,10 +73,9 @@ export function HeroTeam() {
           <section id="top" aria-labelledby="ht-title" className="relative pt-32 md:pt-40">
             {/* background: dots only, strongest at the bottom and fading upward, over a soft blue rise from the bottom */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(37,99,235,.13),rgba(37,99,235,.04)_45%,transparent_75%)]" />
               <div
                 className="absolute inset-0 [mask-image:linear-gradient(to_top,#000_0%,rgba(0,0,0,.55)_35%,transparent_75%)]"
-                style={{ backgroundImage: 'radial-gradient(circle,rgba(37,99,235,.5) 1.4px,transparent 1.8px)', backgroundSize: '24px 24px' }}
+                style={{ backgroundImage: 'radial-gradient(circle,rgba(12,22,56,.2) 0.9px,transparent 1.2px)', backgroundSize: '16px 16px' }}
               />
             </div>
             <div className={`relative flex flex-col items-center text-center ${FRAME_PAD}`}>
@@ -97,7 +96,7 @@ export function HeroTeam() {
             </div>
             {/* the product sits in a window frame that fades into the logo strip, as on Notion */}
             <div style={delay(0.45)} className={`noir-up relative mx-auto mt-14 max-w-[1040px] md:mt-16 ${FRAME_PAD}`}>
-              <div className="overflow-hidden rounded-t-[14px] border border-b-0 border-navy/[.1] bg-white shadow-[0_-10px_80px_-30px_rgba(37,99,235,.35)]">
+              <div className="overflow-hidden rounded-t-[14px] border border-b-0 border-navy/[.1] bg-white shadow-[0_-12px_40px_-24px_rgba(12,22,56,.18)]">
                 <div className="flex items-center gap-1.5 border-b border-navy/[.07] bg-[#f6f7fa] px-4 py-3" aria-hidden="true">
                   <span className="size-2.5 rounded-full bg-navy/15" />
                   <span className="size-2.5 rounded-full bg-navy/15" />
@@ -105,7 +104,6 @@ export function HeroTeam() {
                 </div>
                 <Shot priority />
               </div>
-              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
             </div>
           </section>
           <div className="border-y border-navy/[.09]">
