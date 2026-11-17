@@ -75,7 +75,7 @@ export function HeroTeam() {
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
               <div
                 className="absolute inset-0 [mask-image:linear-gradient(to_top,#000_0%,rgba(0,0,0,.55)_35%,transparent_75%)]"
-                style={{ backgroundImage: 'radial-gradient(circle,rgba(12,22,56,.2) 0.9px,transparent 1.2px)', backgroundSize: '16px 16px' }}
+                style={{ backgroundImage: 'radial-gradient(circle,rgba(12,22,56,.22) 1.25px,transparent 1.6px)', backgroundSize: '16px 16px' }}
               />
             </div>
             <div className={`relative flex flex-col items-center text-center ${FRAME_PAD}`}>
